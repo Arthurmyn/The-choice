@@ -1,0 +1,1268 @@
+{
+  "id": "speak-for-someone-else",
+  "title": "SPEAK FOR SOMEONE ELSE",
+  "category": "Personal Ethics",
+  "themes": [
+    "Friendship",
+    "Trust",
+    "Honesty",
+    "Privacy",
+    "Personal boundaries"
+  ],
+  "minutes": "3–5 min",
+  "synopsis": "A friend asks you to cover for him in the group chat while a colleague is quietly blamed. What you say next speaks for more than one person.",
+  "disclaimer": "Fictional scenario. Consequences are simulated for philosophical discussion.",
+  "tone": "volunteer-room",
+  "start": "intro",
+  "characters": {
+    "player": {
+      "id": "player",
+      "name": "You",
+      "role": "Volunteer",
+      "visual": {
+        "skin": "#d2a583",
+        "hair": {
+          "style": "short",
+          "color": "#2a2320"
+        },
+        "outfit": "#2c3a4a",
+        "accent": "#65B9FF",
+        "accessory": "none"
+      },
+      "voice": {
+        "gender": "m",
+        "pitch": 1.0,
+        "rate": 1.0
+      }
+    },
+    "daniyar": {
+      "id": "daniyar",
+      "name": "Daniyar",
+      "role": "Your friend",
+      "visual": {
+        "skin": "#c89d7c",
+        "hair": {
+          "style": "cropped",
+          "color": "#15120f"
+        },
+        "outfit": "#38493f",
+        "accent": "#8C9BB0",
+        "accessory": "none"
+      },
+      "voice": {
+        "gender": "m",
+        "pitch": 0.95,
+        "rate": 0.95
+      }
+    },
+    "alina": {
+      "id": "alina",
+      "name": "Alina",
+      "role": "Volunteer",
+      "visual": {
+        "skin": "#efcbb0",
+        "hair": {
+          "style": "long",
+          "color": "#7a4a2a"
+        },
+        "outfit": "#4a3144",
+        "accent": "#8C9BB0",
+        "accessory": "none"
+      },
+      "voice": {
+        "gender": "f",
+        "pitch": 1.08,
+        "rate": 1.0
+      }
+    },
+    "tomas": {
+      "id": "tomas",
+      "name": "Tomas",
+      "role": "Event organizer",
+      "visual": {
+        "skin": "#b98560",
+        "hair": {
+          "style": "curly",
+          "color": "#1b1512"
+        },
+        "outfit": "#43382c",
+        "accent": "#65B9FF",
+        "accessory": "lanyard"
+      },
+      "voice": {
+        "gender": "m",
+        "pitch": 0.9,
+        "rate": 0.98
+      }
+    }
+  },
+  "nodes": {
+    "intro": {
+      "type": "scene",
+      "id": "intro",
+      "next": "message",
+      "scene": {
+        "background": "volunteer-room",
+        "ambient": "room",
+        "caption": "[Chairs scraping. Murmur of volunteers.]",
+        "cast": [
+          "tomas",
+          "alina"
+        ],
+        "card": {
+          "kicker": "STORY 02",
+          "title": "SPEAK FOR SOMEONE ELSE",
+          "text": "Fictional scenario. Consequences are simulated for philosophical discussion."
+        },
+        "lines": [
+          {
+            "text": "Saturday morning. The community hall smells of coffee and cardboard. Open Table's free Community Day opens in three hours."
+          },
+          {
+            "text": "The tables and printed materials were supposed to be collected at 07:30. They weren't. Tomas, the organizer, is already typing in the group chat."
+          },
+          {
+            "speaker": "tomas",
+            "expression": "angry",
+            "text": "Nobody picked up the materials. The calendar says Alina had it. Alina, did you forget?"
+          },
+          {
+            "speaker": "alina",
+            "expression": "surprised",
+            "text": "What? Nobody told me anything about a pickup."
+          },
+          {
+            "speaker": "tomas",
+            "expression": "concerned",
+            "text": "It's on the calendar with your name. I'm not trying to blame you. I just need to know what happened."
+          }
+        ]
+      }
+    },
+    "message": {
+      "type": "scene",
+      "id": "message",
+      "next": "investigation",
+      "scene": {
+        "background": "messaging",
+        "ambient": "digital",
+        "caption": "[Phone vibration.]",
+        "cast": [
+          "player",
+          "daniyar"
+        ],
+        "lines": [
+          {
+            "text": "Your phone buzzes in your pocket. It's Daniyar."
+          },
+          {
+            "speaker": "daniyar",
+            "expression": "sad",
+            "text": "Tell them I was with you collecting materials. I don't want to talk about my family."
+          },
+          {
+            "text": "You know why. Earlier this morning he told you his mother was taken in for an urgent medical examination, and he went with her."
+          },
+          {
+            "text": "Across the hall, the group chat keeps filling with questions. You haven't yet checked the calendar history."
+          }
+        ]
+      }
+    },
+    "investigation": {
+      "type": "investigation",
+      "id": "investigation",
+      "next": "d1",
+      "scene": {
+        "background": "volunteer-room",
+        "ambient": "room",
+        "caption": "[A group chat notification, then another.]",
+        "cast": [
+          "player"
+        ],
+        "lines": [
+          {
+            "text": "Before you answer anyone, look at what you have in front of you."
+          },
+          {
+            "text": "The private conversation and the group chat are the essential reading."
+          }
+        ]
+      },
+      "items": [
+        {
+          "id": "private",
+          "label": "Private conversation",
+          "kind": "message",
+          "required": true,
+          "title": "Daniyar · direct messages",
+          "body": [
+            "Daniyar · 07:12: I can't make the pickup. Mom is at the clinic. They said it can't wait.",
+            "You · 07:13: Oh no. Is she okay? Don't worry about the shift.",
+            "Daniyar · 07:41: Tell them I was with you collecting materials. I don't want to talk about my family."
+          ],
+          "finding": "Daniyar asked you for a specific explanation, and also asked that his family stay out of it. He did not ask you to speak about his mother's health."
+        },
+        {
+          "id": "group",
+          "label": "Group chat",
+          "kind": "message",
+          "required": true,
+          "title": "Community Day crew · 14 members",
+          "body": [
+            "Tomas · 08:02: Materials weren't picked up. Printer is waiting.",
+            "Tomas · 08:03: The calendar says Alina had it. Alina, did you forget?",
+            "Alina · 08:05: What? Nobody told me about a pickup.",
+            "Tomas · 08:06: It's on the calendar with your name."
+          ],
+          "finding": "The group is already looking at Alina. The only evidence offered so far is a name on a calendar."
+        },
+        {
+          "id": "calendar",
+          "label": "Calendar (current view)",
+          "kind": "card",
+          "title": "Calendar · this Saturday",
+          "rows": [
+            [
+              "07:30",
+              "Pickup: tables and printed materials · Alina K."
+            ],
+            [
+              "09:00",
+              "Registration desk · Priya, Noor"
+            ],
+            [
+              "11:00",
+              "Opening remarks · Tomas"
+            ]
+          ],
+          "body": [
+            "This is the current view. The edit history is not shown here."
+          ],
+          "finding": "Alina's name is displayed on the pickup. Nothing here shows when or why it was put there."
+        }
+      ]
+    },
+    "d1": {
+      "type": "decision",
+      "id": "d1",
+      "stage": "D1",
+      "title": "TALK TO YOUR FRIEND",
+      "background": "messaging",
+      "situation": "Daniyar has asked you to say something untrue, and to keep his family private. The group is waiting, and you are the only one who knows why he is absent.",
+      "info": [
+        "Daniyar's message is private.",
+        "The group discussion is happening now.",
+        "Tomas expects an explanation."
+      ],
+      "pressures": [
+        "A friend's request",
+        "A group waiting for an answer",
+        "The event opens in three hours"
+      ],
+      "next": "d2",
+      "context": {
+        "type": "chat",
+        "app": "Open Table · Messages",
+        "channel": "Daniyar",
+        "messages": [
+          {
+            "from": "daniyar",
+            "parts": [
+              {
+                "text": "I can't make the pickup. Mom is at the clinic. They said it can't wait."
+              }
+            ]
+          },
+          {
+            "from": "me",
+            "parts": [
+              {
+                "text": "Oh no. Is she okay? Don't worry about the shift."
+              }
+            ]
+          },
+          {
+            "from": "daniyar",
+            "parts": [
+              {
+                "text": "Tell them I was with you collecting materials. I don't want to talk about my family."
+              }
+            ]
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "ask",
+          "label": "Message Daniyar first.",
+          "description": "Reply privately and propose an explanation that doesn't require inventing anything.",
+          "preview": "I don't want to invent a reason. Can we simply say that you have an urgent family matter, without sharing details?",
+          "mapLabel": "Message Daniyar first",
+          "sets": {
+            "consent": "minimal"
+          },
+          "interaction": {
+            "type": "chat",
+            "app": "Open Table · Messages",
+            "channel": "Daniyar",
+            "sendLabel": "Send message",
+            "messages": [
+              {
+                "from": "me",
+                "parts": [
+                  {
+                    "text": "I don't want to invent a reason. Can we simply say that you have an urgent family matter, without sharing details?"
+                  }
+                ]
+              },
+              {
+                "from": "daniyar",
+                "parts": [
+                  {
+                    "text": "Yes, that is fine. Please don't mention health."
+                  }
+                ]
+              }
+            ]
+          },
+          "result": "Daniyar agrees to a limited explanation. He asks that his family's health stay out of it.",
+          "reaction": {
+            "background": "messaging",
+            "ambient": "digital",
+            "cast": [
+              "player",
+              "daniyar"
+            ],
+            "lines": [
+              {
+                "speaker": "daniyar",
+                "expression": "sad",
+                "text": "Thank you. I just can't have this at the hall right now."
+              },
+              {
+                "speaker": "player",
+                "expression": "concerned",
+                "text": "I'll keep it to what we agreed. Go be with your mom."
+              }
+            ]
+          }
+        },
+        {
+          "id": "skip",
+          "label": "Do not contact him privately yet.",
+          "description": "Go straight to the group discussion without agreeing on an explanation first.",
+          "mapLabel": "Don't contact him yet",
+          "sets": {
+            "consent": "absent"
+          },
+          "result": "You move directly to the group discussion without agreeing on a specific explanation. Daniyar's request for privacy remains.",
+          "reaction": {
+            "background": "messaging",
+            "ambient": "digital",
+            "cast": [
+              "player"
+            ],
+            "lines": [
+              {
+                "text": "You put the phone face-down and open the group chat. You and Daniyar have not agreed on what to say."
+              },
+              {
+                "text": "His message is still the last thing in your private thread: 'I don't want to talk about my family.'"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "d2": {
+      "type": "decision",
+      "id": "d2",
+      "stage": "D2",
+      "title": "VERIFY THE ACCUSATION",
+      "background": "volunteer-room",
+      "situation": "Alina is being asked to explain something she says she never knew about. You have not checked why her name is on the calendar.",
+      "info": [
+        "Alina's name appears on the pickup entry.",
+        "The calendar keeps an edit history.",
+        "Alina says she was never told about the task."
+      ],
+      "pressures": [
+        "A colleague being blamed in public",
+        "The urge to answer quickly",
+        "Limited time before the event"
+      ],
+      "next": "d3",
+      "choices": [
+        {
+          "id": "check",
+          "label": "Open the calendar history.",
+          "description": "Look at how the entry was created and who was notified before you say anything about Alina.",
+          "mapLabel": "Check the calendar",
+          "sets": {
+            "basis": "checked"
+          },
+          "interaction": {
+            "type": "calendar",
+            "title": "Calendar history · Pickup, this Saturday",
+            "doneText": "The history is complete. You now have a verified record of the assignment.",
+            "entries": [
+              {
+                "id": "copy",
+                "day": "Mon 09:12",
+                "time": "calendar copy",
+                "title": "Last week's calendar duplicated for this week",
+                "assignee": "Alina K.",
+                "note": "Entries and names copied as they were."
+              },
+              {
+                "id": "assign",
+                "day": "Tue 20:41",
+                "time": "roster edit",
+                "title": "Pickup reassigned for this Saturday",
+                "assignee": "Daniyar M.",
+                "note": "Assigned in the roster, but the calendar entry was not updated."
+              },
+              {
+                "id": "notify",
+                "day": "Tue 20:41",
+                "time": "notification log",
+                "title": "Notification sent",
+                "assignee": "Daniyar M.",
+                "note": "No message was sent to Alina K. for this shift."
+              }
+            ],
+            "findings": [
+              {
+                "entryId": "copy",
+                "text": "Alina's name remained from the previous week's copy."
+              },
+              {
+                "entryId": "assign",
+                "text": "Daniyar was assigned to the current shift."
+              },
+              {
+                "entryId": "notify",
+                "text": "Alina was never sent the new task."
+              }
+            ]
+          },
+          "result": "The calendar history disproves the current assumption about Alina.",
+          "reaction": {
+            "background": "volunteer-room",
+            "ambient": "room",
+            "cast": [
+              "player",
+              "alina"
+            ],
+            "lines": [
+              {
+                "text": "The record is plain. Alina's name is a leftover from the previous week's copy, and the real assignment never reached her."
+              },
+              {
+                "speaker": "alina",
+                "expression": "concerned",
+                "text": "I've been standing here for ten minutes feeling like I let everyone down."
+              }
+            ]
+          }
+        },
+        {
+          "id": "skip-check",
+          "label": "Respond without checking the calendar.",
+          "description": "Reply to the group using only what you already know.",
+          "mapLabel": "Don't check",
+          "sets": {
+            "basis": "uncertain"
+          },
+          "result": "You do not have a verified record of the current assignment. The assumption in the group chat remains unverified.",
+          "reaction": {
+            "background": "volunteer-room",
+            "ambient": "room",
+            "cast": [
+              "player",
+              "alina"
+            ],
+            "lines": [
+              {
+                "text": "You don't open the calendar history. Alina's name is still on the entry, and nobody has asked her anything beyond whether she forgot."
+              },
+              {
+                "speaker": "alina",
+                "expression": "sad",
+                "text": "Why does everyone keep looking at me?"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "d3": {
+      "type": "decision",
+      "id": "d3",
+      "stage": "D3",
+      "title": "RESPOND IN THE GROUP CHAT",
+      "background": "messaging",
+      "situation": "Fourteen people are waiting for an answer. Whatever you write will stay in the chat.",
+      "info": [
+        "Fourteen members will read your message.",
+        "You can write only what you choose to write.",
+        "A sent message can be deleted, but it can also have been read before then."
+      ],
+      "pressures": [
+        "A friend who asked for cover",
+        "A colleague who may be blamed",
+        "A group that wants a quick answer"
+      ],
+      "context": {
+        "type": "chat",
+        "app": "Open Table · Group",
+        "channel": "Community Day crew",
+        "messages": [
+          {
+            "from": "tomas",
+            "parts": [
+              {
+                "text": "Materials weren't picked up. Printer is waiting."
+              }
+            ]
+          },
+          {
+            "from": "tomas",
+            "parts": [
+              {
+                "text": "The calendar says Alina had it. Alina, did you forget? Does anyone know what happened?"
+              }
+            ]
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "truthful",
+          "label": "Give a truthful and limited explanation.",
+          "description": "Say what is true and yours to say, and leave the rest to Daniyar.",
+          "preview": "Your message adapts to what you did earlier: it names a family matter or says the circumstances are personal, and it addresses the calendar according to what you checked.",
+          "mapLabel": "Truthful and limited",
+          "sets": {},
+          "ending": "L_E1",
+          "interaction": {
+            "type": "chat",
+            "app": "Open Table · Group",
+            "channel": "Community Day crew",
+            "sendLabel": "Send message",
+            "receipt": {
+              "text": "Seen by 6 members"
+            },
+            "messages": [
+              {
+                "from": "tomas",
+                "parts": [
+                  {
+                    "text": "The calendar says Alina had it. Alina, did you forget? Does anyone know what happened?"
+                  }
+                ]
+              },
+              {
+                "from": "me",
+                "parts": [
+                  {
+                    "when": {
+                      "flag": "consent",
+                      "is": "minimal"
+                    },
+                    "text": "Daniyar has an urgent family matter. I will leave the details private."
+                  },
+                  {
+                    "when": {
+                      "flag": "consent",
+                      "is": "absent"
+                    },
+                    "text": "Daniyar's circumstances are personal. He can decide what he wants to share."
+                  },
+                  {
+                    "when": {
+                      "flag": "basis",
+                      "is": "checked"
+                    },
+                    "text": "The calendar contains an old entry. Alina was not assigned to this shift."
+                  },
+                  {
+                    "when": {
+                      "flag": "basis",
+                      "is": "uncertain"
+                    },
+                    "text": "Before assigning responsibility to Alina, let's verify the schedule."
+                  }
+                ]
+              }
+            ]
+          },
+          "result": "The group learns that Daniyar has a personal matter, and nothing more. Alina is not asked to answer for a task she was never given.",
+          "reaction": {
+            "background": "messaging",
+            "ambient": "digital",
+            "cast": [
+              "tomas",
+              "alina"
+            ],
+            "lines": [
+              {
+                "speaker": "tomas",
+                "expression": "neutral",
+                "text": "Okay. A family matter. I'll leave it there."
+              },
+              {
+                "speaker": "tomas",
+                "when": {
+                  "flag": "basis",
+                  "is": "checked"
+                },
+                "expression": "concerned",
+                "text": "An old entry? So Alina was never asked at all. Alina, I'm sorry."
+              },
+              {
+                "speaker": "tomas",
+                "when": {
+                  "flag": "basis",
+                  "is": "uncertain"
+                },
+                "expression": "neutral",
+                "text": "Fair enough. Let's look at the schedule before we point at anyone."
+              }
+            ]
+          }
+        },
+        {
+          "id": "false",
+          "label": "Confirm the fictional trip.",
+          "description": "Tell the group what Daniyar originally asked you to say.",
+          "preview": "Your message confirms the trip, and addresses the calendar according to what you checked.",
+          "mapLabel": "Confirm the false story",
+          "sets": {},
+          "ending": "L_E2",
+          "interaction": {
+            "type": "chat",
+            "app": "Open Table · Group",
+            "channel": "Community Day crew",
+            "sendLabel": "Send message",
+            "receipt": {
+              "text": "Seen by 6 members"
+            },
+            "messages": [
+              {
+                "from": "tomas",
+                "parts": [
+                  {
+                    "text": "The calendar says Alina had it. Alina, did you forget? Does anyone know what happened?"
+                  }
+                ]
+              },
+              {
+                "from": "me",
+                "parts": [
+                  {
+                    "text": "Yes, he was with me collecting materials."
+                  },
+                  {
+                    "when": {
+                      "flag": "basis",
+                      "is": "checked"
+                    },
+                    "text": "The calendar contains an old entry. Alina was not assigned to this shift."
+                  },
+                  {
+                    "when": {
+                      "flag": "basis",
+                      "is": "uncertain"
+                    },
+                    "text": "Please verify the assignment before blaming Alina."
+                  }
+                ]
+              }
+            ]
+          },
+          "result": "A false explanation has entered the conversation. The organizer asks for clarification. You must now decide whether to correct the message or continue the story.",
+          "reaction": {
+            "background": "messaging",
+            "ambient": "digital",
+            "cast": [
+              "tomas",
+              "alina"
+            ],
+            "lines": [
+              {
+                "speaker": "tomas",
+                "expression": "surprised",
+                "text": "Collecting materials? Hold on."
+              }
+            ]
+          }
+        },
+        {
+          "id": "reveal",
+          "label": "Reveal the full family situation.",
+          "description": "Tell the group the real reason, in full.",
+          "preview": "Your message states the medical reason, and addresses the calendar according to what you checked.",
+          "mapLabel": "Reveal everything",
+          "sets": {},
+          "ending": "L_E3",
+          "interaction": {
+            "type": "chat",
+            "app": "Open Table · Group",
+            "channel": "Community Day crew",
+            "sendLabel": "Send message",
+            "receipt": {
+              "text": "Seen by 6 members"
+            },
+            "messages": [
+              {
+                "from": "tomas",
+                "parts": [
+                  {
+                    "text": "The calendar says Alina had it. Alina, did you forget? Does anyone know what happened?"
+                  }
+                ]
+              },
+              {
+                "from": "me",
+                "parts": [
+                  {
+                    "text": "He was accompanying his parent to a medical examination."
+                  },
+                  {
+                    "when": {
+                      "flag": "basis",
+                      "is": "checked"
+                    },
+                    "text": "The calendar contains an old entry. Alina was not assigned to this shift."
+                  },
+                  {
+                    "when": {
+                      "flag": "basis",
+                      "is": "uncertain"
+                    },
+                    "text": "Please verify the assignment before blaming Alina."
+                  }
+                ]
+              }
+            ]
+          },
+          "result": "The group now knows private family information. Daniyar did not authorize you to share these details. He asks you to delete the message.",
+          "reaction": {
+            "background": "messaging",
+            "ambient": "digital",
+            "cast": [
+              "tomas",
+              "daniyar"
+            ],
+            "lines": [
+              {
+                "speaker": "tomas",
+                "expression": "concerned",
+                "text": "Oh. I'm sorry. I had no idea."
+              },
+              {
+                "text": "Your phone buzzes again. It's Daniyar."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "endings": {
+    "L_E1": {
+      "id": "L_E1",
+      "title": "HONEST AND PRIVATE",
+      "subtitle": "The truth was shared in part. Some of it stayed Daniyar's.",
+      "result": "The group learns that Daniyar has a personal matter, and nothing more. Alina is not asked to answer for a task she was never given.",
+      "unresolved": "The group has an incomplete picture. Is withholding details the same as being honest?",
+      "scene": {
+        "background": "city-dawn",
+        "ambient": "room",
+        "caption": "[Hall doors opening. Distant voices.]",
+        "cast": [
+          "tomas",
+          "alina",
+          "daniyar"
+        ],
+        "lines": [
+          {
+            "text": "By nine the hall is full of folding tables, balloons and the smell of coffee. Someone found a printer that was open on Saturdays, and the registration desk is staffed."
+          },
+          {
+            "speaker": "tomas",
+            "when": {
+              "flag": "basis",
+              "is": "checked"
+            },
+            "expression": "concerned",
+            "text": "I checked the calendar after you posted. That old entry did it. Alina, I'm sorry I put it on you."
+          },
+          {
+            "speaker": "alina",
+            "when": {
+              "flag": "basis",
+              "is": "checked"
+            },
+            "expression": "neutral",
+            "text": "Thank you for catching that. It would have stuck to me."
+          },
+          {
+            "speaker": "tomas",
+            "when": {
+              "flag": "basis",
+              "is": "uncertain"
+            },
+            "expression": "neutral",
+            "text": "I looked at the history in the end. It wasn't Alina's. I should have asked before assuming."
+          },
+          {
+            "speaker": "alina",
+            "when": {
+              "flag": "basis",
+              "is": "uncertain"
+            },
+            "expression": "concerned",
+            "text": "Thanks for asking him to check. I'd spent half an hour wondering what I was supposed to have done."
+          },
+          {
+            "speaker": "daniyar",
+            "when": {
+              "flag": "consent",
+              "is": "minimal"
+            },
+            "expression": "sad",
+            "text": "Thank you for keeping it to what we agreed. My mom's resting now. I'll be there for the afternoon shift."
+          },
+          {
+            "speaker": "daniyar",
+            "when": {
+              "flag": "consent",
+              "is": "absent"
+            },
+            "expression": "concerned",
+            "text": "You didn't ask me first. It turned out all right, but I'd rather have been asked before you spoke for me."
+          },
+          {
+            "text": "In the chat, someone posts a photo of the banner going up. Nobody asks about Daniyar again."
+          }
+        ]
+      },
+      "fragments": [
+        {
+          "when": {
+            "flag": "consent",
+            "is": "minimal"
+          },
+          "text": "Daniyar agreed to a limited explanation before you spoke."
+        },
+        {
+          "when": {
+            "flag": "consent",
+            "is": "absent"
+          },
+          "text": "Daniyar did not know what you would say about him."
+        },
+        {
+          "when": {
+            "flag": "basis",
+            "is": "checked"
+          },
+          "text": "You had checked the calendar history before speaking."
+        },
+        {
+          "when": {
+            "flag": "basis",
+            "is": "uncertain"
+          },
+          "text": "You asked the group to verify the schedule without having checked it yourself."
+        }
+      ],
+      "consequences": [
+        {
+          "text": "The group knows there is a personal matter, and nothing more."
+        },
+        {
+          "text": "Daniyar's family's health stayed with him."
+        },
+        {
+          "when": {
+            "flag": "basis",
+            "is": "checked"
+          },
+          "text": "Alina was cleared with a verified record."
+        },
+        {
+          "when": {
+            "flag": "basis",
+            "is": "uncertain"
+          },
+          "text": "Alina was protected for the moment, but only because someone else checked later."
+        }
+      ]
+    },
+    "L_E2": {
+      "id": "L_E2",
+      "title": "THE FALSE STORY",
+      "subtitle": "A convenient story is now on record, and it is yours.",
+      "result": "A false explanation has entered the conversation. The organizer asks for clarification. You must now decide whether to correct the message or continue the story.",
+      "unresolved": "The false explanation is in the chat and you can correct it or keep it. What would correcting it cost Daniyar, and what does keeping it cost everyone else?",
+      "scene": {
+        "background": "city-night",
+        "ambient": "digital",
+        "caption": "[The chat notification sound repeats.]",
+        "cast": [
+          "tomas",
+          "alina",
+          "daniyar"
+        ],
+        "lines": [
+          {
+            "text": "09:14. The chat is quiet for a moment, then Tomas replies."
+          },
+          {
+            "speaker": "tomas",
+            "expression": "concerned",
+            "text": "Collecting materials? The printer says nobody came for the printed materials. Where were you two?"
+          },
+          {
+            "speaker": "tomas",
+            "when": {
+              "flag": "basis",
+              "is": "checked"
+            },
+            "expression": "concerned",
+            "text": "I've seen the calendar correction. Alina, I accused you without a basis. I'm sorry."
+          },
+          {
+            "speaker": "alina",
+            "when": {
+              "flag": "basis",
+              "is": "checked"
+            },
+            "expression": "sad",
+            "text": "It took until now for someone to look."
+          },
+          {
+            "speaker": "tomas",
+            "when": {
+              "flag": "basis",
+              "is": "uncertain"
+            },
+            "expression": "concerned",
+            "text": "If Daniyar was with you, then who was supposed to do the pickup? Alina's name is still on the calendar."
+          },
+          {
+            "speaker": "alina",
+            "when": {
+              "flag": "basis",
+              "is": "uncertain"
+            },
+            "expression": "angry",
+            "text": "I don't even know what I was supposed to have picked up."
+          },
+          {
+            "speaker": "daniyar",
+            "when": {
+              "flag": "consent",
+              "is": "minimal"
+            },
+            "expression": "concerned",
+            "text": "We agreed on 'a family matter.' Why does Tomas think we were collecting materials?"
+          },
+          {
+            "speaker": "daniyar",
+            "when": {
+              "flag": "consent",
+              "is": "absent"
+            },
+            "expression": "concerned",
+            "text": "You did what I asked, so I can't complain. But now someone is going to find out it isn't true."
+          },
+          {
+            "text": "Your message is still there. The chat is waiting for what you say next."
+          }
+        ]
+      },
+      "fragments": [
+        {
+          "when": {
+            "flag": "consent",
+            "is": "minimal"
+          },
+          "text": "You had agreed with Daniyar on a family-matter explanation, then said something else."
+        },
+        {
+          "when": {
+            "flag": "consent",
+            "is": "absent"
+          },
+          "text": "You did what Daniyar asked, but you never told him whether you would."
+        },
+        {
+          "when": {
+            "flag": "basis",
+            "is": "checked"
+          },
+          "text": "You corrected the calendar error, so Alina's name was cleared."
+        },
+        {
+          "when": {
+            "flag": "basis",
+            "is": "uncertain"
+          },
+          "text": "You asked the group to verify the schedule, but the false story already pointed back toward Alina."
+        }
+      ],
+      "consequences": [
+        {
+          "text": "A false explanation about Daniyar's absence is in the group chat."
+        },
+        {
+          "text": "The organizer is asking for clarification."
+        },
+        {
+          "when": {
+            "flag": "basis",
+            "is": "checked"
+          },
+          "text": "Alina has been cleared, but the story that cleared the way is not true."
+        },
+        {
+          "when": {
+            "flag": "basis",
+            "is": "uncertain"
+          },
+          "text": "Alina remains under suspicion while the false story holds."
+        }
+      ]
+    },
+    "L_E3": {
+      "id": "L_E3",
+      "title": "PRIVACY VIOLATED",
+      "subtitle": "The message was deleted. What it said was already read.",
+      "result": "The group now knows private family information. Daniyar did not authorize you to share these details. He asks you to delete the message.",
+      "unresolved": "The message can be deleted, but not unread. What do you owe Daniyar now that it can't be unsaid?",
+      "scene": {
+        "background": "city-night",
+        "ambient": "digital",
+        "caption": "[A single message tone.]",
+        "cast": [
+          "daniyar",
+          "tomas",
+          "alina"
+        ],
+        "lines": [
+          {
+            "text": "Your message sits in the chat: 'He was accompanying his parent to a medical examination.' Under it: 'Seen by 6 members.'"
+          },
+          {
+            "speaker": "daniyar",
+            "when": {
+              "flag": "consent",
+              "is": "minimal"
+            },
+            "expression": "angry",
+            "text": "We agreed you wouldn't mention health. Please delete it."
+          },
+          {
+            "speaker": "daniyar",
+            "when": {
+              "flag": "consent",
+              "is": "absent"
+            },
+            "expression": "angry",
+            "text": "I told you I didn't want to talk about my family. You never even asked me. Please delete it."
+          },
+          {
+            "text": "You delete the message. The chat now shows 'Message deleted.' It doesn't show who read it first. Six people did."
+          },
+          {
+            "speaker": "tomas",
+            "expression": "concerned",
+            "text": "I saw it before it went. I'm sorry, Daniyar. I won't bring it up."
+          },
+          {
+            "speaker": "alina",
+            "expression": "sad",
+            "text": "I saw it too. I didn't know. I'm sorry."
+          },
+          {
+            "speaker": "tomas",
+            "when": {
+              "flag": "basis",
+              "is": "checked"
+            },
+            "expression": "concerned",
+            "text": "And the calendar. Alina, it was an old entry. I'm sorry I put it on you."
+          },
+          {
+            "speaker": "alina",
+            "when": {
+              "flag": "basis",
+              "is": "uncertain"
+            },
+            "expression": "concerned",
+            "text": "Somebody still needs to check why my name was on that calendar."
+          },
+          {
+            "speaker": "daniyar",
+            "expression": "sad",
+            "text": "It's gone from the chat. It isn't gone from their heads."
+          }
+        ]
+      },
+      "fragments": [
+        {
+          "when": {
+            "flag": "consent",
+            "is": "minimal"
+          },
+          "text": "You had agreed with Daniyar that health would not be mentioned, and then mentioned it."
+        },
+        {
+          "when": {
+            "flag": "consent",
+            "is": "absent"
+          },
+          "text": "Daniyar did not know what you would say about him, and had asked you not to speak about his family."
+        },
+        {
+          "when": {
+            "flag": "basis",
+            "is": "checked"
+          },
+          "text": "Your message also corrected the calendar error about Alina."
+        },
+        {
+          "when": {
+            "flag": "basis",
+            "is": "uncertain"
+          },
+          "text": "Your message asked for the schedule to be verified without having checked it yourself."
+        }
+      ],
+      "consequences": [
+        {
+          "text": "Six group members read Daniyar's family situation before the message was deleted."
+        },
+        {
+          "text": "Deleting the message removed the text from the chat. It did not undo what had been read."
+        },
+        {
+          "when": {
+            "flag": "basis",
+            "is": "checked"
+          },
+          "text": "Alina's name was cleared at the same moment that Daniyar's privacy was lost."
+        },
+        {
+          "when": {
+            "flag": "basis",
+            "is": "uncertain"
+          },
+          "text": "The question about Alina was left open while attention shifted to Daniyar."
+        }
+      ]
+    }
+  },
+  "flagLabels": [
+    {
+      "flag": "consent",
+      "values": {
+        "minimal": "Agreed with Daniyar on a limited explanation",
+        "absent": "Did not contact Daniyar first"
+      }
+    },
+    {
+      "flag": "basis",
+      "values": {
+        "checked": "Checked the calendar history",
+        "uncertain": "Did not check the calendar"
+      }
+    }
+  ],
+  "analysis": {
+    "kant": {
+      "argument": "Kant's Groundwork Section II offers two tests: act only on a maxim you could will as a universal law, and treat humanity, in yourself and in others, never merely as a means but always as an end. His example of the false promise shows how a lie can seem to help in the moment yet undermine the practice of trust that it relies on. Declining to share something is not the same as asserting something false.",
+      "application": {
+        "byEnding": {
+          "L_E1": "A truthful, limited statement is consistent with both tests. It makes no false assertion, so its maxim can be universal. And leaving Daniyar's details private treats him as the person who decides what to tell others about his family.",
+          "L_E2": "Confirming a fictional trip asserts something you know to be false. The maxim 'I will say what is untrue when someone I care about asks me to' cannot be a universal law, because statements would stop being reliable. On Kant's account, a kind motive does not by itself make the maxim universalizable, and the group, who rely on your word, are not treated as persons owed the truth.",
+          "L_E3": "Revealing the family situation is true, but it uses Daniyar's private information without his consent to answer the group's question. The formula of humanity asks whether he could share the purpose of the action; he had said that he does not. A Kantian reading treats this as failing to respect his autonomy."
+        },
+        "byFlag": {
+          "consent=minimal": "Asking Daniyar first treated him as a participant in the decision, an agent whose consent matters, not as a matter to be managed.",
+          "consent=absent": "Speaking about Daniyar without asking him leaves him a bystander to a decision about his own privacy. Even a considerate message does not replace his consent.",
+          "basis=checked": "Checking the record meant that what you said about Alina rested on something you knew. Alina is owed that care as a person who could be blamed unjustly.",
+          "basis=uncertain": "Without checking the record, what you said about Alina rested on an unverified assumption. She is owed more care than that, as a person who can be blamed unjustly."
+        }
+      },
+      "limitation": {
+        "L_E1": "Kant's formulas do not say how much silence is acceptable when it leaves others with an incomplete picture. When does declining to share become a kind of concealment?",
+        "L_E2": "Some readers find Kant's strictness about lying too rigid when the lie is meant to protect someone. The Groundwork leaves open how to weigh a duty of truthfulness against a friend's reasonable request for privacy.",
+        "L_E3": "Nothing in the formulas tells you how to weigh Alina's claim not to be blamed against Daniyar's privacy. A Kantian must work out which duty takes priority, and Kant gives no ranking."
+      },
+      "reference": "kant"
+    },
+    "mill": {
+      "argument": "In Chapter II of Utilitarianism, Mill asks us to weigh the happiness and suffering of everyone affected, impartially, and to give special weight to long-term goods. He treats trust in people's word as one of the most valuable of those goods, while accepting rare cases where a departure from the truth may avoid a greater harm. For Mill, well-being includes dignity and security, not just momentary pleasure.",
+      "application": {
+        "byEnding": {
+          "L_E1": "The limited explanation protects Daniyar's dignity and family privacy, keeps the group's trust in what you say, and leaves the question about Alina to be settled by the facts. The costs are small and mostly short-term: curiosity and an incomplete answer.",
+          "L_E2": "A false explanation might spare Daniyar embarrassment for a few hours, but it spreads the cost: Alina can remain exposed to blame, the group's confidence in your word is at risk, and Daniyar depends on a story staying intact. Mill's concern with long-term trust counts against it, though he allows exceptions.",
+          "L_E3": "Sharing the news may end speculation and bring sympathy for Daniyar. But it exposes private information that cannot be recalled, takes control from the person most affected, and may discourage others from confiding in you."
+        },
+        "byFlag": {
+          "consent=minimal": "Agreeing with Daniyar first brought his own view of his interests into the calculation rather than guessing at them.",
+          "consent=absent": "Without asking, you estimated Daniyar's interests for him. If the estimate was wrong, the cost fell on him.",
+          "basis=checked": "Checking the calendar removed one source of avoidable harm, an unfair accusation, before it spread.",
+          "basis=uncertain": "Leaving the calendar unchecked kept Alina's reputation at risk for longer, and the cost of that risk fell on her alone."
+        }
+      },
+      "limitation": {
+        "L_E1": "Mill's approach depends on estimating how people feel, and you cannot know how Tomas or Alina would weigh an incomplete answer. Is a small harm to the group's curiosity outweighed by Daniyar's privacy?",
+        "L_E2": "It is hard to know how large the harm of a lie is before it is found out. If the story is never questioned, would the result be better by Mill's standard? That uncertainty is where the principle strains.",
+        "L_E3": "Once information is shared, the effects depend on how six different people respond, which you cannot control. The approach asks you to predict responses you cannot observe."
+      },
+      "reference": "mill"
+    },
+    "aristotle": {
+      "argument": "Aristotle's practical wisdom (Nicomachean Ethics VI.5, VI.7) is the ability to see what a particular situation calls for and to act well on it, and it is built through experience, not rules. In VIII.3 he distinguishes friendships of usefulness or pleasure from friendship between people who wish each other well for the other's own sake. On this view, a good friend is not simply compliant; a good friend cares about the other person's actual good and about the truth between them.",
+      "application": {
+        "byEnding": {
+          "L_E1": "The honest and private response tries to be loyal to Daniyar without giving up honesty with the group. That is the kind of balance practical wisdom aims at, though there is no formula for it: one has to see what this friend, this group and this moment require.",
+          "L_E2": "Confirming the story is loyal to what Daniyar asked, but friendship of virtue involves wishing the other person good for their own sake, which may not mean doing whatever they ask. A good friend might also consider how the lie could affect Daniyar later.",
+          "L_E3": "Revealing the information might be an attempt at honesty, but virtue concerns the right action at the right time toward the right person. Disclosing a friend's private matter without asking suggests that the friendship, and the situation, were not fully understood."
+        },
+        "byFlag": {
+          "consent=minimal": "Messaging Daniyar first reflects the attention to a particular friend that practical wisdom requires, and treats the friendship as one of goodwill rather than mere convenience.",
+          "consent=absent": "Not consulting Daniyar means acting on a general idea of what a friend should do, not on knowledge of what this friend wants and needs.",
+          "basis=checked": "Checking the history shows attention to particulars: you did not rely on the general impression that Alina forgot, but looked at what actually happened.",
+          "basis=uncertain": "Not checking meant relying on an impression. Practical wisdom asks you to look at particulars before acting, especially when a third person's reputation depends on it."
+        }
+      },
+      "limitation": {
+        "L_E1": "Aristotle does not tell us how to tell a wise balance from a convenient compromise. Only experience and reflection can.",
+        "L_E2": "Circumstances matter in Aristotle's account, and in some circumstances a small untruth might be what a friend needs. He gives no rule for deciding when.",
+        "L_E3": "Practical wisdom develops through experience, and one mistake does not define a character. What remains open is what you do next and how the friendship is repaired."
+      },
+      "reference": "aristotle"
+    }
+  },
+  "reflection": {
+    "conflicts": {
+      "L_E1": "Kant sees respect for Daniyar's autonomy and an honest statement as aligned. Mill worries about the incomplete picture left with the group. Aristotle asks whether loyalty and honesty were balanced with judgment about this particular friend.",
+      "L_E2": "The theories split here. Kant treats the false statement as ruled out whatever the motive. Mill weighs short-term relief against long-term trust and Alina's exposure. Aristotle asks what a friend who truly wishes Daniyar well would do.",
+      "L_E3": "Kant and Aristotle both question disclosure without consent, for different reasons: autonomy in one case, friendship in the other. Mill points to harms that cannot be recalled. None of them ranks Daniyar's privacy against Alina's claim not to be blamed."
+    },
+    "questions": [
+      "Which of your choices felt freest, and which felt shaped by the group waiting for an answer?",
+      "What do you owe a friend who asks you to say something untrue?",
+      "When is staying silent honest, and when does it become concealment?",
+      "What would repairing trust with Daniyar, and with Alina, look like?"
+    ]
+  }
+}
