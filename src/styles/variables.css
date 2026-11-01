@@ -1,0 +1,42 @@
+@import '@fontsource-variable/manrope';
+@import '@fontsource-variable/space-grotesk';
+
+:root {
+  /* ECHO palette */
+  --bg-0: #080b10;
+  --bg-1: #111b27;
+  --bg-2: #172433;
+  --steel: #20364a;
+  --accent: #65b9ff;
+  --text: #e8edf3;
+  --muted: #8c9aa8;
+  --memory: #b58b68;
+
+  --accent-soft: rgba(101, 185, 255, 0.12);
+  --accent-line: rgba(101, 185, 255, 0.55);
+  --memory-soft: rgba(181, 139, 104, 0.14);
+  --memory-line: rgba(181, 139, 104, 0.5);
+  --hair: rgba(232, 237, 243, 0.09);
+  --hair-strong: rgba(232, 237, 243, 0.2);
+  --glass: rgba(11, 17, 26, 0.74);
+  --glass-solid: rgba(8, 11, 16, 0.94);
+
+  --font: 'Manrope Variable', Manrope, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk Variable', 'Space Grotesk', Manrope, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --radius: 6px;
+  --radius-lg: 10px;
+}
+
+html {
+  font-size: 17px;
+}
+html[data-text-size='small'] {
+  font-size: 15px;
+}
+html[data-text-size='large'] {
+  font-size: 20px;
+}
