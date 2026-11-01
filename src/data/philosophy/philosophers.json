@@ -1,0 +1,30 @@
+{
+  "centralQuestion": "When we make a decision, are we truly choosing freely, or are we simply reacting to the circumstances created around us?",
+  "note": "The text below under 'From the source' is a paraphrase of the philosopher's argument. The application to your choices is this game's modern interpretation. It is not a verdict, and no philosopher is claimed to endorse a particular button.",
+  "philosophers": {
+    "kant": {
+      "id": "kant",
+      "name": "Immanuel Kant",
+      "years": "1724–1804",
+      "section": "RULE OF ACTION",
+      "question": "Could the principle behind this action become a universal rule? Did the decision respect other people as independent individuals?",
+      "concepts": ["Moral duty", "Categorical imperative", "Universal law", "Humanity as an end in itself", "Respect for autonomy"]
+    },
+    "mill": {
+      "id": "mill",
+      "name": "John Stuart Mill",
+      "years": "1806–1873",
+      "section": "CONSEQUENCES FOR PEOPLE",
+      "question": "What consequences did this action create for all affected people?",
+      "concepts": ["Utilitarianism", "Happiness", "Reduction of suffering", "Interests of everyone affected", "Long-term trust"]
+    },
+    "aristotle": {
+      "id": "aristotle",
+      "name": "Aristotle",
+      "years": "384–322 BCE",
+      "section": "RELATIONSHIPS AND PRACTICAL WISDOM",
+      "question": "Does this action demonstrate practical wisdom and a good understanding of the situation?",
+      "concepts": ["Virtue ethics", "Practical wisdom", "Friendship", "Character", "Context and circumstances"]
+    }
+  }
+}

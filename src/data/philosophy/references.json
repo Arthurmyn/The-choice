@@ -1,0 +1,20 @@
+{
+  "kant": {
+    "author": "Immanuel Kant",
+    "work": "Fundamental Principles of the Metaphysic of Morals (Groundwork of the Metaphysics of Morals)",
+    "location": "Section II",
+    "note": "Source of the formula of universal law, the formula of humanity and the false-promise example."
+  },
+  "mill": {
+    "author": "John Stuart Mill",
+    "work": "Utilitarianism",
+    "location": "Chapter II, 'What Utilitarianism Is'",
+    "note": "Source of the greatest-happiness principle, the quality of pleasures, secondary principles and the importance of trustworthiness."
+  },
+  "aristotle": {
+    "author": "Aristotle",
+    "work": "Nicomachean Ethics",
+    "location": "Book VI, Chapters 5 and 7; Book VIII, Chapter 3",
+    "note": "Source of practical wisdom (phronesis), its focus on particulars, and the kinds of friendship."
+  }
+}
