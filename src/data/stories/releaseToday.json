@@ -1,0 +1,1222 @@
+{
+  "id": "release-today",
+  "title": "RELEASE TODAY",
+  "category": "Professional Ethics",
+  "themes": [
+    "Responsibility",
+    "Data privacy",
+    "Honesty",
+    "Professional integrity",
+    "Pressure and deadlines"
+  ],
+  "minutes": "5–7 min",
+  "synopsis": "Forty minutes before a pilot launch, a tester finds that one organization can read another's documents. The team will act on your recommendation.",
+  "disclaimer": "Fictional scenario. Consequences are simulated for philosophical discussion.",
+  "tone": "office-night",
+  "start": "intro",
+  "characters": {
+    "alex": {
+      "id": "alex",
+      "name": "Alex",
+      "role": "Software developer (you)",
+      "visual": {
+        "skin": "#c99b7a",
+        "hair": {
+          "style": "short",
+          "color": "#1d1f24"
+        },
+        "outfit": "#26313f",
+        "accent": "#65B9FF",
+        "accessory": "none"
+      },
+      "voice": {
+        "gender": "m",
+        "pitch": 1.0,
+        "rate": 0.98
+      }
+    },
+    "daniel": {
+      "id": "daniel",
+      "name": "Daniel",
+      "role": "Team manager",
+      "visual": {
+        "skin": "#e0b494",
+        "hair": {
+          "style": "cropped",
+          "color": "#4a4038"
+        },
+        "outfit": "#3a4656",
+        "accent": "#8C9BB0",
+        "accessory": "lanyard"
+      },
+      "voice": {
+        "gender": "m",
+        "pitch": 0.9,
+        "rate": 0.95
+      }
+    },
+    "maria": {
+      "id": "maria",
+      "name": "Maria",
+      "role": "QA engineer",
+      "visual": {
+        "skin": "#a97654",
+        "hair": {
+          "style": "bun",
+          "color": "#14100e"
+        },
+        "outfit": "#2f4660",
+        "accent": "#65B9FF",
+        "accessory": "glasses"
+      },
+      "voice": {
+        "gender": "f",
+        "pitch": 1.05,
+        "rate": 1.0
+      }
+    },
+    "elena": {
+      "id": "elena",
+      "name": "Elena Voss",
+      "role": "Client representative",
+      "visual": {
+        "skin": "#e8c4a6",
+        "hair": {
+          "style": "side",
+          "color": "#6b4a32"
+        },
+        "outfit": "#2b2f45",
+        "accent": "#8C9BB0",
+        "accessory": "headset"
+      },
+      "voice": {
+        "gender": "f",
+        "pitch": 0.97,
+        "rate": 0.95
+      }
+    }
+  },
+  "nodes": {
+    "intro": {
+      "type": "scene",
+      "id": "intro",
+      "next": "briefing",
+      "scene": {
+        "background": "office-night",
+        "ambient": "office",
+        "caption": "[Low hum of air conditioning. A distant keyboard.]",
+        "cast": [
+          "alex"
+        ],
+        "card": {
+          "kicker": "STORY 01",
+          "title": "RELEASE TODAY",
+          "text": "Fictional scenario. Consequences are simulated for philosophical discussion."
+        },
+        "lines": [
+          {
+            "text": "Thursday, 17:20. The office has almost emptied. Outside the windows, the city is turning from blue to black."
+          },
+          {
+            "text": "Northgate Docs, a document-sharing service your team has built for eight months, enters its pilot at 18:00. Two organizations are waiting: Harbor Clinics and Brightwell Legal."
+          },
+          {
+            "speaker": "alex",
+            "expression": "confident",
+            "text": "Forty minutes. The checklist is green. For once, everything is green."
+          }
+        ]
+      }
+    },
+    "briefing": {
+      "type": "scene",
+      "id": "briefing",
+      "next": "conference",
+      "scene": {
+        "background": "dev-workspace",
+        "ambient": "office",
+        "caption": "[Fast footsteps approaching.]",
+        "cast": [
+          "alex",
+          "maria"
+        ],
+        "lines": [
+          {
+            "speaker": "maria",
+            "expression": "concerned",
+            "text": "Alex, do you have a second? I need you to look at something before six."
+          },
+          {
+            "speaker": "maria",
+            "expression": "concerned",
+            "text": "I was clicking through the document viewer as a Harbor user. The address ends with a document number. I changed the number by one."
+          },
+          {
+            "speaker": "maria",
+            "expression": "surprised",
+            "text": "And it opened a Brightwell contract. Test data, but it was in another organization's workspace."
+          },
+          {
+            "speaker": "alex",
+            "expression": "surprised",
+            "text": "Any signed-in user could do that?"
+          },
+          {
+            "speaker": "maria",
+            "expression": "neutral",
+            "text": "As far as I can tell. I wrote it up with the steps. I only ran it twice, though. I haven't had time to isolate it."
+          },
+          {
+            "text": "Your phone vibrates. Daniel is calling you to the conference room."
+          }
+        ]
+      }
+    },
+    "conference": {
+      "type": "scene",
+      "id": "conference",
+      "next": "investigation",
+      "scene": {
+        "background": "conference",
+        "ambient": "office",
+        "caption": "[A video call chime.]",
+        "cast": [
+          "alex",
+          "daniel",
+          "elena"
+        ],
+        "lines": [
+          {
+            "speaker": "daniel",
+            "expression": "concerned",
+            "text": "Alex. Elena's on the line. Maria just told me what she found, so I'll skip the preamble."
+          },
+          {
+            "speaker": "elena",
+            "expression": "neutral",
+            "text": "Both boards will be watching at six. Harbor's director told her staff tonight is the day they stop emailing files around."
+          },
+          {
+            "speaker": "daniel",
+            "expression": "concerned",
+            "text": "The demonstration has already been promised. Can we fix this after launch?"
+          },
+          {
+            "speaker": "daniel",
+            "expression": "neutral",
+            "text": "I'm not asking you to hide anything. I'm asking what the engineering truth is. The team will go with your recommendation."
+          },
+          {
+            "speaker": "alex",
+            "expression": "concerned",
+            "text": "Give me a few minutes with the evidence."
+          }
+        ]
+      }
+    },
+    "investigation": {
+      "type": "investigation",
+      "id": "investigation",
+      "next": "d1",
+      "scene": {
+        "background": "dev-workspace",
+        "ambient": "digital",
+        "caption": "[Soft electronic pulse.]",
+        "cast": [
+          "alex"
+        ],
+        "lines": [
+          {
+            "text": "You have a few minutes. Before you answer anyone, look at what you actually know."
+          },
+          {
+            "text": "Open the materials on your desk. Two of them are essential reading."
+          }
+        ]
+      },
+      "items": [
+        {
+          "id": "report",
+          "label": "Security report #214",
+          "kind": "document",
+          "required": true,
+          "title": "Report #214 · Cross-organization document access",
+          "body": [
+            "Reporter: Maria (QA).  Severity proposed: High.",
+            "Steps: 1) Sign in as a Harbor Clinics test user. 2) Open /docs/view/4821. 3) Change the number to 4822. 4) A document owned by Brightwell Legal is returned.",
+            "Reproduced twice by the reporter. No second reproduction yet."
+          ],
+          "finding": "If the report is right, any signed-in user could read documents belonging to another organization by changing a number in the address."
+        },
+        {
+          "id": "logs",
+          "label": "Technical logs",
+          "kind": "log",
+          "title": "Staging access log (excerpt)",
+          "mono": true,
+          "body": [
+            "17:09:41  GET /docs/view/4821  200  org=harbor  user=maria.test",
+            "17:09:58  GET /docs/view/4822  200  org=harbor  user=maria.test  doc.org=brightwell",
+            "17:10:12  GET /docs/view/4823  200  org=harbor  user=maria.test  doc.org=brightwell",
+            "17:10:12  ownership_check  not_executed"
+          ],
+          "finding": "The log shows requests from one organization succeeding on another organization's documents. No 403 was ever recorded."
+        },
+        {
+          "id": "manager",
+          "label": "Manager's message",
+          "kind": "message",
+          "required": true,
+          "title": "Message from Daniel · 17:21",
+          "body": [
+            "The demonstration has already been promised. Can we fix this after launch?",
+            "Sales has confirmed the 18:00 slot with both boards. Please give me your recommendation as soon as you can."
+          ],
+          "finding": "Daniel is asking for your engineering judgment. He has not decided yet. The team will follow your recommendation."
+        },
+        {
+          "id": "clients",
+          "label": "Client obligations",
+          "kind": "card",
+          "title": "Pilot agreement · summary card",
+          "rows": [
+            [
+              "Harbor Clinics",
+              "40 staff · patient intake forms"
+            ],
+            [
+              "Brightwell Legal",
+              "12 attorneys · client contracts"
+            ],
+            [
+              "Demonstration",
+              "18:00 today, both boards attending"
+            ],
+            [
+              "Clause 7",
+              "Provider must notify clients of unauthorized access to their documents within 24 hours"
+            ]
+          ],
+          "body": [
+            "Real documents will be uploaded the moment the pilot opens."
+          ],
+          "finding": "The people inside those documents are not in this room. Patients and clients of both organizations would be the ones exposed."
+        },
+        {
+          "id": "toggle",
+          "label": "Feature toggle",
+          "kind": "config",
+          "title": "Feature flag · doc_sharing",
+          "mono": true,
+          "body": [
+            "doc_sharing = ON",
+            "Controls: upload, share, view and download routes for documents.",
+            "Does not control: sign-in, dashboards, messaging, notifications.",
+            "Changing the flag requires a redeploy (about five minutes) and must be tested after."
+          ],
+          "finding": "The document features can be switched off without touching the rest of the product, but switching them off is an action that needs to be checked."
+        }
+      ]
+    },
+    "d1": {
+      "type": "decision",
+      "id": "d1",
+      "stage": "D1",
+      "title": "VERIFY THE EVIDENCE",
+      "background": "dev-workspace",
+      "situation": "Maria's report is clear, but only she has reproduced the problem, and only twice. Your recommendation is the one the team will use. How do you establish what you know?",
+      "info": [
+        "Time remaining: about 36 minutes.",
+        "The report includes step-by-step reproduction.",
+        "A test environment with synthetic accounts is available."
+      ],
+      "pressures": [
+        "A deadline already promised to clients",
+        "A colleague who brought you a problem",
+        "Limited time to check"
+      ],
+      "next": "d2",
+      "choices": [
+        {
+          "id": "verify",
+          "label": "Repeat the test using test accounts.",
+          "description": "Open the testing workspace, choose two fictional test accounts and reproduce the issue yourself.",
+          "mapLabel": "Verify personally",
+          "sets": {
+            "evidence": "verified"
+          },
+          "interaction": {
+            "type": "testLab",
+            "title": "Testing workspace · synthetic data only",
+            "requireDistinctOrgs": true,
+            "accounts": [
+              {
+                "id": "h1",
+                "label": "test.nurse",
+                "org": "Harbor Clinics"
+              },
+              {
+                "id": "h2",
+                "label": "test.admin",
+                "org": "Harbor Clinics"
+              },
+              {
+                "id": "b1",
+                "label": "test.attorney",
+                "org": "Brightwell Legal"
+              },
+              {
+                "id": "b2",
+                "label": "test.paralegal",
+                "org": "Brightwell Legal"
+              }
+            ],
+            "log": [
+              "session opened as {a}",
+              "GET /docs/view/4821 → 200 OK (own document)",
+              "document id changed 4821 → 4822",
+              "GET /docs/view/4822 → 200 OK · owner: {b}",
+              "ownership_check: not executed"
+            ],
+            "resultText": "ACCESS CONFIRMED. {a} read a synthetic document owned by {b}."
+          },
+          "result": "Access confirmed. The report now includes reproducible steps and a synthetic example. The verification took ten minutes.",
+          "reaction": {
+            "background": "dev-workspace",
+            "ambient": "digital",
+            "cast": [
+              "alex",
+              "maria"
+            ],
+            "lines": [
+              {
+                "speaker": "maria",
+                "expression": "concerned",
+                "text": "So it wasn't just me."
+              },
+              {
+                "speaker": "alex",
+                "expression": "concerned",
+                "text": "Different organizations, same number trick. I've added a synthetic example to your report so nobody has to take our word for it."
+              },
+              {
+                "text": "The clock on your second monitor reads 17:34. Twenty-six minutes remain."
+              }
+            ]
+          }
+        },
+        {
+          "id": "trust-report",
+          "label": "Use the tester's report.",
+          "description": "Rely on Maria's documented steps and move straight to the recommendation.",
+          "mapLabel": "Trust the report",
+          "sets": {
+            "evidence": "reported"
+          },
+          "result": "The report contains reproducible steps. You saved time, but did not personally verify the issue.",
+          "reaction": {
+            "background": "dev-workspace",
+            "ambient": "digital",
+            "cast": [
+              "alex",
+              "maria"
+            ],
+            "lines": [
+              {
+                "speaker": "alex",
+                "expression": "neutral",
+                "text": "Your steps are clear. I'll work from the report."
+              },
+              {
+                "speaker": "maria",
+                "expression": "concerned",
+                "text": "I can run it again if you'd like, or sit with you while you do."
+              },
+              {
+                "speaker": "alex",
+                "expression": "concerned",
+                "text": "There's no time. I trust the report."
+              },
+              {
+                "speaker": "maria",
+                "expression": "neutral",
+                "text": "Okay. Then it's on the page that I only ran it twice."
+              },
+              {
+                "text": "The clock reads 17:26. Thirty-four minutes remain."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "d2": {
+      "type": "decision",
+      "id": "d2",
+      "stage": "D2",
+      "title": "MESSAGE THE TEAM",
+      "background": "messaging",
+      "situation": "The team channel is waiting. Support, Sales and Daniel will act on whatever you write next.",
+      "info": [
+        "Everyone in #pilot-launch will read your message.",
+        "Report #214 is attached to the launch task.",
+        "Your message is the team's main source on engineering readiness."
+      ],
+      "pressures": [
+        "A manager who wants a quick answer",
+        "Colleagues who need clarity",
+        "The wish to avoid panic"
+      ],
+      "next": "d3",
+      "context": {
+        "type": "chat",
+        "app": "Northgate Chat",
+        "channel": "#pilot-launch",
+        "messages": [
+          {
+            "from": "daniel",
+            "parts": [
+              {
+                "text": "Status check: are we green for 18:00? Sales and Support are waiting on engineering."
+              }
+            ]
+          },
+          {
+            "from": "maria",
+            "parts": [
+              {
+                "text": "I've attached report #214 to the launch task."
+              }
+            ]
+          },
+          {
+            "from": "daniel",
+            "parts": [
+              {
+                "text": "Alex, whatever you recommend, the team follows. Need it in a few minutes."
+              }
+            ]
+          }
+        ]
+      },
+      "choices": [
+        {
+          "id": "disclose",
+          "label": "Report the risk clearly.",
+          "description": "Tell the team exactly what the issue is, who could be affected, and what you recommend.",
+          "preview": "The new release may allow access to documents belonging to another organization. The report is attached. We need to postpone the launch or disable the affected feature and verify the result.",
+          "mapLabel": "Report the risk",
+          "sets": {
+            "disclosure": "explicit"
+          },
+          "interaction": {
+            "type": "chat",
+            "app": "Northgate Chat",
+            "channel": "#pilot-launch",
+            "sendLabel": "Send message",
+            "messages": [
+              {
+                "from": "me",
+                "parts": [
+                  {
+                    "text": "The new release may allow access to documents belonging to another organization. The report is attached. We need to postpone the launch or disable the affected feature and verify the result."
+                  }
+                ]
+              }
+            ]
+          },
+          "result": "Support prepares an honest explanation. The manager now understands the risk.",
+          "reaction": {
+            "background": "messaging",
+            "ambient": "digital",
+            "cast": [
+              "daniel"
+            ],
+            "lines": [
+              {
+                "speaker": "daniel",
+                "expression": "concerned",
+                "text": "Okay. Thank you for saying it plainly."
+              },
+              {
+                "text": "In the support channel, someone starts drafting an honest explanation for the clients."
+              },
+              {
+                "speaker": "daniel",
+                "expression": "concerned",
+                "text": "If another organization's documents are exposed, this isn't a demo problem. It's a different kind of problem. I need to think."
+              }
+            ]
+          }
+        },
+        {
+          "id": "delay",
+          "label": "Only mention a technical delay.",
+          "description": "Tell the team there is a technical issue and that you are checking launch readiness.",
+          "preview": "There is a technical issue. I am checking the launch readiness.",
+          "mapLabel": "Mention only a delay",
+          "sets": {
+            "disclosure": "vague"
+          },
+          "interaction": {
+            "type": "chat",
+            "app": "Northgate Chat",
+            "channel": "#pilot-launch",
+            "sendLabel": "Send message",
+            "messages": [
+              {
+                "from": "me",
+                "parts": [
+                  {
+                    "text": "There is a technical issue. I am checking the launch readiness."
+                  }
+                ]
+              }
+            ]
+          },
+          "result": "The manager knows about a delay, but does not understand who may be affected. The detailed report remains in the task.",
+          "reaction": {
+            "background": "messaging",
+            "ambient": "digital",
+            "cast": [
+              "daniel"
+            ],
+            "lines": [
+              {
+                "speaker": "daniel",
+                "expression": "neutral",
+                "text": "A technical issue. Okay. How long are we talking? Can Sales still tell Elena six o'clock?"
+              },
+              {
+                "speaker": "alex",
+                "expression": "concerned",
+                "text": "I'm still checking launch readiness."
+              },
+              {
+                "speaker": "daniel",
+                "expression": "neutral",
+                "text": "Right. Keep me posted."
+              },
+              {
+                "text": "The detailed report sits in the task tracker, where only the people who open it will see it."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "d3": {
+      "type": "decision",
+      "id": "d3",
+      "stage": "D3",
+      "title": "THE LAUNCH DECISION",
+      "background": "conference",
+      "situation": "It is time. Daniel, Maria and Elena are waiting for your recommendation. Whatever you say, the team will do.",
+      "info": [
+        "Launch is at 18:00.",
+        "Real client documents will be uploaded as soon as the pilot opens.",
+        "The feature toggle can disable document sharing, but must be tested."
+      ],
+      "pressures": [
+        "Two clients waiting",
+        "A promise already made",
+        "Documents of people who are not in the room"
+      ],
+      "choices": [
+        {
+          "id": "postpone",
+          "label": "POSTPONE THE LAUNCH",
+          "description": "Do not release. Keep the vulnerable build away from user documents while the access-control problem is fixed.",
+          "mapLabel": "Postpone",
+          "sets": {},
+          "ending": "R_E1",
+          "result": "The pilot is postponed. The vulnerable release does not receive user documents. Support reschedules the demonstration, and the team works on the access-control problem.",
+          "reaction": {
+            "background": "conference",
+            "ambient": "office",
+            "cast": [
+              "alex",
+              "daniel",
+              "elena"
+            ],
+            "lines": [
+              {
+                "speaker": "alex",
+                "expression": "confident",
+                "text": "My recommendation is to postpone. We can't put real documents into this build."
+              },
+              {
+                "speaker": "daniel",
+                "expression": "sad",
+                "text": "Then we postpone. I'll call the boards myself."
+              },
+              {
+                "speaker": "elena",
+                "expression": "concerned",
+                "text": "I understand. I won't pretend it isn't painful."
+              }
+            ]
+          }
+        },
+        {
+          "id": "limited",
+          "label": "LAUNCH WITHOUT DOCUMENT SHARING",
+          "description": "Switch off the document features, prove they are really off, and prove the two organizations are isolated. Then release the rest.",
+          "mapLabel": "Limited release",
+          "sets": {},
+          "ending": "R_E2",
+          "interaction": {
+            "type": "steps",
+            "title": "Release console · northgate-prod",
+            "doneText": "All three checks complete. The build is ready to release without document sharing.",
+            "steps": [
+              {
+                "id": "disable",
+                "label": "1. Disable the document-sharing feature",
+                "button": "Set doc_sharing = OFF",
+                "output": [
+                  "$ flags set doc_sharing OFF",
+                  "deploy 4f2a9c … complete",
+                  "routes /docs/* unregistered"
+                ]
+              },
+              {
+                "id": "direct",
+                "label": "2. Test the direct request to the disabled route",
+                "button": "Request /docs/view/4822",
+                "output": [
+                  "$ curl -i /docs/view/4822  (as harbor.test)",
+                  "HTTP/1.1 404 Not Found",
+                  "document routes are disabled"
+                ]
+              },
+              {
+                "id": "isolation",
+                "label": "3. Verify isolation between the two test organizations",
+                "button": "Run isolation check",
+                "output": [
+                  "$ isolation-check harbor ↔ brightwell",
+                  "workspace listing .......... PASS",
+                  "dashboard data ............. PASS",
+                  "cross-org reads ............ 0"
+                ]
+              }
+            ]
+          },
+          "result": "The pilot launches with basic functionality. Document sharing is unavailable. The team must explain the limitation and test the fix before enabling the feature.",
+          "reaction": {
+            "background": "conference",
+            "ambient": "office",
+            "cast": [
+              "alex",
+              "daniel",
+              "elena"
+            ],
+            "lines": [
+              {
+                "speaker": "alex",
+                "expression": "confident",
+                "text": "We can launch tonight, but without document sharing. I'll disable the feature, test it, and check isolation before anyone logs in."
+              },
+              {
+                "speaker": "daniel",
+                "expression": "concerned",
+                "text": "That's a smaller pilot than we promised."
+              },
+              {
+                "speaker": "elena",
+                "expression": "neutral",
+                "text": "Smaller than promised, yes. I need to know exactly what it can and can't do."
+              }
+            ]
+          }
+        },
+        {
+          "id": "full",
+          "label": "LAUNCH THE FULL PRODUCT",
+          "description": "Release everything on schedule and address the access problem afterward.",
+          "mapLabel": "Full release",
+          "sets": {},
+          "ending": "R_E3",
+          "result": "The full pilot launches. The following day, the security team reproduces the same unauthorized access and disables document sharing.",
+          "reaction": {
+            "background": "conference",
+            "ambient": "office",
+            "cast": [
+              "alex",
+              "daniel",
+              "elena"
+            ],
+            "lines": [
+              {
+                "speaker": "alex",
+                "expression": "neutral",
+                "text": "Launch. We'll fix the access problem as quickly as we can afterward."
+              },
+              {
+                "speaker": "daniel",
+                "expression": "concerned",
+                "text": "...All right. We launch at six."
+              },
+              {
+                "speaker": "elena",
+                "expression": "confident",
+                "text": "Thank you. The boards will be pleased."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "endings": {
+    "R_E1": {
+      "id": "R_E1",
+      "title": "POSTPONED",
+      "subtitle": "The deadline was missed. The risk was not transferred to the clients.",
+      "result": "The pilot is postponed. The vulnerable release does not receive user documents. Support reschedules the demonstration, and the team works on the access-control problem. The deadline was missed, but the risk was not transferred to clients.",
+      "unresolved": "The clients lost a day they had been promised. Was that cost yours to impose on them?",
+      "scene": {
+        "background": "city-night",
+        "ambient": "city",
+        "caption": "[Rain begins against the glass.]",
+        "cast": [
+          "daniel",
+          "elena",
+          "maria"
+        ],
+        "lines": [
+          {
+            "text": "18:00 passes. In Harbor Clinics' meeting room, the projector shows a calendar invitation instead of a login screen."
+          },
+          {
+            "speaker": "elena",
+            "expression": "concerned",
+            "text": "Harbor's director took it better than I expected. One of Brightwell's board members asked whether your team can keep its dates."
+          },
+          {
+            "speaker": "daniel",
+            "expression": "sad",
+            "text": "We missed the deadline. That's mine to answer for."
+          },
+          {
+            "speaker": "daniel",
+            "when": {
+              "flag": "disclosure",
+              "is": "vague"
+            },
+            "expression": "concerned",
+            "text": "I'll be honest. When your message said 'technical issue,' I thought it was a delay. I didn't know it was our clients' data until I read the report."
+          },
+          {
+            "speaker": "daniel",
+            "when": {
+              "flag": "disclosure",
+              "is": "explicit"
+            },
+            "expression": "neutral",
+            "text": "You told us what was at stake, so the call to the boards was at least an honest one."
+          },
+          {
+            "speaker": "maria",
+            "expression": "neutral",
+            "text": "The ownership check is missing in four routes. It'll take days to fix properly, and I'll write the regression test first."
+          },
+          {
+            "speaker": "maria",
+            "when": {
+              "flag": "evidence",
+              "is": "reported"
+            },
+            "expression": "concerned",
+            "text": "I keep thinking about that second reproduction. I only ran it twice, and now no one will know if it was as bad as I thought."
+          },
+          {
+            "speaker": "maria",
+            "when": {
+              "flag": "evidence",
+              "is": "verified"
+            },
+            "expression": "confident",
+            "text": "And since you reproduced it yourself, we have a clean example to turn into a test."
+          }
+        ]
+      },
+      "fragments": [
+        {
+          "when": {
+            "flag": "evidence",
+            "is": "verified"
+          },
+          "text": "Your decision was based on a personal test using synthetic data."
+        },
+        {
+          "when": {
+            "flag": "evidence",
+            "is": "reported"
+          },
+          "text": "Your decision relied on the tester's report. You did not personally reproduce the issue."
+        },
+        {
+          "when": {
+            "flag": "disclosure",
+            "is": "explicit"
+          },
+          "text": "The team received a clear description of the cross-organization risk before deciding."
+        },
+        {
+          "when": {
+            "flag": "disclosure",
+            "is": "vague"
+          },
+          "text": "The risk was initially hidden behind a general description of a technical problem."
+        }
+      ],
+      "consequences": [
+        {
+          "text": "The pilot is rescheduled; the promised demonstration did not happen."
+        },
+        {
+          "text": "No client documents were stored in the vulnerable release."
+        },
+        {
+          "text": "Trust with the clients now depends on how the delay is explained."
+        },
+        {
+          "when": {
+            "flag": "disclosure",
+            "is": "vague"
+          },
+          "text": "Daniel learned what was at stake only after the decision was already made."
+        }
+      ]
+    },
+    "R_E2": {
+      "id": "R_E2",
+      "title": "LIMITED RELEASE",
+      "subtitle": "A smaller pilot, and a promise that still has to be kept.",
+      "result": "The pilot launches with basic functionality. Document sharing is unavailable. The team must explain the limitation and test the fix before enabling the feature.",
+      "unresolved": "Both clients now have a product that is not what they were promised. Who tells them, and how much of the reason do they deserve to hear?",
+      "scene": {
+        "background": "city-dusk",
+        "ambient": "office",
+        "caption": "[A quiet notification chime.]",
+        "cast": [
+          "daniel",
+          "elena",
+          "maria"
+        ],
+        "lines": [
+          {
+            "text": "18:02. Harbor's staff sign in to dashboards and messaging. The document tab is missing, and a banner explains that it is temporarily unavailable."
+          },
+          {
+            "speaker": "elena",
+            "expression": "neutral",
+            "text": "My phone has been ringing. 'Where are the files?' I'd like to answer that honestly. What can I say?"
+          },
+          {
+            "speaker": "daniel",
+            "expression": "concerned",
+            "text": "That we found a problem with access between organizations and turned the feature off until it's fixed and tested."
+          },
+          {
+            "speaker": "daniel",
+            "when": {
+              "flag": "disclosure",
+              "is": "vague"
+            },
+            "expression": "sad",
+            "text": "I wish I'd known earlier how serious the problem was. I could have prepared the boards."
+          },
+          {
+            "speaker": "maria",
+            "expression": "confident",
+            "text": "Sharing stays off until the fix passes a full isolation test. I'll write the regression test tonight."
+          },
+          {
+            "speaker": "maria",
+            "when": {
+              "flag": "evidence",
+              "is": "verified"
+            },
+            "expression": "neutral",
+            "text": "Because you reproduced it yourself, we know exactly which test to re-run."
+          },
+          {
+            "speaker": "elena",
+            "expression": "concerned",
+            "text": "Smaller than promised. But at least I know where we stand."
+          }
+        ]
+      },
+      "fragments": [
+        {
+          "when": {
+            "flag": "evidence",
+            "is": "verified"
+          },
+          "text": "Your decision was based on a personal test using synthetic data."
+        },
+        {
+          "when": {
+            "flag": "evidence",
+            "is": "reported"
+          },
+          "text": "Your decision relied on the tester's report. You did not personally reproduce the issue."
+        },
+        {
+          "when": {
+            "flag": "disclosure",
+            "is": "explicit"
+          },
+          "text": "The team received a clear description of the cross-organization risk before deciding."
+        },
+        {
+          "when": {
+            "flag": "disclosure",
+            "is": "vague"
+          },
+          "text": "The risk was initially hidden behind a general description of a technical problem."
+        }
+      ],
+      "consequences": [
+        {
+          "text": "The pilot opens with accounts, dashboards and messaging only."
+        },
+        {
+          "text": "Document sharing stays disabled until the fix is tested."
+        },
+        {
+          "text": "The team must explain the limitation to both clients."
+        },
+        {
+          "when": {
+            "flag": "disclosure",
+            "is": "vague"
+          },
+          "text": "The explanation to the clients has to be assembled after the fact, with less preparation time."
+        }
+      ]
+    },
+    "R_E3": {
+      "id": "R_E3",
+      "title": "FULL RELEASE",
+      "subtitle": "The pilot went live. The question now is who was affected.",
+      "result": "The full pilot launches. The following day, the security team reproduces the same unauthorized access and disables document sharing. The team must inspect logs and notify responsible people. It is not yet known whether anyone accessed another organization's documents.",
+      "unresolved": "Whether anyone read another organization's documents is still unknown. Who carries responsibility for a harm that may or may not have happened?",
+      "scene": {
+        "background": "city-alert",
+        "ambient": "office",
+        "caption": "[Several phones ringing at once.]",
+        "cast": [
+          "daniel",
+          "elena",
+          "maria"
+        ],
+        "lines": [
+          {
+            "text": "Friday, 09:10. The security team has reproduced the access problem overnight. Document sharing was switched off an hour ago."
+          },
+          {
+            "speaker": "daniel",
+            "expression": "sad",
+            "text": "They've turned it off. Now we have to find out whether anyone used it."
+          },
+          {
+            "speaker": "elena",
+            "expression": "angry",
+            "text": "Harbor uploaded intake forms last night. Brightwell uploaded client contracts. I need to know whether anyone outside those organizations opened them, and I need to know by when."
+          },
+          {
+            "speaker": "maria",
+            "expression": "concerned",
+            "text": "The logs will tell us. Separating real access from testing will take hours."
+          },
+          {
+            "speaker": "maria",
+            "when": {
+              "flag": "evidence",
+              "is": "reported"
+            },
+            "expression": "sad",
+            "text": "My report said I'd only reproduced it twice. Nobody re-ran it. I keep wondering if that changed anything."
+          },
+          {
+            "speaker": "alex",
+            "when": {
+              "flag": "evidence",
+              "is": "verified"
+            },
+            "expression": "sad",
+            "text": "I tested it myself. I knew it was real when I made the call."
+          },
+          {
+            "speaker": "daniel",
+            "when": {
+              "flag": "disclosure",
+              "is": "explicit"
+            },
+            "expression": "concerned",
+            "text": "You told us clearly. We decided to go anyway. That belongs to all of us."
+          },
+          {
+            "speaker": "daniel",
+            "when": {
+              "flag": "disclosure",
+              "is": "vague"
+            },
+            "expression": "angry",
+            "text": "I thought it was a delay, not a data problem. Nobody told me who could be affected."
+          },
+          {
+            "speaker": "elena",
+            "expression": "concerned",
+            "text": "Under clause 7, you have twenty-four hours to notify us of anything you find."
+          }
+        ]
+      },
+      "fragments": [
+        {
+          "when": {
+            "flag": "evidence",
+            "is": "verified"
+          },
+          "text": "Your decision was based on a personal test using synthetic data."
+        },
+        {
+          "when": {
+            "flag": "evidence",
+            "is": "reported"
+          },
+          "text": "Your decision relied on the tester's report. You did not personally reproduce the issue."
+        },
+        {
+          "when": {
+            "flag": "disclosure",
+            "is": "explicit"
+          },
+          "text": "The team received a clear description of the cross-organization risk before deciding."
+        },
+        {
+          "when": {
+            "flag": "disclosure",
+            "is": "vague"
+          },
+          "text": "The risk was initially hidden behind a general description of a technical problem."
+        }
+      ],
+      "consequences": [
+        {
+          "text": "The security team reproduced the unauthorized access the next day."
+        },
+        {
+          "text": "Document sharing was disabled after real client documents had been uploaded."
+        },
+        {
+          "text": "Logs must be inspected and the responsible people notified under clause 7."
+        },
+        {
+          "text": "It is not yet known whether anyone accessed another organization's documents."
+        }
+      ]
+    }
+  },
+  "flagLabels": [
+    {
+      "flag": "evidence",
+      "values": {
+        "verified": "Verified the issue yourself",
+        "reported": "Relied on the tester's report"
+      }
+    },
+    {
+      "flag": "disclosure",
+      "values": {
+        "explicit": "Reported the risk clearly",
+        "vague": "Mentioned only a technical delay"
+      }
+    }
+  ],
+  "analysis": {
+    "kant": {
+      "argument": "In Section II of the Groundwork, Kant tests an action through its maxim, the private rule you are acting on. A maxim fails if it cannot be willed as a universal law without contradiction, and an action also fails if it treats a person merely as a means, not as someone with their own purposes. Both formulations ask what you owe people regardless of how convenient the outcome is.",
+      "application": {
+        "byEnding": {
+          "R_E1": "Postponing acts on a maxim like 'when others' private documents may be exposed, I will not hand them to the risk, even when it costs me a commitment.' That rule can be imagined as universal without collapsing. It also declines to use the clients' documents as a means for keeping a promise made to them.",
+          "R_E2": "Launching with sharing disabled acts on a maxim closer to 'I will keep a commitment by the narrowest means that does not expose others to a known harm, and I will check that it works.' A Kantian reading then asks whether the clients are told what they are receiving, since a pilot presented as complete would involve deception.",
+          "R_E3": "Launching in full acts on a maxim like 'when a commitment is inconvenient and the risk falls on others, I will proceed and treat that risk as acceptable.' Imagined as a universal rule, no one could rely on a promised service. And the clients' documents, and the people named in them, become means for a successful demonstration without their consent to carry the risk."
+        },
+        "byFlag": {
+          "evidence=verified": "Verifying the issue yourself gave your maxim firmer ground: you acted on what you knew, not on what you assumed. Kant's test applies to what you actually knew when you chose.",
+          "evidence=reported": "Relying on Maria's report means acting on testimony, which can be rational. The Kantian question is whether you held that testimony to the standard you would want applied if the data at risk were your own.",
+          "disclosure=explicit": "By describing the risk plainly, you treated the team as rational agents who could decide with the facts. This respects their autonomy as co-deciders.",
+          "disclosure=vague": "A message that conceals who may be affected steers the team's decision without giving them the means to evaluate it. The maxim 'withhold the reason so the decision goes my way' treats colleagues as instruments, and could not be universalized, because it depends on others not doing the same."
+        }
+      },
+      "limitation": {
+        "R_E1": "Kant's formulas say little about how to weigh the duty to the clients' data against duties to a colleague who staked his credibility on the date. Both can be described as duties; the formulas do not rank them.",
+        "R_E2": "The test is sensitive to how the maxim is described. A narrow description (disable the feature, test, disclose) passes easily; a broader one (ship while a fix is unfinished) might not. Who decides the right level of description?",
+        "R_E3": "A Kantian is not committed to a particular outcome here. If the team honestly believed the vulnerability was minor, the maxim would be described differently. But your own evidence limits how honestly that description can be given."
+      },
+      "reference": "kant"
+    },
+    "mill": {
+      "argument": "In Chapter II of Utilitarianism, Mill holds that actions are right in so far as they promote happiness and wrong in so far as they produce the reverse, counting everyone affected impartially. It is not a head-count: he distinguishes the quality of pleasures, and he treats security and trustworthiness as among the most important long-term sources of well-being. He also notes that we usually rely on tested rules and weigh consequences directly mainly in hard cases.",
+      "application": {
+        "byEnding": {
+          "R_E1": "Postponing creates certain, immediate costs: a missed demonstration, disappointed staff, a dent in the team's reputation. It avoids a possible harm of a different kind and size: the exposure of clients' private documents, which touches the security people count on. The weighing depends on probabilities and magnitudes, not on counting the people in the room.",
+          "R_E2": "A limited release spreads the costs: clients receive something usable, the team keeps some credibility, and the specific exposure risk is closed off. Mill would also ask whether the shortfall is communicated honestly, since trust in what a provider says about its product is a long-lived good.",
+          "R_E3": "A full release bets the clients' security against a successful demonstration. If no one accessed another organization's files, the harm may stay small; if someone did, it could be large and hard to reverse. Because the log inspection is unfinished, the actual balance of consequences is not yet known, and the clients are made to carry that uncertainty."
+        },
+        "byFlag": {
+          "evidence=verified": "A personal test replaced guesswork with evidence about how likely and how serious the exposure was, which is what makes weighing consequences meaningful.",
+          "evidence=reported": "Without independent confirmation, your estimate of the probability stayed uncertain. That is not wrong in itself, but it makes the weighing less reliable, and the people at risk had no say in how much uncertainty to accept.",
+          "disclosure=explicit": "A clear message let everyone affected by the launch, including Support and Sales, prepare for the consequences. Accurate information is a precondition for anyone to act in the interest of the clients.",
+          "disclosure=vague": "A vague message left Support and management weighing consequences they did not fully know. Over time, that kind of opacity can erode the trust that makes teams work well."
+        }
+      },
+      "limitation": {
+        "R_E1": "Utilitarian reasoning depends on predictions: we cannot know whether the exposure would have occurred. Does a harm that was avoided count as heavily as one that was seen?",
+        "R_E2": "The limited release is a compromise, and how many of the clients' needs it meets is an empirical question. Mill's framework does not say how much disappointment is acceptable in exchange for lower risk.",
+        "R_E3": "The consequences are still unfolding. A theory that depends on outcomes can only give a provisional judgment until the logs are read. Is it reasonable to decide on the basis of outcomes you cannot yet see?"
+      },
+      "reference": "mill"
+    },
+    "aristotle": {
+      "argument": "In Nicomachean Ethics VI.5 Aristotle describes practical wisdom (phronesis) as the ability to deliberate well about what is good for human life in particular circumstances. In VI.7 he adds that it concerns particulars and grows through experience, unlike knowledge of universal truths. VIII.3 distinguishes relationships based on usefulness from those grounded in goodwill for the other person's own sake. Virtue lies in judging what the situation calls for, not in applying a formula.",
+      "application": {
+        "byEnding": {
+          "R_E1": "Postponing can express courage and honesty about the situation, at the cost of appearing unreliable. Whether it shows practical wisdom depends on whether it matched the actual risk, the people involved, and the options available, including whether smaller steps existed.",
+          "R_E2": "Limiting the release looks like a search for the mean between two extremes: recklessness on one side and over-caution on the other. Aristotle's mean is not a midpoint; it is what a practically wise person would judge right for this situation. The three technical checks show that judgment turned into action.",
+          "R_E3": "A full launch may be described as bold, but Aristotle distinguishes courage from rashness: the rash person overlooks the danger. Practical wisdom involves seeing the situation as it is, including people who are not in the room but will be affected by the choice."
+        },
+        "byFlag": {
+          "evidence=verified": "Checking the claim yourself is what practical wisdom can look like when time is short: attending to particulars rather than relying on general reassurance.",
+          "evidence=reported": "Trusting a colleague can reflect a good working relationship, which Aristotle values. Practical wisdom also asks whether that trust fit the stakes.",
+          "disclosure=explicit": "Speaking plainly to your manager treated the working relationship as honest cooperation, closer to a shared good than to mere convenience (VIII.3).",
+          "disclosure=vague": "A message that keeps the real issue from your manager treats the relationship as a means of getting through the evening. Aristotle's discussion of friendships of usefulness notes that they last only as long as the benefit does."
+        }
+      },
+      "limitation": {
+        "R_E1": "Aristotle gives no procedure for knowing when caution has become excess. The judgment is made by the person in the situation, and can be wrong.",
+        "R_E2": "It is hard to say whether someone who chose the 'mean' truly saw the situation or only found a comfortable middle. Aristotle expects practical wisdom to show itself over time, not in a single choice.",
+        "R_E3": "Aristotle's ethics centers on character formed over time. One evening's decision may reveal less about your character than about the pressure on it. How much weight should one decision carry?"
+      },
+      "reference": "aristotle"
+    }
+  },
+  "reflection": {
+    "conflicts": {
+      "R_E1": "Kant's attention to what is owed to the clients' data sits against Mill's concern for the real, immediate costs of a missed launch. Aristotle asks whether the response was proportionate to the risk, which neither of the others settles.",
+      "R_E2": "Kant asks whether the clients were told what they actually received. Mill is satisfied by lower harm but wants the shortfall honestly communicated. Aristotle asks whether the middle course was seen or merely convenient. The three agree on honesty and weigh it differently.",
+      "R_E3": "Kant and Mill pull apart most here: a rule against exposing others to a known risk, against a calculation of actual harm that is still unfinished. Aristotle adds that rashness is a failure of perception, not only of principle."
+    },
+    "questions": [
+      "Which of your choices felt freest, and which felt shaped by the deadline?",
+      "Would your recommendation have changed if the documents at risk had been your own?",
+      "How much certainty is enough before you act on a risk to other people?",
+      "Who should carry the cost when a promise and a safeguard conflict?"
+    ]
+  }
+}
