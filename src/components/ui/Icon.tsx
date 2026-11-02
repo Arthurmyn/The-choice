@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 export type IconName =
   | 'back' | 'next' | 'close' | 'settings' | 'volume' | 'mute' | 'document' | 'log' | 'message' | 'card' | 'config'
-  | 'check' | 'lock' | 'zoom-in' | 'zoom-out' | 'fit' | 'clock' | 'branch' | 'archive' | 'restart' | 'map' | 'mind' | 'fragment' | 'menu';
+  | 'food' | 'medicine' | 'ammo' | 'fuel' | 'check' | 'lock' | 'zoom-in' | 'zoom-out' | 'fit' | 'clock' | 'branch' | 'archive' | 'restart' | 'map' | 'mind' | 'fragment' | 'menu';
 
 const PATHS: Record<IconName, ReactNode> = {
   back: <path d="M15 5l-7 7 7 7M8 12h12" />,
@@ -17,6 +17,10 @@ const PATHS: Record<IconName, ReactNode> = {
   message: <path d="M4 5h16v11H9l-5 4z" />,
   card: (<><rect x="3" y="6" width="18" height="12" rx="2" /><path d="M3 10h18M7 15h4" /></>),
   config: (<><rect x="3" y="8" width="18" height="8" rx="4" /><circle cx="16" cy="12" r="2.4" /></>),
+  food: <><path d="M7 3v7a2 2 0 004 0V3M9 3v18" /><path d="M16 3c-2 2-2.5 5-2.5 8h3.5V3zM16.5 11V21" /></>,
+  medicine: <><rect x="3" y="9" width="18" height="8" rx="4" transform="rotate(-35 12 13)" /><path d="M9.5 8l6 6" /></>,
+  ammo: <><path d="M9 21V9l3-5 3 5v12z" /><path d="M9 15h6" /></>,
+  fuel: <><path d="M5 21V5a1 1 0 011-1h7a1 1 0 011 1v16" /><path d="M4 21h11M14 9h2.5a1.5 1.5 0 011.5 1.5V16a1.5 1.5 0 003 0V9l-3-3M7 8h5" /></>,
   check: <path d="M5 12.5l4.5 4.5L19 7.5" />,
   lock: (<><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V8a4 4 0 018 0v3" /></>),
   'zoom-in': (<><circle cx="11" cy="11" r="6" /><path d="M16 16l4 4M11 8.5v5M8.5 11h5" /></>),
