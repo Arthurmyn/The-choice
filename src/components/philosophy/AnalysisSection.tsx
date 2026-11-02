@@ -4,6 +4,7 @@ import { getPhilosophy, getReferences } from '../../data';
 import { useLang } from '../../i18n';
 import type { PhilosopherId } from '../../data';
 import type { Story } from '../../engine/types';
+import { evaluate } from '../../engine/narrativeEngine';
 import { PhilosopherPortrait } from './PhilosopherPortrait';
 
 function stageOf(story: Story, flag: string): string {
@@ -33,7 +34,10 @@ export function AnalysisSection({
   const info = philosophyMeta.philosophers[id];
   const a = story.analysis[id];
   const ref = sourceReferences[a.reference as PhilosopherId];
-  const fragments = story.flagLabels
+  const conditional = (a.application.fragments ?? [])
+    .filter((f) => evaluate(f.when, flags))
+    .map((f, i) => ({ key: `c${i}`, stage: '', label: f.label, text: f.text }));
+  const fragments = conditional.length || a.application.fragments ? conditional : story.flagLabels
     .filter((fl) => flags[fl.flag])
     .map((fl) => ({
       key: `${fl.flag}=${flags[fl.flag]}`,
@@ -69,7 +73,7 @@ export function AnalysisSection({
           <ul className="frag-list">
             {fragments.map((f) => (
               <li key={f.key}>
-                <span className="frag-label">{f.stage} · {f.label}</span>
+                <span className="frag-label">{f.stage ? `${f.stage} · ` : ''}{f.label}</span>
                 <span>{f.text}</span>
               </li>
             ))}
