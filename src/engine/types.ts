@@ -9,7 +9,16 @@ export type BackgroundId =
   | 'city-dusk'
   | 'city-night'
   | 'city-dawn'
-  | 'city-alert';
+  | 'city-alert'
+  | 'gas-station'
+  | 'highway'
+  | 'forest-road'
+  | 'hospital'
+  | 'checkpoint'
+  | 'camp'
+  | 'shelter'
+  | 'ruined-city'
+  | 'haven-gate';
 
 export type AmbientId = 'office' | 'room' | 'city' | 'digital' | 'none';
 
@@ -17,8 +26,21 @@ export type AmbientId = 'office' | 'room' | 'city' | 'digital' | 'none';
 export type Condition =
   | { flag: string; is: string }
   | { flag: string; isNot: string }
+  /** Numeric tests for stats (keys starting with "#"); a missing stat counts as 0. */
+  | { flag: string; gte: number }
+  | { flag: string; lte: number }
   | { all: Condition[] }
   | { any: Condition[] };
+
+/**
+ * A state change. `sets` assigns flags; `effects` adds to numeric stats.
+ * Entries run in order, each only if its `when` holds at that moment.
+ */
+export interface Apply {
+  when?: Condition;
+  sets?: Record<string, string>;
+  effects?: Record<string, number>;
+}
 
 export interface Conditional {
   when?: Condition;
@@ -160,6 +182,10 @@ export interface EvidenceItem {
   /** Table rows as [key, value]. */
   rows?: [string, string][];
   finding: string;
+  /** Only present when this holds. */
+  when?: Condition;
+  /** Applied when inspected during the investigation. Inspections that change the story are recorded in the history. */
+  apply?: Apply[];
 }
 
 /* ---------- Nodes ---------- */
@@ -171,6 +197,10 @@ export interface Choice {
   /** Exact action text (e.g. the message that will be sent). */
   preview?: string;
   sets: Record<string, string>;
+  /** Further state changes (conditional flags and numeric effects). */
+  apply?: Apply[];
+  /** Only offered when this holds. */
+  when?: Condition;
   /** Next node id. Falls back to the decision's `next`. */
   next?: string;
   /** Ending id. If present the story finishes after this choice. */
@@ -185,16 +215,30 @@ export interface Choice {
 export interface SceneNode {
   type: 'scene';
   id: string;
+  chapter?: number;
   scene: SceneContent;
+  apply?: Apply[];
   next: string;
 }
 
 export interface InvestigationNode {
   type: 'investigation';
   id: string;
+  chapter?: number;
   scene: SceneContent;
   items: EvidenceItem[];
+  apply?: Apply[];
   next: string;
+}
+
+/** Picks the next node from the current state. No beat is shown for it. */
+export interface RouterNode {
+  type: 'router';
+  id: string;
+  apply?: Apply[];
+  routes: { when: Condition; next?: string; ending?: string }[];
+  default?: string;
+  defaultEnding?: string;
 }
 
 export interface DecisionNode {
@@ -202,6 +246,7 @@ export interface DecisionNode {
   id: string;
   /** Short stage tag, e.g. "D1". */
   stage: string;
+  chapter?: number;
   title: string;
   background: BackgroundId;
   situation: string;
@@ -212,10 +257,12 @@ export interface DecisionNode {
   next?: string;
 }
 
-export type StoryNode = SceneNode | InvestigationNode | DecisionNode;
+export type StoryNode = SceneNode | InvestigationNode | DecisionNode | RouterNode;
 
 export interface Ending {
   id: string;
+  /** Counted in the total but not described until found. */
+  hidden?: boolean;
   title: string;
   subtitle: string;
   scene: SceneContent;
@@ -237,6 +284,8 @@ export interface PhilosopherAnalysis {
     byEnding: Record<string, string>;
     /** Keys look like "evidence=verified". */
     byFlag: Record<string, string>;
+    /** Conditional passages for stories with many state variables. */
+    fragments?: { when: Condition; label: string; text: string }[];
   };
   limitation: Record<string, string>;
   reference: string;
@@ -252,6 +301,14 @@ export interface Story {
   disclaimer: string;
   tone: BackgroundId;
   start: string;
+  /** Initial flags and stats (stats are numeric strings under "#" keys). */
+  initial?: Record<string, string>;
+  /** Chapter titles, for stories told in chapters. */
+  chapters?: { title: string; day: string }[];
+  /** Stats shown in the HUD as resources. */
+  resources?: { key: string; label: string; icon: string }[];
+  /** Set to false for large graphs: validation samples playthroughs instead of enumerating every path. */
+  exhaustive?: boolean;
   characters: Record<string, Character>;
   nodes: Record<string, StoryNode>;
   endings: Record<string, Ending>;
@@ -277,6 +334,10 @@ export interface EngineState {
   error?: string;
   /** All nodes reached on the path, in order. */
   path: string[];
+  /** Evidence inspected during investigations (only those that change the story are recorded). */
+  inspected: Record<string, string[]>;
+  /** Flags as they were at each node, so the screen never shows what has not happened yet. A decision has `<id>:before` too. */
+  snapshots: Record<string, Record<string, string>>;
   /** The decision node waiting for an answer, or null when complete/invalid. */
   pendingDecisionId: string | null;
   flags: Record<string, string>;
