@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { stories } from '../data';
+import { stories as allStories } from '../data';
+
+/** Stories small enough to enumerate every path. The Last Journey is covered in lastJourney.test.ts. */
+const stories = allStories.filter((s) => s.exhaustive !== false);
 import {
+  allLines,
   buildTimeline,
   deriveState,
   enumeratePaths,
@@ -249,7 +253,7 @@ function mask(o: J, key = '', inText = false): J {
 describe('languages', () => {
   const en = getStories('en');
   it.each(LANGS)('%s stories validate and have all 12 paths each', (lang) => {
-    for (const s of getStories(lang)) {
+    for (const s of getStories(lang).filter((x) => x.exhaustive !== false)) {
       expect(validateStory(s)).toEqual([]);
       expect(enumeratePaths(s)).toHaveLength(12);
     }
@@ -263,7 +267,7 @@ describe('languages', () => {
 
   it('translated text is not left in English', () => {
     for (const s of getStories('ru')) {
-      const lines = Object.values(s.nodes).flatMap((n) => (n.type === 'decision' ? n.choices.flatMap((c) => c.reaction.lines) : n.scene.lines));
+      const lines = allLines(s);
       for (const l of lines) expect(/[А-Яа-яЁё]/.test(l.text), l.text).toBe(true);
       for (const e of Object.values(s.endings)) expect(/[А-Яа-яЁё]/.test(e.title + e.result)).toBe(true);
     }
