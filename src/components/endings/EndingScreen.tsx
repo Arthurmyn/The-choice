@@ -7,6 +7,8 @@ import { pathKey } from '../../engine/narrativeEngine';
 import type { DecisionRecord, SceneContent, Story } from '../../engine/types';
 import { ScenePlayer } from '../cinematic/ScenePlayer';
 import { StorySummary } from './StorySummary';
+import { EndingsProgress } from './EndingsProgress';
+import { useGame } from '../../hooks/useGameState';
 import { Icon } from '../ui/Icon';
 
 export function EndingScreen({
@@ -26,6 +28,8 @@ export function EndingScreen({
 }): ReactNode {
   const t = useT();
   const resolved = useMemo(() => resolveEnding(story, history), [story, history]);
+  const { progressOf } = useGame();
+  const found = useMemo(() => new Set(Object.values(progressOf(story.id).completed).map((r) => r.endingId)), [progressOf, story.id]);
   if (!resolved) return null;
   const { ending, lines, fragments, consequences } = resolved;
   const run = pathKey(history);
@@ -50,6 +54,8 @@ export function EndingScreen({
             <StorySummary story={story} history={history} />
           </section>
         </div>
+
+        <EndingsProgress story={story} found={found} current={ending.id} />
 
         <p className="unresolved"><strong>{t('Unresolved')}:</strong> {ending.unresolved}</p>
         <p className="disclaimer">{story.disclaimer}</p>

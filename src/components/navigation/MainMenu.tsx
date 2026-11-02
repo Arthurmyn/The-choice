@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useT } from '../../i18n';
 import type { KeyboardEvent, ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import { storyById } from '../../data';
+import { getStories, storyById } from '../../data';
 import { useLang } from '../../i18n';
 import { hasActiveRun } from '../../engine/progressManager';
 import { useGame } from '../../hooks/useGameState';
@@ -30,6 +30,9 @@ export function MainMenu({ go }: { go: (r: Route) => void }): ReactNode {
   const list = useRef<HTMLUListElement>(null);
   const still = settings.reducedMotion;
   const last = lastStoryId ? storyById(lastStoryId, lang) : undefined;
+  const all = getStories(lang);
+  const total = all.reduce((n, s) => n + Object.keys(s.endings).length, 0);
+  const foundCount = all.reduce((n, s) => n + new Set(Object.values(progressOf(s.id).completed).map((r) => r.endingId)).size, 0);
   const canContinue = !!last && hasActiveRun(progressOf(last.id));
 
   useEffect(() => {
@@ -39,7 +42,7 @@ export function MainMenu({ go }: { go: (r: Route) => void }): ReactNode {
   const items: { label: string; hint: string; onClick: () => void; disabled?: boolean; id: string }[] = [
     { id: 'continue', label: t('Continue'), hint: canContinue && last ? last.title : t('No saved session'), onClick: () => last && go({ name: 'play', storyId: last.id }), disabled: !canContinue },
     { id: 'new', label: t('New Experience'), hint: t('Begin a story'), onClick: () => go({ name: 'stories' }) },
-    { id: 'stories', label: t('Stories'), hint: t('Chapters and endings'), onClick: () => go({ name: 'stories' }) },
+    { id: 'stories', label: t('Stories'), hint: t('{n} of {m} endings', { n: foundCount, m: total }), onClick: () => go({ name: 'stories' }) },
     { id: 'archive', label: t('Memory Archive'), hint: t('Fragments and paths'), onClick: () => go({ name: 'archive' }) },
     { id: 'settings', label: t('Settings'), hint: t('Sound, text, motion'), onClick: () => go({ name: 'settings' }) },
     { id: 'about', label: t('About'), hint: t('The idea and sources'), onClick: () => go({ name: 'about' }) },

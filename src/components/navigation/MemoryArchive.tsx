@@ -10,6 +10,7 @@ import type { Route } from '../../app/routes';
 import { InteractiveDocument } from '../investigation/InteractiveDocument';
 import { Icon } from '../ui/Icon';
 import type { IconName } from '../ui/Icon';
+import { EndingsProgress } from '../endings/EndingsProgress';
 import { Shell } from './Shell';
 
 const itemsOf = (s: Story): EvidenceItem[] =>
@@ -72,6 +73,9 @@ export function MemoryArchive({ go }: { go: (r: Route) => void }): ReactNode {
 
       {tab === 'paths' && (
         <>
+          <div className="endings-grid">
+            {stories.map((s) => <EndingsProgress key={s.id} story={s} found={new Set(Object.values(progressOf(s.id).completed).map((r) => r.endingId))} />)}
+          </div>
           {!anyPath && (
             <div className="empty">
               <p>{t('No path recorded yet. Finish a story and the choices you made will be kept here, with their decision map.')}</p>
