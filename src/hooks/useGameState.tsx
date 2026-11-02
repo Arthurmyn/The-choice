@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { stories } from '../data';
-import { submitDecision } from '../engine/narrativeEngine';
+import { submitDecision, submitEvidence } from '../engine/narrativeEngine';
 import type { SubmitResult } from '../engine/narrativeEngine';
 import {
   LAST_KEY,
@@ -85,6 +85,7 @@ interface GameContextValue {
   setCursor: (storyId: string, cursor: Cursor) => void;
   restartStory: (storyId: string) => void;
   collectFragment: (storyId: string, itemId: string) => void;
+  inspectEvidence: (story: Story, nodeId: string, itemId: string) => void;
   lastStoryId: string | null;
   storageWarning: string | null;
   recoveredStories: string[];
@@ -179,6 +180,18 @@ export function GameProvider({ children }: { children: ReactNode }): ReactNode {
     [persist],
   );
 
+  /** Evidence that changes the story is recorded in the run's history; all evidence is archived. */
+  const inspectEvidence = useCallback(
+    (story: Story, nodeId: string, itemId: string) => {
+      const current = ref.current[story.id];
+      const res = submitEvidence(story, current.history, nodeId, itemId, Date.now());
+      let next = res.ok ? { ...current, history: res.history, updatedAt: Date.now() } : current;
+      next = withFragment(next, itemId);
+      if (next !== current) persist(next);
+    },
+    [persist],
+  );
+
   // Apply display settings to the document.
   useEffect(() => {
     const root = document.documentElement;
@@ -197,11 +210,12 @@ export function GameProvider({ children }: { children: ReactNode }): ReactNode {
       setCursor,
       restartStory,
       collectFragment,
+      inspectEvidence,
       lastStoryId,
       storageWarning: warning,
       recoveredStories: [...recovered, ...initial.rec],
     }),
-    [settings, updateSettings, progress, confirmDecision, setCursor, restartStory, collectFragment, lastStoryId, warning, recovered, initial.rec],
+    [settings, updateSettings, progress, confirmDecision, setCursor, restartStory, collectFragment, inspectEvidence, lastStoryId, warning, recovered, initial.rec],
   );
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
