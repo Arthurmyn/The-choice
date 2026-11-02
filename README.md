@@ -52,7 +52,7 @@ Direction, palette and type live in [DESIGN.md](DESIGN.md); product truth in [PR
 
 The game is fully available in **English and Russian** (switch on the menu or in Settings; the default follows the browser language). Story data lives in `src/data/stories/*.json` (EN) and `*.ru.json` (RU) with identical ids, logic and conditions, so progress and endings are language independent. A test checks that the two stay structurally identical. Interface strings use the English phrase as the key (`t('...')`) with Russian in `src/i18n/ru.ts`; a test fails if a used key has no translation.
 
-**Voices** are pre-rendered neural speech (open-source [Piper](https://github.com/rhasspy/piper) models, one voice per character plus a narrator, in both languages) stored as `public/voice/<lang>/*.m4a` (~6 MB). If a clip is missing the game falls back to the browser's own speech synthesis, preferring natural voices. Regenerate with `scripts/generate-voice.py` (see its header; needs Piper 1.2 on an x86_64/Linux Python and the voice models). A test verifies every spoken line has a clip.
+**Voices** are pre-rendered neural speech (open-source [Kokoro](https://github.com/thewh1teagle/kokoro-onnx) for English and [Silero](https://github.com/snakers4/silero-models) v4 for Russian, one voice per character plus a narrator; Silero's license is CC BY-NC-SA, non-commercial) stored as `public/voice/<lang>/*.m4a` (~34 MB). If a clip is missing the game falls back to the browser's own speech synthesis, preferring natural voices. Regenerate with `scripts/generate-voice.py` (see its header; needs the Kokoro and Silero models). A test verifies every spoken line has a clip.
 
 **Portraits** are vector, semi-realistic busts. To use your own cut-out images, put them in `src/assets/characters/<id>/<expression>.png` (see the README there); missing files fall back to the vector portrait.
 
@@ -109,7 +109,7 @@ Last run: see the final line of `npm test`; `tsc --noEmit` clean; `vite build` s
 
 ## Known limitations
 
-- Voice-over uses Piper medium-quality models: natural but not studio actors, and I could not listen to them in this environment. Music and effects are synthesized (a soft pad, noise-based ambience, simple tones). It is deliberately modest; it was verified to initialize, but its sound quality was not evaluated by ear in this environment.
+- Voice-over uses Kokoro and Silero: much more natural than classic TTS but not studio actors, and I could not listen to them in this environment. Music and effects are synthesized (a soft pad, noise-based ambience, simple tones). It is deliberately modest; it was verified to initialize, but its sound quality was not evaluated by ear in this environment.
 - Art is procedural SVG (scenes and portraits, six expressions), not rendered or photographic. Scene backgrounds accept an optional `image` URL that falls back to the SVG if it fails to load, but no image or video assets ship.
 - In `The False Story` and `Privacy Violated` the story deliberately ends on an unresolved question rather than adding a fourth decision, as specified (3 decisions, 3 endings).
 - Saves are per browser (LocalStorage); private browsing or full storage shows a warning and the game stays playable without persistence.
