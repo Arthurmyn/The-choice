@@ -27,6 +27,21 @@ CAST = {
         'daniyar': ('en_US-hfc_male-medium', 1.0, 1.0),
         'alina': ('en_US-kristin-medium', 1.0, 1.0),
         'tomas': ('en_US-norman-medium', 1.0, 1.0),
+        # THE LAST JOURNEY
+        'reed': ('en_US-ryan-medium', 1.0, 1.0),
+        'sarah': ('en_US-amy-medium', 1.0, 1.0),
+        'noah': ('en_US-john-medium', 0.96, 1.0),
+        'emily': ('en_US-kristin-medium', 1.04, 1.0),
+        'james': ('en_US-norman-medium', 0.94, 1.06),
+        'leo': ('en_US-hfc_male-medium', 1.04, 1.0),
+        'tobias': ('en_US-kristin-medium', 1.25, 1.0),
+        'marcus': ('en_GB-alan-medium', 0.95, 1.0),
+        'wren': ('en_GB-jenny_dioco-medium', 1.0, 1.0),
+        'anna': ('en_US-amy-medium', 0.93, 1.06),
+        'elise': ('en_GB-jenny_dioco-medium', 0.94, 1.0),
+        'voss': ('en_US-john-medium', 0.9, 1.0),
+        'okafor': ('en_US-ryan-medium', 0.92, 1.05),
+        'broadcast': ('en_US-kristin-medium', 0.92, 1.0),
     },
     'ru': {
         'narrator': ('ru_RU-ruslan-medium', 0.97, 1.04),
@@ -38,9 +53,24 @@ CAST = {
         'daniyar': ('ru_RU-dmitri-medium', 1.04, 1.0),
         'alina': ('ru_RU-irina-medium', 1.08, 1.0),
         'tomas': ('ru_RU-ruslan-medium', 0.93, 1.0),
+        # THE LAST JOURNEY
+        'reed': ('ru_RU-denis-medium', 1.0, 1.0),
+        'sarah': ('ru_RU-irina-medium', 1.0, 1.0),
+        'noah': ('ru_RU-dmitri-medium', 0.93, 1.0),
+        'emily': ('ru_RU-irina-medium', 1.08, 1.0),
+        'james': ('ru_RU-ruslan-medium', 0.9, 1.06),
+        'leo': ('ru_RU-denis-medium', 1.06, 1.0),
+        'tobias': ('ru_RU-irina-medium', 1.3, 1.0),
+        'marcus': ('ru_RU-dmitri-medium', 0.97, 1.0),
+        'wren': ('ru_RU-irina-medium', 0.96, 1.0),
+        'anna': ('ru_RU-irina-medium', 0.92, 1.06),
+        'elise': ('ru_RU-irina-medium', 1.03, 1.0),
+        'voss': ('ru_RU-ruslan-medium', 0.94, 1.0),
+        'okafor': ('ru_RU-denis-medium', 0.92, 1.05),
+        'broadcast': ('ru_RU-irina-medium', 0.9, 1.0),
     },
 }
-STORIES = {'en': ['releaseToday', 'speakForSomeoneElse'], 'ru': ['releaseToday.ru', 'speakForSomeoneElse.ru']}
+STORIES = {'en': ['releaseToday', 'speakForSomeoneElse', 'theLastJourney'], 'ru': ['releaseToday.ru', 'speakForSomeoneElse.ru', 'theLastJourney.ru']}
 
 
 def lines_of(story):
@@ -49,7 +79,7 @@ def lines_of(story):
         if n['type'] == 'decision':
             for c in n['choices']:
                 out += c['reaction']['lines']
-        else:
+        elif n['type'] != 'router':
             out += n['scene']['lines']
     for e in story['endings'].values():
         out += e['scene']['lines']
