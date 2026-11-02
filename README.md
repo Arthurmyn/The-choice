@@ -10,8 +10,19 @@ Everything (story, characters, art, music, sound) is original and generated in t
 |---|-------|----------|---------|
 | 01 | **Release Today** (5–7 min) | Professional ethics | `R_E1` Postponed · `R_E2` Limited Release · `R_E3` Full Release |
 | 02 | **Speak for Someone Else** (3–5 min) | Personal ethics | `L_E1` Honest and Private · `L_E2` The False Story · `L_E3` Privacy Violated |
+| 03 | **The Last Journey** (25–40 min) | Survival drama | Together · The Sacrifice · Alone · Betrayal · New Home · No One Left · *Echo* (hidden) |
 
-Each story is 2 × 2 × 3 = 12 paths (24 in total). D1 and D2 set story flags that rewrite dialogue and the final scene; D3 decides the ending.
+Stories 01 and 02 are 2 × 2 × 3 = 12 paths each. **The Last Journey** is a six-chapter campaign with 13 decisions, conditional scenes, shared resources, trust, infection and evidence systems, and seven endings (one hidden); it has far too many paths to enumerate, so it is validated by sampling (see Tests).
+
+### The Last Journey
+
+26 days after the outbreak, a radio message promises a last convoy 280 km north. You play Daniel Reed, a mechanic who has become the leader of six survivors. Chapters: Empty Shelves, Strangers, No Way Back, The Hospital, The Checkpoint, The Last Journey.
+
+- **Real branching.** Decisions set flags and change numeric state; *routers* pick the next scene from that state, so branches diverge (who steals the food depends on whether you took in the boy; who is bitten depends on who you sent into the woods; who dies depends on whether you asked).
+- **State (hidden):** trust per character, who is alive, who is bitten, what the player knows. **Shown:** food, medicine, ammunition and fuel in the HUD. Resources are clamped at zero and affect scenes and options.
+- **Infection.** A bite is not visible at first; the bitten person is fixed by earlier choices, can hide it, and is examined (publicly, privately) or not. A test checks the story stays consistent on thousands of playthroughs.
+- **Evidence.** Inspecting evidence that changes the story is recorded in the run's history (so it replays and saves); all evidence goes to the Memory Archive.
+- **Endings** depend on the whole history; the **map** shows chapters, decisions and every ending, and highlights your path.
 
 ## Setup
 
@@ -69,6 +80,8 @@ src/
 
 **One source of truth.** The only stored game state is the ordered decision history `{ nodeId, choiceId, timestamp }[]`. Flags, the current decision, visited nodes, the ending and the map highlight are all *derived* by replaying it over the story graph (`deriveState`). The ending is a property of the D3 choice, never random.
 
+**Engine extensions** for large stories: numeric stats and conditional `apply` entries (flags that start with `#` are numbers), conditional choices (`when`), `router` nodes that choose the next scene from state and can end the story, and evidence that applies state changes. Old stories do not use these and behave exactly as before.
+
 **Engine rules** (`narrativeEngine.ts`): every transition is validated; submitting an out-of-order, invalid or duplicate decision, or one after the ending, is rejected; tampered or corrupt saves are detected and discarded (a backup copy is kept under `…:corrupt`).
 
 **Stories are data.** Adding a story means adding a JSON file with the same shape and registering it in `src/data/index.ts`; no component changes. `storyValidator.validateStory` checks graph integrity, that every conditional flag can be set, and that every one of the story's paths ends in a defined ending with philosophical text for each flag. A story JSON contains:
@@ -87,7 +100,7 @@ Sources: Kant, *Fundamental Principles of the Metaphysic of Morals*, Section II;
 
 ## Tests and results
 
-`npm test` runs the suite below:
+`npm test` runs the suite below. **The Last Journey** has far too many paths to enumerate, so `lastJourney.test.ts` validates it by *sampling* (thousands of seeded random playthroughs must always finish, keep consistent state and have analysis for the ending reached), replays a stored path to each of the seven endings in both languages, and checks resources, infection, relationships, branching dialogue, evidence recording, saving and the map:
 
 - **Engine (42):** both story files validate; all 12 + 12 paths: correct history, ending, flags, conditional text, timeline, philosophical text, map highlight, save round trip; exact conditional strings from the brief; duplicate/out-of-order/invalid submissions; corrupted/outdated saves; restart keeps completed runs.
 - **UI (38):** the **real app is driven through all 24 paths** (title cards, evidence gating, test lab, console steps, chat, calendar, confirmation dialogs) and checks the ending screen, saved progress, analysis, and decision map (8 nodes / 7 edges highlighted, alternative nodes reviewable, save unchanged); plus menu, story list, reload after a decision, double-submit prevention, per-story restart, continuing a finished story, corrupted save recovery, settings persistence, keyboard navigation, and caption toggling.
