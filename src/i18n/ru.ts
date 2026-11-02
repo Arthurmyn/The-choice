@@ -211,4 +211,13 @@ export const RU: Record<string, string> = {
   'Send your message. The team will answer.': 'Отправьте сообщение. Команда ответит.',
   'Progress cannot be saved in this browser. You can still play, but closing the page will lose it.': 'В этом браузере нельзя сохранять прогресс. Играть можно, но при закрытии страницы он будет потерян.',
   'Progress could not be saved. Storage may be full or disabled. You can keep playing, but progress will be lost on reload.': 'Не удалось сохранить прогресс. Возможно, хранилище переполнено или отключено. Можно продолжать играть, но при перезагрузке прогресс будет потерян.',
+  'Chapter {n}': 'Глава {n}',
+  'Supplies': 'Припасы',
+  'this run': 'это прохождение',
+  'neutral': 'спокойно',
+  'concerned': 'встревоженно',
+  'angry': 'гневно',
+  'sad': 'печально',
+  'confident': 'уверенно',
+  'surprised': 'удивлённо',
 };

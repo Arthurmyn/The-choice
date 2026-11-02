@@ -56,7 +56,7 @@ export function DialoguePanel({
           <>
             <span className="dialogue-name">{character.name}</span>
             <span className="dialogue-role">{character.role}</span>
-            {line.expression && line.expression !== 'neutral' && <span className="dialogue-expr">{line.expression}</span>}
+            {line.expression && line.expression !== 'neutral' && <span className="dialogue-expr">{t(line.expression)}</span>}
           </>
         ) : (
           <span className="dialogue-name narrator">{t('Narration')}</span>
