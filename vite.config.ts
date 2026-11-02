@@ -4,7 +4,10 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  build: { chunkSizeWarningLimit: 700 },
+  build: {
+    chunkSizeWarningLimit: 700,
+    rollupOptions: { output: { manualChunks: (id) => (id.includes('/src/data/stories/') ? 'stories' : undefined) } },
+  },
   test: {
     environment: 'jsdom',
     globals: true,
