@@ -1,0 +1,508 @@
+{
+ "NO_ONE_LEFT": [
+  {
+   "nodeId": "c1_search",
+   "choiceId": "item:c1_ledger"
+  },
+  {
+   "nodeId": "c1_d1",
+   "choiceId": "help"
+  },
+  {
+   "nodeId": "c1_clues",
+   "choiceId": "item:c1_prints_small"
+  },
+  {
+   "nodeId": "c1_d2",
+   "choiceId": "ration_equal"
+  },
+  {
+   "nodeId": "c2_camp",
+   "choiceId": "item:c2_wire"
+  },
+  {
+   "nodeId": "c2_d3",
+   "choiceId": "trust"
+  },
+  {
+   "nodeId": "c2_d4",
+   "choiceId": "confront_marcus"
+  },
+  {
+   "nodeId": "c3_d5",
+   "choiceId": "reed_noah"
+  },
+  {
+   "nodeId": "c3_cabin",
+   "choiceId": "item:c3_badge"
+  },
+  {
+   "nodeId": "c3_d7",
+   "choiceId": "isolate"
+  },
+  {
+   "nodeId": "c4_find",
+   "choiceId": "item:c4_report"
+  },
+  {
+   "nodeId": "c4_d8",
+   "choiceId": "hail"
+  },
+  {
+   "nodeId": "c4_d9",
+   "choiceId": "refuse_ward"
+  },
+  {
+   "nodeId": "c5_scout",
+   "choiceId": "item:c5_notebook"
+  },
+  {
+   "nodeId": "c5_d10",
+   "choiceId": "negotiate"
+  },
+  {
+   "nodeId": "c5_d11",
+   "choiceId": "lure_away"
+  }
+ ],
+ "ALONE": [
+  {
+   "nodeId": "c1_search",
+   "choiceId": "item:c1_tank"
+  },
+  {
+   "nodeId": "c1_d1",
+   "choiceId": "leave"
+  },
+  {
+   "nodeId": "c1_clues",
+   "choiceId": "item:c1_prints_leo"
+  },
+  {
+   "nodeId": "c1_d2",
+   "choiceId": "ration_equal"
+  },
+  {
+   "nodeId": "c2_d3",
+   "choiceId": "tell_all"
+  },
+  {
+   "nodeId": "c2_d4",
+   "choiceId": "wait_dawn"
+  },
+  {
+   "nodeId": "c3_inspect",
+   "choiceId": "item:c3_tracks"
+  },
+  {
+   "nodeId": "c3_d5",
+   "choiceId": "noah_leo"
+  },
+  {
+   "nodeId": "c3_d6",
+   "choiceId": "abandon"
+  },
+  {
+   "nodeId": "c3_d7",
+   "choiceId": "trust_them"
+  },
+  {
+   "nodeId": "c4_find",
+   "choiceId": "item:c4_report"
+  },
+  {
+   "nodeId": "c4_find",
+   "choiceId": "item:c4_pharmacy"
+  },
+  {
+   "nodeId": "c4_d8",
+   "choiceId": "follow"
+  },
+  {
+   "nodeId": "c4_d9",
+   "choiceId": "refuse_ward"
+  },
+  {
+   "nodeId": "c5_scout",
+   "choiceId": "item:c5_wall"
+  },
+  {
+   "nodeId": "c5_d10",
+   "choiceId": "split_group"
+  },
+  {
+   "nodeId": "c5_d11",
+   "choiceId": "open_gates"
+  },
+  {
+   "nodeId": "c6_d13",
+   "choiceId": "submit"
+  },
+  {
+   "nodeId": "c6_d14",
+   "choiceId": "enter_alone"
+  }
+ ],
+ "ECHO": [
+  {
+   "nodeId": "c1_search",
+   "choiceId": "item:c1_tank"
+  },
+  {
+   "nodeId": "c1_d1",
+   "choiceId": "help"
+  },
+  {
+   "nodeId": "c1_d2",
+   "choiceId": "talk_emily"
+  },
+  {
+   "nodeId": "c2_camp",
+   "choiceId": "item:c2_wire"
+  },
+  {
+   "nodeId": "c2_d3",
+   "choiceId": "tell_all"
+  },
+  {
+   "nodeId": "c2_d4",
+   "choiceId": "move_on"
+  },
+  {
+   "nodeId": "c3_inspect",
+   "choiceId": "item:c3_map"
+  },
+  {
+   "nodeId": "c3_inspect",
+   "choiceId": "item:c3_tracks"
+  },
+  {
+   "nodeId": "c3_d5",
+   "choiceId": "push"
+  },
+  {
+   "nodeId": "c3_cabin",
+   "choiceId": "item:c3_med"
+  },
+  {
+   "nodeId": "c3_d7",
+   "choiceId": "private_check"
+  },
+  {
+   "nodeId": "c4_find",
+   "choiceId": "item:c4_tape"
+  },
+  {
+   "nodeId": "c4_d8",
+   "choiceId": "hail"
+  },
+  {
+   "nodeId": "c4_d9",
+   "choiceId": "refuse_ward"
+  },
+  {
+   "nodeId": "c5_scout",
+   "choiceId": "item:c5_notebook"
+  },
+  {
+   "nodeId": "c5_d10",
+   "choiceId": "force"
+  },
+  {
+   "nodeId": "c5_d11",
+   "choiceId": "sacrifice_vol"
+  },
+  {
+   "nodeId": "c6_d13",
+   "choiceId": "broadcast"
+  }
+ ],
+ "NEW_HOME": [
+  {
+   "nodeId": "c1_d1",
+   "choiceId": "send_leo"
+  },
+  {
+   "nodeId": "c1_clues",
+   "choiceId": "item:c1_prints_leo"
+  },
+  {
+   "nodeId": "c1_d2",
+   "choiceId": "talk_emily"
+  },
+  {
+   "nodeId": "c2_camp",
+   "choiceId": "item:c2_wire"
+  },
+  {
+   "nodeId": "c2_d3",
+   "choiceId": "trust"
+  },
+  {
+   "nodeId": "c2_d4",
+   "choiceId": "search_now"
+  },
+  {
+   "nodeId": "c3_d5",
+   "choiceId": "leo_emily"
+  },
+  {
+   "nodeId": "c3_d6",
+   "choiceId": "abandon"
+  },
+  {
+   "nodeId": "c3_cabin",
+   "choiceId": "item:c3_badge"
+  },
+  {
+   "nodeId": "c3_cabin",
+   "choiceId": "item:c3_med"
+  },
+  {
+   "nodeId": "c3_d7",
+   "choiceId": "private_check"
+  },
+  {
+   "nodeId": "c4_d8",
+   "choiceId": "hail"
+  },
+  {
+   "nodeId": "c4_d9",
+   "choiceId": "go_with"
+  },
+  {
+   "nodeId": "c5_scout",
+   "choiceId": "item:c5_wall"
+  },
+  {
+   "nodeId": "c5_d10",
+   "choiceId": "alt_route"
+  },
+  {
+   "nodeId": "c5_d11",
+   "choiceId": "sacrifice_vol"
+  },
+  {
+   "nodeId": "c6_d13",
+   "choiceId": "walk_away"
+  },
+  {
+   "nodeId": "c6_d14",
+   "choiceId": "new_home"
+  }
+ ],
+ "BETRAYAL": [
+  {
+   "nodeId": "c1_search",
+   "choiceId": "item:c1_tank"
+  },
+  {
+   "nodeId": "c1_d1",
+   "choiceId": "leave"
+  },
+  {
+   "nodeId": "c1_clues",
+   "choiceId": "item:c1_prints_leo"
+  },
+  {
+   "nodeId": "c1_d2",
+   "choiceId": "talk_emily"
+  },
+  {
+   "nodeId": "c2_d3",
+   "choiceId": "hide"
+  },
+  {
+   "nodeId": "c2_d4",
+   "choiceId": "confront_marcus"
+  },
+  {
+   "nodeId": "c3_d5",
+   "choiceId": "leo_emily"
+  },
+  {
+   "nodeId": "c3_d6",
+   "choiceId": "send_noah"
+  },
+  {
+   "nodeId": "c3_d7",
+   "choiceId": "trust_them"
+  },
+  {
+   "nodeId": "c4_d8",
+   "choiceId": "hail"
+  },
+  {
+   "nodeId": "c4_d9",
+   "choiceId": "go_with"
+  },
+  {
+   "nodeId": "c5_scout",
+   "choiceId": "item:c5_manifest"
+  },
+  {
+   "nodeId": "c5_scout",
+   "choiceId": "item:c5_wall"
+  },
+  {
+   "nodeId": "c5_d10",
+   "choiceId": "split_group"
+  },
+  {
+   "nodeId": "c5_d11",
+   "choiceId": "open_gates"
+  },
+  {
+   "nodeId": "c6_d13",
+   "choiceId": "walk_away"
+  }
+ ],
+ "TOGETHER": [
+  {
+   "nodeId": "c1_d1",
+   "choiceId": "leave"
+  },
+  {
+   "nodeId": "c1_d2",
+   "choiceId": "ration_equal"
+  },
+  {
+   "nodeId": "c2_camp",
+   "choiceId": "item:c2_stock"
+  },
+  {
+   "nodeId": "c2_d3",
+   "choiceId": "examine_secret"
+  },
+  {
+   "nodeId": "c2_d4",
+   "choiceId": "move_on"
+  },
+  {
+   "nodeId": "c3_inspect",
+   "choiceId": "item:c3_map"
+  },
+  {
+   "nodeId": "c3_inspect",
+   "choiceId": "item:c3_tracks"
+  },
+  {
+   "nodeId": "c3_d5",
+   "choiceId": "push"
+  },
+  {
+   "nodeId": "c3_d7",
+   "choiceId": "trust_them"
+  },
+  {
+   "nodeId": "c4_find",
+   "choiceId": "item:c4_ward"
+  },
+  {
+   "nodeId": "c4_d8",
+   "choiceId": "hail"
+  },
+  {
+   "nodeId": "c4_d9",
+   "choiceId": "refuse_ward"
+  },
+  {
+   "nodeId": "c5_d10",
+   "choiceId": "alt_route"
+  },
+  {
+   "nodeId": "c5_d11",
+   "choiceId": "open_gates"
+  },
+  {
+   "nodeId": "c6_gate",
+   "choiceId": "item:c6_wall"
+  },
+  {
+   "nodeId": "c6_d13",
+   "choiceId": "submit"
+  },
+  {
+   "nodeId": "c6_d14",
+   "choiceId": "enter_together"
+  }
+ ],
+ "THE_SACRIFICE": [
+  {
+   "nodeId": "c1_search",
+   "choiceId": "item:c1_tank"
+  },
+  {
+   "nodeId": "c1_search",
+   "choiceId": "item:c1_note"
+  },
+  {
+   "nodeId": "c1_d1",
+   "choiceId": "send_leo"
+  },
+  {
+   "nodeId": "c1_d2",
+   "choiceId": "stay_quiet"
+  },
+  {
+   "nodeId": "c2_camp",
+   "choiceId": "item:c2_wire"
+  },
+  {
+   "nodeId": "c2_camp",
+   "choiceId": "item:c2_ledger"
+  },
+  {
+   "nodeId": "c2_d3",
+   "choiceId": "trust"
+  },
+  {
+   "nodeId": "c2_d4",
+   "choiceId": "search_now"
+  },
+  {
+   "nodeId": "c3_d5",
+   "choiceId": "noah_leo"
+  },
+  {
+   "nodeId": "c3_d6",
+   "choiceId": "go_back"
+  },
+  {
+   "nodeId": "c3_cabin",
+   "choiceId": "item:c3_sleeve"
+  },
+  {
+   "nodeId": "c3_d7",
+   "choiceId": "private_check"
+  },
+  {
+   "nodeId": "c4_find",
+   "choiceId": "item:c4_locker"
+  },
+  {
+   "nodeId": "c4_d8",
+   "choiceId": "hail"
+  },
+  {
+   "nodeId": "c4_d9",
+   "choiceId": "alone"
+  },
+  {
+   "nodeId": "c5_d10",
+   "choiceId": "alt_route"
+  },
+  {
+   "nodeId": "c5_d11",
+   "choiceId": "sacrifice_vol"
+  },
+  {
+   "nodeId": "c6_d13",
+   "choiceId": "negotiate_gate"
+  },
+  {
+   "nodeId": "c6_d14",
+   "choiceId": "stay_outside"
+  }
+ ]
+}
