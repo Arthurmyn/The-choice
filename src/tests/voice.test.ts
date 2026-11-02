@@ -48,16 +48,14 @@ describe('character voices', () => {
 
 import { existsSync, readFileSync } from 'node:fs';
 import { getStories, LANGS } from '../data';
+import { allLines } from '../engine/narrativeEngine';
 
 describe('recorded voice-over', () => {
   it.each(LANGS)('%s: every spoken line has a recorded clip', (lang) => {
     const manifest = JSON.parse(readFileSync(`public/voice/${lang}/manifest.json`, 'utf8')) as Record<string, string>;
     const missing: string[] = [];
     for (const s of getStories(lang)) {
-      const lines = [
-        ...Object.values(s.nodes).flatMap((n) => (n.type === 'decision' ? n.choices.flatMap((c) => c.reaction.lines) : n.scene.lines)),
-        ...Object.values(s.endings).flatMap((e) => e.scene.lines),
-      ];
+      const lines = allLines(s);
       for (const l of lines) {
         const key = `${l.speaker ?? 'narrator'}|${l.text}`;
         const file = manifest[key];
