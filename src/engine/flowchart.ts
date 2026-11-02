@@ -1,4 +1,4 @@
-import { getDecision } from './narrativeEngine';
+import { deriveState, getDecision } from './narrativeEngine';
 import type { DecisionRecord, Story, StoryNode } from './types';
 
 export type MapNodeKind = 'start' | 'decision' | 'choice' | 'ending';
@@ -41,87 +41,133 @@ const MARGIN = 48;
 
 const choiceId = (n: string, c: string): string => `choice:${n}:${c}`;
 
-/** Build a top-down decision map from the story graph. */
+/**
+ * Decision map for any story graph. Scenes and routers are collapsed: an edge goes
+ * from a choice to every decision or ending it can lead to next.
+ */
 export function buildMapLayout(story: Story): MapLayout {
-  const nodes: MapNode[] = [];
+  const nodes = new Map<string, MapNode>();
   const edges: MapEdge[] = [];
-  const rows: MapNode[][] = [];
-  const push = (n: Omit<MapNode, 'x' | 'y'>): MapNode => {
-    const full = { ...n, x: 0, y: 0 };
-    nodes.push(full);
-    (rows[n.row] ??= []).push(full);
+  const edgeSet = new Set<string>();
+  const addEdge = (from: string, to: string): void => {
+    const id = `${from}->${to}`;
+    if (!edgeSet.has(id)) {
+      edgeSet.add(id);
+      edges.push({ id, from, to });
+    }
+  };
+  const mk = (n: Omit<MapNode, 'x' | 'y' | 'row'>): MapNode => {
+    const full: MapNode = { ...n, row: 0, x: 0, y: 0 };
+    nodes.set(n.id, full);
     return full;
   };
 
-  push({ id: 'start', kind: 'start', label: 'INTRODUCTION', sublabel: story.title, row: 0 });
-  let row = 1;
-  let prevIds = ['start'];
+  mk({ id: 'start', kind: 'start', label: 'INTRODUCTION', sublabel: story.title });
 
-  // Follow the decision spine; story graphs here are layered (all choices rejoin).
-  let nodeId: string | undefined = story.start;
-  const seen = new Set<string>();
-  while (nodeId && !seen.has(nodeId)) {
-    seen.add(nodeId);
-    const node: StoryNode | undefined = story.nodes[nodeId];
-    if (!node) break;
-    if (node.type !== 'decision') {
-      nodeId = node.next;
+  /** Decision / ending ids that can follow `id` once scenes and routers are passed through. */
+  const targetsMemo = new Map<string, string[]>();
+  const targets = (id: string | undefined, seen = new Set<string>()): string[] => {
+    if (!id || seen.has(id)) return [];
+    seen.add(id);
+    const node: StoryNode | undefined = story.nodes[id];
+    if (!node) return [];
+    if (node.type === 'decision') return [id];
+    if (node.type === 'router') {
+      const out: string[] = [];
+      for (const r of node.routes) {
+        if (r.ending) out.push(`ending:${r.ending}`);
+        else out.push(...targets(r.next, seen));
+      }
+      if (node.defaultEnding) out.push(`ending:${node.defaultEnding}`);
+      else out.push(...targets(node.default, seen));
+      return [...new Set(out)];
+    }
+    const cached = targetsMemo.get(id);
+    if (cached) return cached;
+    const r = targets(node.next, seen);
+    targetsMemo.set(id, r);
+    return r;
+  };
+
+  // Walk the reachable graph of decisions.
+  const queue: string[] = [...targets(story.start)];
+  for (const t of queue) addEdge('start', t);
+  const seenDecisions = new Set<string>();
+  while (queue.length) {
+    const id = queue.shift() as string;
+    if (id.startsWith('ending:')) {
+      const e = story.endings[id.slice(7)];
+      if (e && !nodes.has(id)) mk({ id, kind: 'ending', label: e.title, sublabel: e.id, endingId: e.id });
       continue;
     }
-    const dn = push({ id: node.id, kind: 'decision', label: node.stage, sublabel: node.title, row, nodeId: node.id });
-    prevIds.forEach((p) => edges.push({ id: `${p}->${dn.id}`, from: p, to: dn.id }));
-    row += 1;
-    const choiceIds: string[] = [];
-    let nextNodes = new Set<string | undefined>();
-    for (const c of node.choices) {
-      const cn = push({
-        id: choiceId(node.id, c.id),
-        kind: 'choice',
-        label: c.mapLabel,
-        sublabel: node.stage,
-        row,
-        nodeId: node.id,
-        choiceId: c.id,
-      });
-      edges.push({ id: `${dn.id}->${cn.id}`, from: dn.id, to: cn.id });
-      choiceIds.push(cn.id);
-      nextNodes.add(c.ending ? `E:${c.ending}` : (c.next ?? node.next));
-    }
-    row += 1;
-    const endingTargets = [...nextNodes].filter((n): n is string => !!n && n.startsWith('E:'));
-    if (endingTargets.length) {
-      for (const c of node.choices) {
-        if (!c.ending) continue;
-        const id = `ending:${c.ending}`;
-        if (!nodes.find((n) => n.id === id)) {
-          const e = story.endings[c.ending];
-          push({ id, kind: 'ending', label: e.title, sublabel: e.id, row, endingId: e.id });
-        }
-        edges.push({ id: `${choiceId(node.id, c.id)}->${id}`, from: choiceId(node.id, c.id), to: id });
+    if (seenDecisions.has(id)) continue;
+    seenDecisions.add(id);
+    const d = getDecision(story, id);
+    if (!d) continue;
+    mk({ id: d.id, kind: 'decision', label: d.stage, sublabel: d.title, nodeId: d.id });
+    for (const c of d.choices) {
+      const cid = choiceId(d.id, c.id);
+      mk({ id: cid, kind: 'choice', label: c.mapLabel, sublabel: d.stage, nodeId: d.id, choiceId: c.id });
+      addEdge(d.id, cid);
+      const next = c.ending ? [`ending:${c.ending}`] : targets(c.next ?? d.next);
+      for (const t of next) {
+        addEdge(cid, t);
+        queue.push(t);
       }
-      break;
     }
-    prevIds = choiceIds;
-    const targets = [...nextNodes].filter((n): n is string => !!n);
-    nodeId = targets[0];
-    nextNodes = new Set();
+  }
+  for (const e of Object.values(story.endings)) {
+    const id = `ending:${e.id}`;
+    // keep endings that are only reached through routers
+    if (!nodes.has(id) && edges.some((x) => x.to === id)) mk({ id, kind: 'ending', label: e.title, sublabel: e.id, endingId: e.id });
   }
 
-  // Left-to-right: each depth is a column, siblings stack vertically.
-  // Column widths follow their widest node, so narrow junctions stay narrow.
+  // Depth = longest path from the start (the graph is acyclic).
+  const preds = new Map<string, string[]>();
+  for (const e of edges) (preds.get(e.to) ?? preds.set(e.to, []).get(e.to)!).push(e.from);
+  const depth = new Map<string, number>();
+  const calc = (id: string, stack = new Set<string>()): number => {
+    const known = depth.get(id);
+    if (known !== undefined) return known;
+    if (stack.has(id)) return 0;
+    stack.add(id);
+    const d = id === 'start' ? 0 : 1 + Math.max(0, ...(preds.get(id) ?? []).map((p) => calc(p, stack)));
+    stack.delete(id);
+    depth.set(id, d);
+    return d;
+  };
+  nodes.forEach((n) => (n.row = calc(n.id)));
+
+  // Order each column by the average position of its predecessors.
+  const maxRow = Math.max(...[...nodes.values()].map((n) => n.row));
+  const cols: MapNode[][] = Array.from({ length: maxRow + 1 }, () => []);
+  nodes.forEach((n) => cols[n.row].push(n));
+  const pos = new Map<string, number>();
+  cols.forEach((col, ci) => {
+    if (ci > 0) {
+      const bary = (n: MapNode): number => {
+        const ps = preds.get(n.id) ?? [];
+        return ps.length ? ps.reduce((a, p) => a + (pos.get(p) ?? 0), 0) / ps.length : 0;
+      };
+      col.sort((a, b) => bary(a) - bary(b));
+    }
+    col.forEach((n, i) => pos.set(n.id, i - (col.length - 1) / 2));
+  });
+
   const rowH = NODE_SIZE.ending.h + ROW_GAP;
-  const tallest = Math.max(...rows.map((r) => r?.length ?? 0));
+  const tallest = Math.max(...cols.map((c) => c.length));
   const height = MARGIN * 2 + (tallest - 1) * rowH + NODE_SIZE.ending.h + 24;
   let cursor = MARGIN;
-  rows.forEach((r) => {
-    const w = Math.max(...r.map((n) => NODE_SIZE[n.kind].w));
-    r.forEach((n, i) => {
+  const used = cols.filter((c) => c.length);
+  used.forEach((col) => {
+    const w = Math.max(...col.map((n) => NODE_SIZE[n.kind].w));
+    col.forEach((n, i) => {
       n.x = cursor + w / 2;
-      n.y = height / 2 + (i - (r.length - 1) / 2) * rowH;
+      n.y = height / 2 + (i - (col.length - 1) / 2) * rowH;
     });
     cursor += w + COL_GAP;
   });
-  return { nodes, edges, width: cursor - COL_GAP + MARGIN, height };
+  return { nodes: [...nodes.values()], edges, width: cursor - COL_GAP + MARGIN, height };
 }
 
 export interface MapHighlight {
@@ -136,26 +182,27 @@ export function highlightPath(story: Story, layout: MapLayout, history: readonly
   let prev = 'start';
   for (const rec of history) {
     const d = getDecision(story, rec.nodeId);
-    if (!d) continue;
-    const decisionId = d.id;
+    if (!d) continue; // evidence records
     const cId = choiceId(d.id, rec.choiceId);
-    active.add(`${prev}->${decisionId}`);
-    active.add(`${decisionId}->${cId}`);
-    visited.add(decisionId);
+    active.add(`${prev}->${d.id}`);
+    active.add(`${d.id}->${cId}`);
+    visited.add(d.id);
     visited.add(cId);
     prev = cId;
-    const ch = d.choices.find((c) => c.id === rec.choiceId);
-    if (ch?.ending) {
-      const eId = `ending:${ch.ending}`;
-      active.add(`${cId}->${eId}`);
-      visited.add(eId);
-    }
   }
-  // Keep only edges/nodes that exist in the layout.
-  const ids = new Set(layout.nodes.map((n) => n.id));
-  const edgeIds = new Set(layout.edges.map((e) => e.id));
+  const end = deriveState(story, history);
+  if (end.complete && end.endingId) {
+    const eId = `ending:${end.endingId}`;
+    visited.add(eId);
+    active.add(`${prev}->${eId}`);
+  }
   return {
-    visitedNodes: new Set([...visited].filter((i) => ids.has(i))),
-    activeEdges: new Set([...active].filter((e) => edgeIds.has(e))),
+    visitedNodes: new Set([...visited].filter((i) => layout.nodes.some((n) => n.id === i))),
+    activeEdges: new Set([...active].filter((e) => layout.edges.some((x) => x.id === e))),
   };
+}
+
+/** The ending reached through a router (no choice carries it). */
+export function endingNodeId(endingId: string): string {
+  return `ending:${endingId}`;
 }
