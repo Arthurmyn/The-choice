@@ -127,7 +127,7 @@ export const RU: Record<string, string> = {
   'After an ending, open the decision map to review branches you did not take. Reviewing never changes your save.': 'После концовки откройте карту решений, чтобы посмотреть ветки, которые вы не выбирали. Просмотр никогда не меняет сохранение.',
   'Philosophical sources': 'Философские источники',
   'Credits': 'Авторы',
-  'Inspired in atmosphere by cinematic branching games. All characters, story, art and music are original; nothing is taken from any existing game. Voices are generated with open-source Piper text-to-speech models.': 'Атмосфера вдохновлена кинематографичными играми с ветвящимся сюжетом. Все персонажи, истории, графика и музыка оригинальные; ничего не заимствовано из существующих игр. Голоса созданы открытыми моделями синтеза речи Piper.',
+  'Inspired in atmosphere by cinematic branching games. All characters, story, art and music are original; nothing is taken from any existing game. Voices are generated with open-source Kokoro and Silero text-to-speech models.': 'Атмосфера вдохновлена кинематографичными играми с ветвящимся сюжетом. Все персонажи, истории, графика и музыка оригинальные; ничего не заимствовано из существующих игр. Голоса созданы открытыми моделями синтеза речи Kokoro и Silero.',
   'Decision {n} of 3': 'Решение {n} из 3',
   'Your options': 'Ваши варианты',
   'Confirm this decision': 'Подтвердить это решение',

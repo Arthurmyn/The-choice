@@ -39,7 +39,7 @@ export function About({ go }: { go: (r: Route) => void }): ReactNode {
         </section>
         <section>
           <h2 className="section-title">{t('Credits')}</h2>
-          <p>{t('Inspired in atmosphere by cinematic branching games. All characters, story, art and music are original; nothing is taken from any existing game. Voices are generated with open-source Piper text-to-speech models.')}</p>
+          <p>{t('Inspired in atmosphere by cinematic branching games. All characters, story, art and music are original; nothing is taken from any existing game. Voices are generated with open-source Kokoro and Silero text-to-speech models.')}</p>
           <p className="disclaimer">{t('Fictional scenarios. Consequences are simulated for philosophical discussion.')}</p>
         </section>
       </div>
