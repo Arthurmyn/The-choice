@@ -2,6 +2,8 @@ import releaseToday from './stories/releaseToday.json';
 import releaseTodayRu from './stories/releaseToday.ru.json';
 import speakForSomeoneElse from './stories/speakForSomeoneElse.json';
 import speakForSomeoneElseRu from './stories/speakForSomeoneElse.ru.json';
+import lastJourney from './stories/theLastJourney.json';
+import lastJourneyRu from './stories/theLastJourney.ru.json';
 import philosophers from './philosophy/philosophers.json';
 import philosophersRu from './philosophy/philosophers.ru.json';
 import references from './philosophy/references.json';
@@ -15,8 +17,8 @@ export const LANGS: Lang[] = ['en', 'ru'];
 const asStory = (raw: object): Story => raw as unknown as Story;
 
 const STORIES: Record<Lang, Story[]> = {
-  en: [asStory(releaseToday), asStory(speakForSomeoneElse)],
-  ru: [asStory(releaseTodayRu), asStory(speakForSomeoneElseRu)],
+  en: [asStory(releaseToday), asStory(speakForSomeoneElse), asStory(lastJourney)],
+  ru: [asStory(releaseTodayRu), asStory(speakForSomeoneElseRu), asStory(lastJourneyRu)],
 };
 
 /** English stories. Ids, nodes and choices are identical in every language. */
