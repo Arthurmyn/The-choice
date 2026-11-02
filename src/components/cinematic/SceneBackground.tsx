@@ -286,7 +286,7 @@ function City({ id }: { id: BackgroundId }): ReactNode {
 
 /** Film-like atmosphere over any scene: bloom, light sweep, rain, grain. */
 function Atmosphere({ id }: { id: BackgroundId }): ReactNode {
-  const rain = id.startsWith('city');
+  const rain = id.startsWith('city') || id === 'forest-road' || id === 'ruined-city' || id === 'gas-station';
   return (
     <div className="atmo" aria-hidden="true">
       <i className="atmo-bloom" />
@@ -294,6 +294,256 @@ function Atmosphere({ id }: { id: BackgroundId }): ReactNode {
       {rain && <i className="atmo-rain" />}
       <i className="atmo-grain" />
     </div>
+  );
+}
+
+
+/* ---------- Post-collapse locations ---------- */
+const Glow = ({ id, x, y, r, c = '#ffb36b', o = 0.5 }: { id: string; x: number; y: number; r: number; c?: string; o?: number }): ReactNode => (
+  <>
+    <radialGradient id={`${id}-g${x}${y}`} cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stopColor={c} stopOpacity={o} />
+      <stop offset="1" stopColor={c} stopOpacity="0" />
+    </radialGradient>
+    <circle cx={x} cy={y} r={r} fill={`url(#${id}-g${x}${y})`} />
+  </>
+);
+
+function Pines({ seed, y, count, h, color, spread = 1600 }: { seed: number; y: number; count: number; h: number; color: string; spread?: number }): ReactNode {
+  const trees = useMemo(() => {
+    const r = rng(seed);
+    return Array.from({ length: count }, () => ({ x: r() * spread, hh: h * (0.6 + r() * 0.7), w: 50 + r() * 50 }));
+  }, [seed, count, h, spread]);
+  return (
+    <g fill={color}>
+      {trees.map((t, i) => (
+        <g key={i}>
+          <rect x={t.x - 4} y={y - 20} width={8} height={30} />
+          {[0, 1, 2, 3].map((k) => (
+            <polygon key={k} points={`${t.x},${y - t.hh + k * (t.hh / 5)} ${t.x - t.w * (0.35 + k * 0.18)},${y - t.hh * 0.18 + k * (t.hh / 14)} ${t.x + t.w * (0.35 + k * 0.18)},${y - t.hh * 0.18 + k * (t.hh / 14)}`} />
+          ))}
+        </g>
+      ))}
+    </g>
+  );
+}
+
+function Cars({ list }: { list: [number, number, number][] }): ReactNode {
+  return (
+    <g fill="#0a0f16" stroke="#1a2535" strokeWidth="2">
+      {list.map(([x, y, w], i) => (
+        <g key={i} transform={`translate(${x} ${y})`}>
+          <rect x={0} y={-w * 0.22} width={w} height={w * 0.22} rx={8} />
+          <path d={`M${w * 0.18} ${-w * 0.22} L${w * 0.3} ${-w * 0.4} L${w * 0.72} ${-w * 0.4} L${w * 0.86} ${-w * 0.22}Z`} />
+          <circle cx={w * 0.22} cy={0} r={w * 0.07} />
+          <circle cx={w * 0.78} cy={0} r={w * 0.07} />
+        </g>
+      ))}
+    </g>
+  );
+}
+
+function GasStation({ id }: { id: string }): ReactNode {
+  return (
+    <>
+      <Defs id={id} a="#0b1219" b="#3c4d60" />
+      <rect width="1600" height="900" fill={`url(#${id}-sky)`} />
+      <Pines seed={5} y={620} count={22} h={150} color="#0f1722" />
+      <path d="M0 620 L1600 600 L1600 900 L0 900Z" fill="#0c1218" />
+      <rect y="640" width="1600" height="260" fill="#10171f" />
+      <g>
+        <rect x="260" y="250" width="1060" height="34" fill="#0a0f15" stroke="#27374b" strokeWidth="3" />
+        <rect x="262" y="284" width="1056" height="14" fill="#1a2634" />
+        {[330, 700, 1230].map((x) => <rect key={x} x={x} y="298" width="22" height="342" fill="#141d28" />)}
+        {[420, 760, 1090].map((x, i) => (
+          <g key={x}>
+            <rect x={x} y="470" width="76" height="170" rx="6" fill="#18222e" stroke="#2a3a4e" strokeWidth="3" />
+            <rect x={x + 12} y="492" width="52" height="34" fill={i === 1 ? '#65b9ff' : '#2b4a68'} opacity={i === 1 ? 0.8 : 0.5} />
+          </g>
+        ))}
+        <rect x="560" y="150" width="14" height="110" fill="#141d28" />
+        <rect x="470" y="118" width="196" height="44" rx="4" fill="#0f1822" stroke="#27374b" strokeWidth="3" />
+        <rect x="486" y="132" width="164" height="16" fill="#65b9ff" opacity="0.35" />
+      </g>
+      <Glow id={id} x={788} y={540} r={260} c="#65b9ff" o={0.22} />
+      <Cars list={[[1180, 760, 300], [120, 790, 260]]} />
+      <rect y="880" width="1600" height="20" fill="#080c11" />
+    </>
+  );
+}
+
+function Highway({ id }: { id: string }): ReactNode {
+  return (
+    <>
+      <Defs id={id} a="#0a1018" b="#42566b" />
+      <rect width="1600" height="900" fill={`url(#${id}-sky)`} />
+      <Pines seed={9} y={500} count={30} h={120} color="#0e1620" />
+      <rect y="500" width="1600" height="400" fill="#0b1118" />
+      <polygon points="800,470 1340,900 260,900" fill="#141c26" />
+      <polygon points="800,470 830,900 770,900" fill="#1d2a39" opacity="0.7" />
+      {[560, 610, 680, 770, 880].map((y, i) => <rect key={y} x={796 - i * 2} y={y} width={8 + i * 2} height={22 + i * 8} fill="#7d8fa3" opacity={0.25 + i * 0.1} />)}
+      <Cars list={[[330, 760, 340], [900, 640, 170], [1090, 700, 230], [640, 600, 100]]} />
+      <rect y="440" width="1600" height="160" fill="#8aa3bc" opacity="0.08" />
+      <Glow id={id} x={800} y={470} r={380} c="#9fc0e0" o={0.2} />
+    </>
+  );
+}
+
+function ForestRoad({ id }: { id: string }): ReactNode {
+  return (
+    <>
+      <Defs id={id} a="#070c12" b="#26384a" />
+      <rect width="1600" height="900" fill={`url(#${id}-sky)`} />
+      <Pines seed={3} y={560} count={26} h={330} color="#0a1118" />
+      <Pines seed={8} y={650} count={20} h={420} color="#070b10" />
+      <polygon points="780,520 820,520 1180,900 420,900" fill="#10171f" />
+      <polygon points="790,520 810,520 830,900 770,900" fill="#1c2836" opacity="0.5" />
+      <rect y="480" width="1600" height="200" fill="#9fb8d2" opacity="0.07" />
+      <Cars list={[[1010, 840, 220]]} />
+      <Pines seed={14} y={940} count={9} h={720} color="#05080c" />
+    </>
+  );
+}
+
+function Hospital({ id }: { id: string }): ReactNode {
+  const lights = [200, 280, 360, 440, 520];
+  return (
+    <>
+      <Defs id={id} a="#06090e" b="#13202b" />
+      <rect width="1600" height="900" fill="#0a1117" />
+      <polygon points="0,0 1600,0 1000,300 600,300" fill="#101a24" />
+      <polygon points="0,900 1600,900 1000,600 600,600" fill="#0c141b" />
+      <polygon points="0,0 600,300 600,600 0,900" fill="#0d151d" />
+      <polygon points="1600,0 1000,300 1000,600 1600,900" fill="#0b1219" />
+      <rect x="600" y="300" width="400" height="300" fill="#16242f" />
+      <rect x="760" y="360" width="80" height="150" fill="#0a1218" stroke="#2b4156" strokeWidth="3" />
+      <path d="M790 400h20M800 390v20" stroke="#65b9ff" strokeWidth="6" opacity="0.7" />
+      {lights.map((y, i) => (
+        <g key={y}>
+          <rect x={800 - (170 - i * 18)} y={i * 36 + 12} width={(170 - i * 18) * 2} height={8 + i * 0.5} fill="#d6e8f6" opacity={i === 2 ? 0.15 : 0.55} />
+        </g>
+      ))}
+      {[120, 260, 400].map((y) => <rect key={y} x="30" y={y} width="140" height="230" fill="#0a1016" stroke="#1d2c3b" strokeWidth="3" />)}
+      {[120, 260, 400].map((y) => <rect key={y} x="1430" y={y} width="140" height="230" fill="#0a1016" stroke="#1d2c3b" strokeWidth="3" />)}
+      <Glow id={id} x={800} y={430} r={420} c="#9fd0f0" o={0.14} />
+      <rect y="880" width="1600" height="20" fill="#05080b" />
+    </>
+  );
+}
+
+function Checkpoint({ id }: { id: string }): ReactNode {
+  return (
+    <>
+      <Defs id={id} a="#090e15" b="#2a3a4b" />
+      <rect width="1600" height="900" fill={`url(#${id}-sky)`} />
+      <Pines seed={4} y={560} count={20} h={160} color="#0d141c" />
+      <rect y="560" width="1600" height="340" fill="#0e151c" />
+      <g fill="#0a0f15" stroke="#1f2d3d" strokeWidth="2">
+        <rect x="90" y="400" width="360" height="130" rx="14" />
+        <rect x="120" y="360" width="290" height="50" rx="10" />
+        <rect x="1130" y="420" width="400" height="110" rx="14" />
+      </g>
+      {Array.from({ length: 9 }, (_, i) => (
+        <rect key={i} x={380 + i * 94} y={i % 2 ? 560 : 545} width={86} height={i % 2 ? 150 : 165} fill="#1a2430" stroke="#2d3e50" strokeWidth="3" />
+      ))}
+      <path d="M360 545 L1240 545" stroke="#4d607a" strokeWidth="3" strokeDasharray="12 6" />
+      <path d="M360 525 q40 -18 80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0" stroke="#5c7087" strokeWidth="3" fill="none" />
+      {[300, 1280].map((x) => (
+        <g key={x}>
+          <rect x={x} y="250" width="14" height="300" fill="#141d28" />
+          <rect x={x - 26} y="236" width="66" height="26" rx="4" fill="#cfe3f5" opacity="0.8" />
+          <Glow id={id} x={x + 7} y={262} r={220} c="#cfe3f5" o={0.3} />
+        </g>
+      ))}
+      <rect x="720" y="500" width="150" height="62" fill="#18222d" stroke="#2d3e50" strokeWidth="3" />
+      <rect x="735" y="514" width="120" height="14" fill="#e8b36b" opacity="0.55" />
+    </>
+  );
+}
+
+function Camp({ id }: { id: string }): ReactNode {
+  return (
+    <>
+      <Defs id={id} a="#070b11" b="#1b2733" />
+      <rect width="1600" height="900" fill={`url(#${id}-sky)`} />
+      <Pines seed={11} y={640} count={22} h={300} color="#0a1017" />
+      <rect y="640" width="1600" height="260" fill="#0c1218" />
+      {[[240, 0.9], [1120, 1.1], [1390, 0.8]].map(([x, k]) => (
+        <g key={x}>
+          <polygon points={`${x},${560 - 170 * k} ${x - 150 * k},${700} ${x + 150 * k},${700}`} fill="#18222e" stroke="#2b3b4e" strokeWidth="3" />
+          <polygon points={`${x},${560 - 170 * k} ${x - 26 * k},${700} ${x + 26 * k},${700}`} fill="#0b1219" />
+        </g>
+      ))}
+      <Glow id={id} x={760} y={650} r={430} c="#ff9b4a" o={0.38} />
+      <path d="M715 690 q45 -120 20 -160 q70 40 55 100 q30 -30 20 -70 q55 70 5 130z" fill="#ffb36b" opacity="0.85" />
+      <path d="M735 690 q25 -60 12 -90 q38 24 30 60 q12 -14 10 -32 q22 40 0 62z" fill="#ffe3b0" opacity="0.9" />
+      <rect x="690" y="696" width="130" height="14" rx="6" fill="#241a12" />
+    </>
+  );
+}
+
+function Shelter({ id }: { id: string }): ReactNode {
+  return (
+    <>
+      <Defs id={id} a="#070a0f" b="#101923" />
+      <rect width="1600" height="900" fill="#0b1118" />
+      <path d="M0 520 Q800 -60 1600 520 L1600 900 L0 900Z" fill="#0f1822" />
+      {[120, 190, 260].map((y) => <rect key={y} x="0" y={y} width="1600" height="10" fill="#1d2b3b" opacity="0.7" />)}
+      {[200, 540, 880, 1220].map((x, i) => (
+        <g key={x}>
+          <path d={`M${x} 0 V ${180 + (i % 2) * 40}`} stroke="#233447" strokeWidth="3" />
+          <circle cx={x} cy={200 + (i % 2) * 40} r="10" fill="#ffd9a0" />
+          <Glow id={id} x={x} y={200 + (i % 2) * 40} r={190} c="#ffc27a" o={0.35} />
+        </g>
+      ))}
+      {Array.from({ length: 14 }, (_, i) => <line key={i} x1={i * 120} y1="520" x2={i * 120 + 40} y2="900" stroke="#17222f" strokeWidth="2" />)}
+      <rect y="720" width="1600" height="180" fill="#090e14" />
+      {[[180, 640, 160, 90], [380, 680, 120, 70], [1200, 650, 200, 100]].map(([x, y, w, h]) => <rect key={x} x={x} y={y} width={w} height={h} fill="#17212c" stroke="#26374a" strokeWidth="3" />)}
+    </>
+  );
+}
+
+function RuinedCity({ id }: { id: string }): ReactNode {
+  return (
+    <>
+      <Defs id={id} a="#0a0d12" b="#2a2f38" />
+      <rect width="1600" height="900" fill={`url(#${id}-sky)`} />
+      <Skyline palette={{ skyTop: '#0a0d12', skyBottom: '#2a2f38', far: '#151b23', near: '#0b1016', window: '#8aa3bc', glow: '#65b9ff' }} seed={31} base={660} />
+      <g fill="#050709" opacity="0.8">
+        {[300, 780, 1230].map((x) => <path key={x} d={`M${x} 560 q-40 -160 20 -300 q-60 120 50 300z`} />)}
+      </g>
+      <Glow id={id} x={1100} y={620} r={320} c="#ff8a4a" o={0.2} />
+      <rect y="660" width="1600" height="240" fill="#0b1015" />
+      <Cars list={[[230, 790, 300], [700, 760, 220], [1180, 820, 360]]} />
+      <g stroke="#1d2530" strokeWidth="3">{[0, 1, 2, 3, 4, 5].map((i) => <line key={i} x1={i * 300} y1="900" x2={i * 300 + 120} y2="700" />)}</g>
+    </>
+  );
+}
+
+function HavenGate({ id }: { id: string }): ReactNode {
+  return (
+    <>
+      <Defs id={id} a="#060a10" b="#1a2735" />
+      <rect width="1600" height="900" fill={`url(#${id}-sky)`} />
+      <rect y="300" width="1600" height="440" fill="#0f1822" />
+      {Array.from({ length: 16 }, (_, i) => <rect key={i} x={i * 100 + 6} y="310" width="88" height="420" fill={i % 2 ? '#121c27' : '#142029'} stroke="#1f2f40" strokeWidth="2" />)}
+      {[160, 1440].map((x) => (
+        <g key={x}>
+          <rect x={x - 60} y="130" width="120" height="180" fill="#0d151e" stroke="#26374b" strokeWidth="3" />
+          <rect x={x - 70} y="112" width="140" height="26" fill="#0a1017" />
+          <rect x={x - 28} y="170" width="56" height="30" fill="#ffd9a0" opacity="0.7" />
+        </g>
+      ))}
+      <polygon points="160,200 560,740 40,740" fill="#cfe3f5" opacity="0.05" />
+      <polygon points="1440,200 1050,740 1580,740" fill="#cfe3f5" opacity="0.05" />
+      <rect x="690" y="380" width="220" height="360" rx="4" fill="#0a1017" stroke="#32465c" strokeWidth="4" />
+      <rect x="700" y="390" width="95" height="340" fill="#16222e" />
+      <rect x="805" y="390" width="95" height="340" fill="#16222e" />
+      <Glow id={id} x={800} y={560} r={360} c="#cfe3f5" o={0.2} />
+      <g stroke="#51657c" strokeWidth="2">{Array.from({ length: 16 }, (_, i) => <line key={i} x1={i * 100} y1="300" x2={i * 100 + 50} y2="270" />)}</g>
+      <rect y="740" width="1600" height="160" fill="#0a1015" />
+      <g fill="#05080c">{Array.from({ length: 14 }, (_, i) => <g key={i}><circle cx={90 + i * 52} cy={800 - (i % 3) * 8} r="12" /><rect x={78 + i * 52} y={810 - (i % 3) * 8} width="24" height="60" rx="8" /></g>)}</g>
+    </>
   );
 }
 
@@ -316,6 +566,33 @@ export function SceneBackground({ id, image, className = '' }: { id: BackgroundI
       break;
     case 'messaging':
       body = <Messaging id={id} />;
+      break;
+    case 'gas-station':
+      body = <GasStation id={id} />;
+      break;
+    case 'highway':
+      body = <Highway id={id} />;
+      break;
+    case 'forest-road':
+      body = <ForestRoad id={id} />;
+      break;
+    case 'hospital':
+      body = <Hospital id={id} />;
+      break;
+    case 'checkpoint':
+      body = <Checkpoint id={id} />;
+      break;
+    case 'camp':
+      body = <Camp id={id} />;
+      break;
+    case 'shelter':
+      body = <Shelter id={id} />;
+      break;
+    case 'ruined-city':
+      body = <RuinedCity id={id} />;
+      break;
+    case 'haven-gate':
+      body = <HavenGate id={id} />;
       break;
     default:
       body = <City id={id} />;
