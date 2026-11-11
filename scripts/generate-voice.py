@@ -9,6 +9,9 @@
 
     python scripts/generate-voice.py MODELS_DIR
 
+The archived stories (src/data/stories/_archive) are the ones with recorded clips; the ECHO chapters use the
+browser's speech synthesis (`voice: false` in the story file).
+
 Output: public/voice/<lang>/<id>.m4a and public/voice/<lang>/manifest.json (key "speaker|text" -> file).
 Re-running renders only missing clips and deletes clips no line uses any more. Needs macOS `afconvert`
 (or edit encode() to use ffmpeg).
@@ -122,7 +125,7 @@ def main():
         os.makedirs(outdir, exist_ok=True)
         todo = {}
         for name in STORIES[lang]:
-            story = json.load(open(os.path.join(ROOT, 'src/data/stories', name + '.json')))
+            story = json.load(open(os.path.join(ROOT, 'src/data/stories/_archive', name + '.json')))
             for l in lines_of(story):
                 todo[(l.get('speaker') or 'narrator', l['text'])] = None
         print(lang, len(todo), 'clips', flush=True)
