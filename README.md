@@ -66,7 +66,7 @@ npm run typecheck
 
 The game is fully available in **English and Russian** (menu or Settings; the default follows the browser). Story data lives in `src/data/stories/<name>.json` (EN) and `<name>.ru.json` (RU) with identical ids, logic and conditions, so progress and endings do not depend on the language. A test checks that the files stay structurally identical. Interface strings use the English phrase as the key (`t('...')`) with Russian in `src/i18n/ru.ts`; a test fails if a used key has no translation.
 
-**Voice-over.** The three ECHO chapters have no pre-rendered clips: they are marked `voice: false` and read by the browser's own speech synthesis, preferring natural voices and giving each character a distinct one. The earlier Kokoro (English) and Silero (Russian) clips in `public/voice/` belong to the archived stories and are kept. `scripts/generate-voice.py` can regenerate clips; its header says which models it needs. Silero's licence is CC BY-NC-SA (non-commercial).
+**Voice-over.** Every line of the three chapters is pre-rendered by open-source neural speech: Kokoro for English and Silero v4 for Russian, one voice per character plus a narrator, stored as `public/voice/<lang>/*.m4a`. Russian uses moderate pitch and rate on purpose, because extreme settings make Silero blur words, and 48 kHz audio at 64 kbit/s for clear consonants. If a clip is missing, or a story sets `voice: false`, the game falls back to the browser's own speech synthesis. `scripts/generate-voice.py` regenerates the clips (its header says which models it needs). Silero's licence is CC BY-NC-SA (non-commercial). The clips of the earlier archived stories were removed from `public/voice/`.
 
 **Portraits** are vector, semi-realistic busts. To use your own cut-out images, put them in `src/assets/characters/<id>/<expression>.png` (see the README there); missing files fall back to the vector portrait.
 
@@ -100,17 +100,17 @@ src/
 
 ## Tests
 
-`npm test` runs the whole suite (240 tests at the time of writing, all passing):
+`npm test` runs the whole suite (241 tests at the time of writing, all passing):
 
 - **Engine:** every chapter validates in both languages; all 18 paths of each chapter in EN and RU (correct history, ending, flags, indicators inside 0 to 10, conditional text, timeline, analysis for every ending and flag, map highlight, "How the system worked" adds up, save round trip); indicator words and clamping; exact conditional ending text; ending length (80 to 110 words) and open final question; submission safety; saves.
 - **UI:** the real app is driven through all 54 paths (content notice, evidence, decisions with confirmation, ending, system panel with no score words, analysis tabs, map with 8 nodes and 7 edges highlighted), plus menu, three chapter cards, Russian switch, HUD indicators (words and arrows, never digits), reload and resume, double-submit prevention, restart, corrupted save, settings, keyboard, captions.
 - **Content rules:** no em or en dashes in story, philosophy, interface text, code or project documents; no verdict language; Hobbes, Locke and Rousseau each with source; Popper and Castells in chapter 3; the Kazakhstan card; chapter 2 never decides on gender, ethnicity or disability.
-- **Languages and voice:** RU and EN structurally identical; no untranslated lines; every `t()` key translated; every character has a voice profile and stories without clips are marked `voice: false`.
+- **Languages and voice:** RU and EN structurally identical; no untranslated lines; every `t()` key translated; every spoken line has a recorded clip in both languages.
 
 ## Known limitations
 
 - **Text needs a human check before submission.** The philosophy paraphrases (all five thinkers), the Russian translations (stories, philosophy, interface) and the Kazakhstan sentence and its citation were written here and not reviewed by an expert or a native editor. The source locations for Popper and Castells are descriptions of the argument, not chapter numbers, and need to be filled in from the editions you cite.
-- Voice is the browser's speech synthesis for the new chapters, so quality depends on the voices installed on the device. It was not listened to in this environment.
+- Voice-over uses Kokoro and Silero. Silero has only five Russian voices, so characters of the same sex are told apart by pitch and rate, and some sound alike. I could not listen to the clips in this environment, so their clarity is chosen by settings, not verified by ear.
 - Music and effects are synthesized and deliberately modest; their sound quality was not evaluated by ear.
 - Art is procedural SVG (scenes, portraits, philosopher busts), not rendered or photographic. The busts are stylised illustrations, not likenesses.
 - The indicator effects are a small, hand-set model: they are chosen so that no option improves all four, and they are not calibrated against any data. They illustrate trade-offs and are not a measurement of anything.
