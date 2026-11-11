@@ -59,10 +59,14 @@ export function applyAll(entries: readonly Apply[] | undefined, flags: Record<st
   }
 }
 
-/** Stats never go below zero (a resource cannot be negative). Trust may. */
-const clamp = (flags: Record<string, string>): void => {
+/** Resources never go below zero. Indicators stay between 0 and 10. Other stats (trust, say) may go anywhere. */
+export const INDICATOR_MAX = 10;
+const clamp = (flags: Record<string, string>, story: Story): void => {
   for (const k of Object.keys(flags)) {
     if (/^#(food|med|ammo|fuel)$/.test(k) && num(flags[k]) < 0) flags[k] = '0';
+  }
+  for (const { key } of story.indicators ?? []) {
+    if (key in flags) flags[key] = String(Math.min(INDICATOR_MAX, Math.max(0, num(flags[key]))));
   }
 };
 
@@ -129,11 +133,11 @@ export function deriveState(story: Story, history: readonly DecisionRecord[]): E
       applyAll(node.apply, flags);
       const hit: { when: Condition; next?: string; ending?: string } | undefined = node.routes.find((r) => evaluate(r.when, flags));
       if (hit?.ending) {
-        clamp(flags);
+        clamp(flags, story);
         return finish(hit.ending);
       }
       if (!hit && node.defaultEnding) {
-        clamp(flags);
+        clamp(flags, story);
         return finish(node.defaultEnding);
       }
       nodeId = hit?.next ?? node.default;
@@ -143,7 +147,7 @@ export function deriveState(story: Story, history: readonly DecisionRecord[]): E
 
     if (node.type !== 'decision') {
       applyAll(node.apply, flags);
-      clamp(flags);
+      clamp(flags, story);
       if (node.type === 'investigation') {
         while (history[cursor] && history[cursor].nodeId === node.id && isEvidenceRecord(history[cursor])) {
           const itemId = history[cursor].choiceId.slice(5);
@@ -152,7 +156,7 @@ export function deriveState(story: Story, history: readonly DecisionRecord[]): E
           if ((inspected[node.id] ??= []).includes(itemId)) return fail(`Evidence "${itemId}" recorded twice.`);
           inspected[node.id].push(itemId);
           applyAll(item.apply, flags);
-          clamp(flags);
+          clamp(flags, story);
           cursor += 1;
         }
       }
@@ -185,7 +189,7 @@ export function deriveState(story: Story, history: readonly DecisionRecord[]): E
 
     Object.assign(flags, choice.sets);
     applyAll(choice.apply, flags);
-    clamp(flags);
+    clamp(flags, story);
     selected[nodeId] = choice.id;
     snapshots[nodeId] = { ...flags };
     cursor += 1;

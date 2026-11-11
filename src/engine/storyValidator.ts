@@ -96,7 +96,8 @@ export function validateStory(story: Story, samples = 3000): string[] {
     e.fragments.forEach((l) => conditionFlags(l.when, used));
     e.consequences.forEach((l) => conditionFlags(l.when, used));
   }
-  for (const ph of ['kant', 'mill', 'aristotle'] as const) story.analysis[ph].application.fragments?.forEach((f) => conditionFlags(f.when, used));
+  for (const a of Object.values(story.analysis)) a.application.fragments?.forEach((f) => conditionFlags(f.when, used));
+  for (const ind of story.indicators ?? []) if (story.initial?.[ind.key] === undefined) errors.push(`Indicator "${ind.key}" has no initial value.`);
   used.forEach((f) => {
     if (!settable.has(f)) errors.push(`Condition uses flag "${f}" which nothing sets.`);
   });
@@ -107,12 +108,12 @@ export function validateStory(story: Story, samples = 3000): string[] {
       errors.push('A path does not reach an ending.');
       return;
     }
-    for (const ph of ['kant', 'mill', 'aristotle'] as const) {
-      const a = story.analysis[ph];
+    for (const [ph, a] of Object.entries(story.analysis)) {
       if (!a.application.byEnding[endingId]) errors.push(`${ph}: missing application for ${endingId}.`);
       if (!a.limitation[endingId]) errors.push(`${ph}: missing limitation for ${endingId}.`);
       if (!a.application.fragments) {
         for (const [flag, value] of Object.entries(flags)) {
+          if (flag.startsWith('#')) continue;
           if (!a.application.byFlag[`${flag}=${value}`]) errors.push(`${ph}: missing fragment ${flag}=${value}.`);
         }
       }

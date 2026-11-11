@@ -307,6 +307,16 @@ export interface Story {
   chapters?: { title: string; day: string }[];
   /** Stats shown in the HUD as resources. */
   resources?: { key: string; label: string; icon: string }[];
+  /** Qualitative indicators (stats kept between 0 and 10, shown as words, never as a total). */
+  indicators?: { key: string; label: string }[];
+  /** False when the story has no recorded clips: lines are read by the browser's speech synthesis. */
+  voice?: boolean;
+  /** Content notice shown once before the first scene. */
+  notice?: string;
+  /** Short paragraph on further thinkers who do not get their own section. */
+  lenses?: { title: string; text: string };
+  /** A neutral real-world note shown on the analysis screen. */
+  context?: { title: string; text: string; source: string };
   /** Set to false for large graphs: validation samples playthroughs instead of enumerating every path. */
   exhaustive?: boolean;
   characters: Record<string, Character>;
@@ -314,11 +324,8 @@ export interface Story {
   endings: Record<string, Ending>;
   flagLabels: FlagLabel[];
   reflection: { conflicts: Record<string, string>; questions: string[] };
-  analysis: {
-    kant: PhilosopherAnalysis;
-    mill: PhilosopherAnalysis;
-    aristotle: PhilosopherAnalysis;
-  };
+  /** One entry per philosopher id (see data/philosophy), in display order. */
+  analysis: Record<string, PhilosopherAnalysis>;
 }
 
 /* ---------- State ---------- */
