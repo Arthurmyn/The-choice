@@ -24,6 +24,10 @@ describe('no em dashes or en dashes', () => {
     expect(offenders).toEqual([]);
   });
 
+  it('in the project documents', () => {
+    for (const f of ['README.md', 'PRODUCT.md', 'DESIGN.md']) expect(DASH.test(readFileSync(f, 'utf8')), f).toBe(false);
+  });
+
   it('in the loaded data of every language', () => {
     for (const lang of LANGS) {
       expect(DASH.test(JSON.stringify(getStories(lang)))).toBe(false);
