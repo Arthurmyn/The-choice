@@ -69,6 +69,8 @@ class VoiceEngine {
   private pending = new Map<Lang, Promise<Manifest | null>>();
   private audio: HTMLAudioElement | null = null;
   private token = 0;
+  /** False for stories that have no recorded clips. */
+  private recorded = true;
 
   get supported(): boolean {
     return typeof window !== 'undefined' && 'speechSynthesis' in window && typeof SpeechSynthesisUtterance !== 'undefined';
@@ -88,6 +90,10 @@ class VoiceEngine {
       window.speechSynthesis.addEventListener?.('voiceschanged', () => this.refresh());
     }
     this.refresh();
+  }
+
+  setRecorded(on: boolean): void {
+    this.recorded = on;
   }
 
   configure(enabled: boolean, volume: number, lang: Lang = this.lang): void {
@@ -127,7 +133,7 @@ class VoiceEngine {
     const speaker = id === NARRATOR_ID ? NARRATOR_ID : id;
     void this.manifest(this.lang).then((m) => {
       if (token !== this.token) return; // a newer line replaced this one
-      const file = m?.[`${speaker}|${text}`];
+      const file = this.recorded ? m?.[`${speaker}|${text}`] : undefined;
       if (file && typeof Audio !== 'undefined') {
         const a = new Audio(`${import.meta.env.BASE_URL ?? '/'}voice/${this.lang}/${file}`);
         a.volume = this.volume;

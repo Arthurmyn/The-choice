@@ -1,0 +1,1726 @@
+{
+ "id": "infected-survivor",
+ "title": "The Infected Survivor",
+ "category": "Social contract",
+ "themes": [
+  "Security",
+  "Freedom",
+  "Legitimacy"
+ ],
+ "minutes": "8-10 min",
+ "synopsis": "Day nine of an outbreak, in a bus depot shelter. Aida hid a bite. Nobody knows whether it is infectious. You are not in charge, but the group is waiting for you.",
+ "disclaimer": "Fictional scenario. Consequences are simulated for philosophical discussion.",
+ "notice": "This story deals with death, coercion and fear. You can leave at any time, and your progress is saved. Nothing here is a recommendation about real events.",
+ "voice": false,
+ "tone": "shelter",
+ "start": "intro",
+ "initial": {
+  "#trust": "6",
+  "#safety": "5",
+  "#resources": "5",
+  "#participation": "5"
+ },
+ "indicators": [
+  {
+   "key": "#trust",
+   "label": "Trust"
+  },
+  {
+   "key": "#safety",
+   "label": "Safety"
+  },
+  {
+   "key": "#resources",
+   "label": "Resources"
+  },
+  {
+   "key": "#participation",
+   "label": "Participation"
+  }
+ ],
+ "characters": {
+  "aida": {
+   "id": "aida",
+   "name": "Aida",
+   "role": "Courier, bitten on the supply run",
+   "visual": {
+    "skin": "#b98a68",
+    "hair": {
+     "style": "long",
+     "color": "#16110f"
+    },
+    "outfit": "#3a4a52",
+    "accent": "#65B9FF",
+    "accessory": "none"
+   },
+   "voice": {
+    "gender": "f",
+    "pitch": 1.05,
+    "rate": 1.0
+   }
+  },
+  "marat": {
+   "id": "marat",
+   "name": "Marat",
+   "role": "Holds the keys and the radio",
+   "visual": {
+    "skin": "#c89d7c",
+    "hair": {
+     "style": "cropped",
+     "color": "#1f1b19"
+    },
+    "outfit": "#34312c",
+    "accent": "#8C9BB0",
+    "accessory": "lanyard"
+   },
+   "voice": {
+    "gender": "m",
+    "pitch": 0.88,
+    "rate": 0.95
+   }
+  },
+  "dana": {
+   "id": "dana",
+   "name": "Dana",
+   "role": "Former teacher",
+   "visual": {
+    "skin": "#e0b494",
+    "hair": {
+     "style": "bun",
+     "color": "#5a4636"
+    },
+    "outfit": "#2f4660",
+    "accent": "#65B9FF",
+    "accessory": "glasses"
+   },
+   "voice": {
+    "gender": "f",
+    "pitch": 0.97,
+    "rate": 0.98
+   }
+  },
+  "timur": {
+   "id": "timur",
+   "name": "Timur",
+   "role": "The youngest in the shelter",
+   "visual": {
+    "skin": "#d9ad8b",
+    "hair": {
+     "style": "short",
+     "color": "#14100e"
+    },
+    "outfit": "#2c3a30",
+    "accent": "#8C9BB0",
+    "accessory": "none"
+   },
+   "voice": {
+    "gender": "m",
+    "pitch": 1.12,
+    "rate": 1.05
+   }
+  },
+  "leo": {
+   "id": "leo",
+   "name": "Leo",
+   "role": "Keeps the supply log",
+   "visual": {
+    "skin": "#a97654",
+    "hair": {
+     "style": "cropped",
+     "color": "#9aa0a8"
+    },
+    "outfit": "#3a3f46",
+    "accent": "#8C9BB0",
+    "accessory": "glasses"
+   },
+   "voice": {
+    "gender": "m",
+    "pitch": 0.8,
+    "rate": 0.9
+   }
+  }
+ },
+ "nodes": {
+  "intro": {
+   "type": "scene",
+   "id": "intro",
+   "next": "discovery",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "aida"
+    ],
+    "card": {
+     "kicker": "DAY 9",
+     "title": "THE DEPOT",
+     "text": "Six people. One storeroom. Nobody in charge on paper."
+    },
+    "lines": [
+     {
+      "text": "Day nine. A former bus depot on the edge of town. Six people sleep behind a shutter they chained themselves."
+     },
+     {
+      "text": "You are one of them. Not the oldest, not the loudest. You carry water, take your shifts, and vote when there is something to vote on."
+     },
+     {
+      "speaker": "leo",
+      "expression": "neutral",
+      "text": "Bread for four days. Water for six. I wrote it down, so nobody has to guess."
+     },
+     {
+      "speaker": "marat",
+      "expression": "confident",
+      "text": "The radio and the key stay with me. Somebody has to hold them."
+     },
+     {
+      "speaker": "dana",
+      "expression": "concerned",
+      "text": "Held for us. Not over us."
+     }
+    ]
+   }
+  },
+  "discovery": {
+   "type": "scene",
+   "id": "discovery",
+   "next": "evidence",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "caption": "[A chain rattles at the shutter.]",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "aida"
+    ],
+    "lines": [
+     {
+      "text": "Dawn. Aida came back from the supply run last night and went straight to bed. Now Timur has seen her sleeve."
+     },
+     {
+      "speaker": "timur",
+      "expression": "surprised",
+      "text": "Her arm. Look at her arm."
+     },
+     {
+      "speaker": "aida",
+      "expression": "concerned",
+      "text": "It is a scratch. A fence, a wire. I told you, it is nothing."
+     },
+     {
+      "speaker": "marat",
+      "expression": "angry",
+      "text": "Nobody hides a scratch under a jacket."
+     },
+     {
+      "speaker": "dana",
+      "expression": "concerned",
+      "text": "Let her talk."
+     },
+     {
+      "speaker": "aida",
+      "expression": "sad",
+      "text": "I carried your food for nine days. Let me speak before you decide."
+     },
+     {
+      "speaker": "leo",
+      "expression": "neutral",
+      "text": "It is twenty hours old. Nobody here can say what it is."
+     },
+     {
+      "text": "Everyone looks at you. You are not in charge. But you are in the room."
+     }
+    ]
+   }
+  },
+  "evidence": {
+   "type": "investigation",
+   "id": "evidence",
+   "next": "d1",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "aida"
+    ],
+    "lines": [
+     {
+      "text": "Before anyone decides, there are three things you can look at. None of them will give you a certain answer."
+     }
+    ]
+   },
+   "items": [
+    {
+     "id": "wound",
+     "label": "The wound",
+     "kind": "card",
+     "title": "Aida's forearm",
+     "body": [
+      "A deep mark on the left forearm, two crescents of broken skin.",
+      "Swollen at the edges. Dry blood under a clean bandage she tied herself.",
+      "Twenty hours old."
+     ],
+     "finding": "It could be a bite or a wire cut. Looking closely does not settle it."
+    },
+    {
+     "id": "log",
+     "label": "Leo's log",
+     "kind": "log",
+     "mono": true,
+     "title": "Supply log, days 1 to 9",
+     "body": [
+      "Day 2: R. bitten. Fever the next morning.",
+      "Day 4: K. bitten. Fever within two days.",
+      "Day 5: S. bitten. No fever by day 8. Marked: unsure.",
+      "Day 7: M. cut on a fence. No fever."
+     ],
+     "finding": "Symptoms usually show within one to two days, but not always. The log cannot say which this is."
+    },
+    {
+     "id": "account",
+     "label": "Aida's account",
+     "kind": "message",
+     "title": "What Aida says happened",
+     "body": [
+      "\"Third house on Rail Street. Something came out of the dark. It was fast. I pulled away and the fence did the rest.\"",
+      "\"I did not see anyone sick.\"",
+      "\"I hid it because I knew what you would do.\""
+     ],
+     "finding": "She hid it out of fear. Nothing she says can be checked."
+    }
+   ]
+  },
+  "d1": {
+   "type": "decision",
+   "id": "d1",
+   "stage": "D1",
+   "title": "DAWN",
+   "background": "shelter",
+   "situation": "Aida stands by the shutter with her sleeve rolled up. Nobody knows whether the bite is infectious. The group waits for you to say what should happen.",
+   "info": [
+    "Twenty hours since the bite. Nobody has a fever.",
+    "The storeroom has one door and one key."
+   ],
+   "pressures": [
+    "Fear of one more infection",
+    "A person who may be sick, or may only be afraid"
+   ],
+   "choices": [
+    {
+     "id": "isolate_force",
+     "label": "Lock her in the storeroom until we know.",
+     "description": "She goes in now, whether she agrees or not. Marat keeps the key.",
+     "mapLabel": "Lock her in",
+     "sets": {
+      "d1": "isolate_force"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#safety": 2,
+        "#trust": -2,
+        "#participation": -1
+       }
+      }
+     ],
+     "next": "h_isolate",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "aida",
+       "dana",
+       "timur"
+      ],
+      "lines": [
+       {
+        "speaker": "marat",
+        "expression": "confident",
+        "text": "Storeroom. Now. We lock it from outside."
+       },
+       {
+        "speaker": "aida",
+        "expression": "sad",
+        "text": "You are locking up someone who has not done anything yet."
+       },
+       {
+        "speaker": "dana",
+        "expression": "angry",
+        "text": "At least tell her for how long."
+       },
+       {
+        "speaker": "marat",
+        "expression": "confident",
+        "text": "Until we know."
+       },
+       {
+        "text": "The chain goes through the handles. The sound lasts longer than it should."
+       }
+      ]
+     },
+     "result": "Aida is locked in the storeroom. Marat keeps the key."
+    },
+    {
+     "id": "stay_watch",
+     "label": "She stays with us, two people watch her in turns.",
+     "description": "She keeps her place in the group. Someone is awake beside her at all times.",
+     "mapLabel": "Keep her, watch her",
+     "sets": {
+      "d1": "stay_watch"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#safety": -1,
+        "#trust": 1
+       }
+      }
+     ],
+     "next": "h_watch",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "timur",
+       "aida",
+       "leo"
+      ],
+      "lines": [
+       {
+        "text": "You say it plainly: she stays. Two people watch her, in turns, day and night."
+       },
+       {
+        "speaker": "timur",
+        "expression": "angry",
+        "text": "You are asking us to sleep next to this."
+       },
+       {
+        "speaker": "aida",
+        "expression": "sad",
+        "text": "Not \"this\". Aida."
+       },
+       {
+        "speaker": "leo",
+        "expression": "neutral",
+        "text": "Two-hour shifts. I will put names on the board."
+       }
+      ]
+     },
+     "result": "Aida stays with the group. Two people watch her in turns."
+    },
+    {
+     "id": "group_decide",
+     "label": "Call everyone together and decide as a group.",
+     "description": "Nothing is done until everyone, Aida included, has spoken.",
+     "mapLabel": "Decide together",
+     "sets": {
+      "d1": "group_decide"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#participation": 2,
+        "#trust": 1,
+        "#safety": -1,
+        "#resources": -1
+       }
+      }
+     ],
+     "next": "h_group",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "dana",
+       "aida"
+      ],
+      "lines": [
+       {
+        "text": "You ask for everyone, in a circle, now. For once Marat does not argue."
+       },
+       {
+        "speaker": "marat",
+        "expression": "concerned",
+        "text": "Fine. Sit down, all of you."
+       },
+       {
+        "speaker": "dana",
+        "expression": "confident",
+        "text": "Good. Whatever this is, we will have decided it together."
+       },
+       {
+        "speaker": "aida",
+        "expression": "concerned",
+        "text": "Thank you."
+       }
+      ]
+     },
+     "result": "The group sits down to decide together."
+    }
+   ]
+  },
+  "h_isolate": {
+   "type": "scene",
+   "id": "h_isolate",
+   "next": "d2_isolate",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "cast": [
+     "dana",
+     "timur",
+     "aida"
+    ],
+    "card": {
+     "kicker": "HOURS LATER",
+     "title": "THE DOOR",
+     "text": "Noon. The chain holds."
+    },
+    "lines": [
+     {
+      "text": "Noon. The storeroom door is chained from outside. Marat keeps the only key on his belt."
+     },
+     {
+      "speaker": "aida",
+      "expression": "sad",
+      "text": "Please. Open it a little. I only want to be heard."
+     },
+     {
+      "text": "Dana stands at the door. Timur stands as far from it as he can."
+     }
+    ]
+   }
+  },
+  "h_watch": {
+   "type": "scene",
+   "id": "h_watch",
+   "next": "d2_watch",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "cast": [
+     "timur",
+     "leo",
+     "aida"
+    ],
+    "card": {
+     "kicker": "HOURS LATER",
+     "title": "THE SHARE",
+     "text": "Midday. A pace apart."
+    },
+    "lines": [
+     {
+      "text": "Midday. Aida eats with the group, a pace apart. Two people take the first watch. Nobody sleeps."
+     },
+     {
+      "speaker": "timur",
+      "expression": "angry",
+      "text": "I am not staying in a room with her. Give me my share. I am going to the water tower."
+     },
+     {
+      "speaker": "leo",
+      "expression": "neutral",
+      "text": "An equal share is two days of bread and a bottle. It is his right to ask."
+     }
+    ]
+   }
+  },
+  "h_group": {
+   "type": "scene",
+   "id": "h_group",
+   "next": "d2_group",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "aida"
+    ],
+    "card": {
+     "kicker": "HOURS LATER",
+     "title": "THE CIRCLE",
+     "text": "Afternoon. Six pallets in a ring."
+    },
+    "lines": [
+     {
+      "text": "Afternoon. The six of you sit in a ring on pallets. Aida sits at the edge, by her own choice."
+     },
+     {
+      "speaker": "dana",
+      "expression": "confident",
+      "text": "We decide together. Then we know who decided."
+     },
+     {
+      "speaker": "marat",
+      "expression": "concerned",
+      "text": "Fine. But whoever votes, votes for all of us."
+     },
+     {
+      "speaker": "leo",
+      "expression": "neutral",
+      "text": "Hands, not voices. I will count."
+     }
+    ]
+   }
+  },
+  "d2_isolate": {
+   "type": "decision",
+   "id": "d2_isolate",
+   "stage": "D2",
+   "title": "THE KEY",
+   "background": "shelter",
+   "situation": "Aida asks through the door to be heard. The only key is on Marat's belt.",
+   "info": [
+    "Marat has not slept since yesterday.",
+    "Dana is already standing at the door."
+   ],
+   "pressures": [
+    "Safety of the group",
+    "One person holding the only key"
+   ],
+   "choices": [
+    {
+     "id": "key_marat",
+     "label": "Keep the only key with Marat.",
+     "description": "The door stays shut. Marat answers for it.",
+     "mapLabel": "Key stays with Marat",
+     "sets": {
+      "d2": "key_marat"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#safety": 1,
+        "#participation": -2,
+        "#trust": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "aida"
+      ],
+      "lines": [
+       {
+        "speaker": "marat",
+        "expression": "confident",
+        "text": "The key stays on me. If something happens, I answer for it."
+       },
+       {
+        "speaker": "aida",
+        "expression": "sad",
+        "text": "Marat. Please. One minute."
+       },
+       {
+        "speaker": "marat",
+        "expression": "neutral",
+        "text": "Not now."
+       }
+      ]
+     },
+     "result": "The key stays with Marat. The door stays shut."
+    },
+    {
+     "id": "hear_door",
+     "label": "Open the door a little so she can speak to the group.",
+     "description": "Marat opens it a hand's width. The chain stays on.",
+     "mapLabel": "Hear her at the door",
+     "sets": {
+      "d2": "hear_door"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#trust": 1,
+        "#participation": 1,
+        "#safety": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "aida",
+       "dana"
+      ],
+      "lines": [
+       {
+        "text": "You ask Marat to open the door a hand's width. He does, and keeps his foot against it."
+       },
+       {
+        "speaker": "aida",
+        "expression": "concerned",
+        "text": "I did not hide it to hurt anyone. I hid it because I was afraid of exactly this. I will stay as far from you as you want."
+       },
+       {
+        "speaker": "dana",
+        "expression": "sad",
+        "text": "That is all she asked for."
+       }
+      ]
+     },
+     "result": "Aida is heard through the open door. The door is not unlocked."
+    }
+   ]
+  },
+  "d2_watch": {
+   "type": "decision",
+   "id": "d2_watch",
+   "stage": "D2",
+   "title": "THE SHARE",
+   "background": "shelter",
+   "situation": "Timur says he will leave with supplies if she stays.",
+   "info": [
+    "Two days of bread and a bottle of water per person.",
+    "The water tower is a half day away on foot."
+   ],
+   "pressures": [
+    "Staying together against each person's own safety",
+    "Supplies for those who stay"
+   ],
+   "choices": [
+    {
+     "id": "let_leave",
+     "label": "Let him leave with an equal share.",
+     "description": "Two days of bread and a bottle. Nobody follows him.",
+     "mapLabel": "Let him leave",
+     "sets": {
+      "d2": "let_leave"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#resources": -2,
+        "#trust": -1,
+        "#participation": 1,
+        "#safety": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "leo",
+       "timur"
+      ],
+      "lines": [
+       {
+        "speaker": "leo",
+        "expression": "neutral",
+        "text": "An equal share. Two days of bread and a bottle. It is written down."
+       },
+       {
+        "speaker": "timur",
+        "expression": "concerned",
+        "text": "I am not saying she is guilty. I am saying I cannot sleep next to this."
+       },
+       {
+        "text": "The shutter rattles. Timur is gone before anyone decides what to say."
+       }
+      ]
+     },
+     "result": "Timur leaves with an equal share of the supplies."
+    },
+    {
+     "id": "forbid_leave",
+     "label": "Nobody leaves, the group stays together.",
+     "description": "Timur stays, whether he wants to or not.",
+     "mapLabel": "Keep everyone together",
+     "sets": {
+      "d2": "forbid_leave"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#safety": 1,
+        "#trust": -2,
+        "#participation": -2
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "timur",
+       "marat"
+      ],
+      "lines": [
+       {
+        "text": "You tell Timur nobody leaves. The group stays together or it is not a group."
+       },
+       {
+        "speaker": "timur",
+        "expression": "angry",
+        "text": "You cannot hold me. You are not Marat."
+       },
+       {
+        "text": "Marat steps between Timur and the shutter and says nothing."
+       }
+      ]
+     },
+     "result": "Nobody leaves. Timur stays by the shutter, his bag at his feet."
+    }
+   ]
+  },
+  "d2_group": {
+   "type": "decision",
+   "id": "d2_group",
+   "stage": "D2",
+   "title": "THE VOTE",
+   "background": "shelter",
+   "situation": "The group debates, then asks who may vote.",
+   "info": [
+    "Six people, six hands.",
+    "The vote is about Aida."
+   ],
+   "pressures": [
+    "Fairness to the person concerned",
+    "The group's sense of safety"
+   ],
+   "choices": [
+    {
+     "id": "all_vote",
+     "label": "Everyone votes, including Aida.",
+     "description": "Six hands. Her vote counts the same as yours.",
+     "mapLabel": "Everyone votes",
+     "sets": {
+      "d2": "all_vote"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#participation": 1,
+        "#trust": 1,
+        "#safety": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "leo",
+       "aida"
+      ],
+      "lines": [
+       {
+        "speaker": "leo",
+        "expression": "neutral",
+        "text": "Six hands, six votes. Aida's counts the same as mine."
+       },
+       {
+        "speaker": "aida",
+        "expression": "surprised",
+        "text": "I did not expect to be asked."
+       }
+      ]
+     },
+     "result": "All six vote, Aida included."
+    },
+    {
+     "id": "exclude_aida",
+     "label": "Everyone votes except Aida, because it concerns her.",
+     "description": "Five hands. Aida listens from the edge of the room.",
+     "mapLabel": "Vote without Aida",
+     "sets": {
+      "d2": "exclude_aida"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#safety": 1,
+        "#trust": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "dana",
+       "marat",
+       "aida"
+      ],
+      "lines": [
+       {
+        "speaker": "dana",
+        "expression": "concerned",
+        "text": "It is her arm. Should she not be the one in the room?"
+       },
+       {
+        "speaker": "marat",
+        "expression": "confident",
+        "text": "It is exactly because it is her arm that she should not vote."
+       },
+       {
+        "speaker": "aida",
+        "expression": "sad",
+        "text": "I will listen. That is all I am allowed, apparently."
+       }
+      ]
+     },
+     "result": "Five vote. Aida listens from the edge of the room."
+    }
+   ]
+  },
+  "night": {
+   "type": "scene",
+   "id": "night",
+   "next": "d3",
+   "scene": {
+    "background": "camp",
+    "ambient": "room",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "aida"
+    ],
+    "card": {
+     "kicker": "NIGHT",
+     "title": "THE FEVER",
+     "text": "Nobody can tell what it is."
+    },
+    "lines": [
+     {
+      "text": "Night. The generator is off to save fuel. One lamp, turned low."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "isolate_force"
+      },
+      "text": "Aida is still behind the door. Somebody has pushed a blanket under it."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "stay_watch"
+      },
+      "text": "Aida lies on a pallet by the stove. Whoever is on watch keeps a stick within reach and does not look at it."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "group_decide"
+      },
+      "text": "Aida sits with the others by the stove. Nobody is sure where to look."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "key_marat"
+      },
+      "text": "The key is still on Marat's belt. Nobody has asked him for it."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "hear_door"
+      },
+      "text": "Aida spoke at the door this afternoon. Everyone remembers what she said."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "let_leave"
+      },
+      "text": "Timur left at noon with a bottle and two days of bread. Nobody watched him go. Nobody stopped him."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "forbid_leave"
+      },
+      "text": "Timur sits by the shutter, his bag at his feet. Nobody has stopped looking at him either."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "all_vote"
+      },
+      "text": "The count is written on the wall in Leo's careful hand. Nobody wants to read it twice."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "exclude_aida"
+      },
+      "text": "The vote was taken without her. She sat by the shutter and heard her name said many times."
+     },
+     {
+      "speaker": "aida",
+      "expression": "sad",
+      "text": "I feel hot. Maybe it is the stove. Maybe it is me. I cannot tell."
+     },
+     {
+      "speaker": "leo",
+      "expression": "neutral",
+      "text": "A fever at this hour could be the bite. Could be the wound going bad. Could be fear. I wrote down all three."
+     },
+     {
+      "speaker": "marat",
+      "expression": "concerned",
+      "text": "Whatever happens, we cannot go on like this. We need a rule tonight."
+     },
+     {
+      "speaker": "dana",
+      "expression": "concerned",
+      "text": "A rule for Aida. Or a rule for all of us."
+     },
+     {
+      "text": "It is for you to say first how this group will live from here."
+     }
+    ]
+   }
+  },
+  "d3": {
+   "type": "decision",
+   "id": "d3",
+   "stage": "D3",
+   "title": "THE RULE",
+   "background": "camp",
+   "situation": "The group needs one rule for everything that follows. You say it first, and the others will follow it or argue.",
+   "info": [
+    "Six people, nine days in, a fever nobody can name.",
+    "What you propose becomes the rule tomorrow."
+   ],
+   "pressures": [
+    "Order against freedom",
+    "Who may decide, and who may be overruled"
+   ],
+   "choices": [
+    {
+     "id": "one_decides",
+     "label": "In an emergency, one person decides.",
+     "description": "A single decision-maker, so that nobody argues while time runs out.",
+     "mapLabel": "One decides",
+     "sets": {},
+     "apply": [
+      {
+       "effects": {
+        "#safety": 1,
+        "#participation": -2,
+        "#trust": -1
+       }
+      }
+     ],
+     "ending": "R_E1",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "dana",
+       "leo"
+      ],
+      "lines": [
+       {
+        "speaker": "marat",
+        "expression": "confident",
+        "text": "Then it is settled. When it counts, I decide."
+       },
+       {
+        "speaker": "dana",
+        "expression": "sad",
+        "text": "Write down who we can ask if he is wrong."
+       },
+       {
+        "speaker": "leo",
+        "expression": "neutral",
+        "text": "I will write it. It will be a short list."
+       }
+      ]
+     },
+     "result": "The group adopts the rule: in an emergency, one person decides."
+    },
+    {
+     "id": "consent_only",
+     "label": "No restriction on a person without their consent.",
+     "description": "Nobody is locked up, searched or sent away unless they agree.",
+     "mapLabel": "Consent only",
+     "sets": {},
+     "apply": [
+      {
+       "effects": {
+        "#participation": 1,
+        "#trust": 1,
+        "#safety": -1
+       }
+      }
+     ],
+     "ending": "R_E2",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "dana",
+       "marat",
+       "aida"
+      ],
+      "lines": [
+       {
+        "speaker": "dana",
+        "expression": "confident",
+        "text": "Nobody is locked, searched or sent away unless they agree to it."
+       },
+       {
+        "speaker": "marat",
+        "expression": "angry",
+        "text": "And when someone says no and the rest of us get sick?"
+       },
+       {
+        "speaker": "aida",
+        "expression": "concerned",
+        "text": "Then ask me. I might say yes."
+       }
+      ]
+     },
+     "result": "The group adopts the rule: no restriction on a person without their consent."
+    },
+    {
+     "id": "group_challenge",
+     "label": "The group decides, and any decision can be challenged the next day.",
+     "description": "Every decision gets a time for objections.",
+     "mapLabel": "Decide, then allow challenge",
+     "sets": {},
+     "apply": [
+      {
+       "effects": {
+        "#participation": 1,
+        "#trust": 1,
+        "#resources": -1
+       }
+      }
+     ],
+     "ending": "R_E3",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "leo",
+       "timur",
+       "dana"
+      ],
+      "lines": [
+       {
+        "speaker": "leo",
+        "expression": "neutral",
+        "text": "We decide together. Next day, anyone can say: wrong, again. I will hold the floor."
+       },
+       {
+        "speaker": "timur",
+        "expression": "concerned",
+        "text": "And if it cannot wait until the next day?"
+       },
+       {
+        "speaker": "dana",
+        "expression": "neutral",
+        "text": "Then we will find out what that costs."
+       }
+      ]
+     },
+     "result": "The group adopts the rule: the group decides, and any decision can be challenged the next day."
+    }
+   ]
+  }
+ },
+ "endings": {
+  "R_E1": {
+   "id": "R_E1",
+   "title": "A SINGLE HAND",
+   "subtitle": "The shelter is calm. It is calm because of one person.",
+   "result": "The group agrees that in an emergency one person decides, and that person is Marat.",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "caption": "[A key turns, once.]",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "aida"
+    ],
+    "lines": [
+     {
+      "text": "Leo writes the rule under the supply log: in an emergency, one person decides. Nobody argues. Everyone looks at Marat."
+     },
+     {
+      "speaker": "marat",
+      "expression": "confident",
+      "text": "I did not ask for this. But somebody has to hold the key."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "isolate_force"
+      },
+      "text": "The door was already chained. Now it is the policy."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "stay_watch"
+      },
+      "text": "The watch that was shared is now Marat's to assign."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "group_decide"
+      },
+      "text": "The group that once voted now waits to be told."
+     },
+     {
+      "text": "By dawn Aida has a fever. It could be the bite, the wound or fear. Marat moves her behind the door again, quietly. Nobody is asked."
+     },
+     {
+      "text": "The chains hold. The bread lasts. Timur sleeps for the first time in days."
+     },
+     {
+      "text": "If Marat is wrong, who will be able to tell him?"
+     }
+    ]
+   },
+   "fragments": [
+    {
+     "when": {
+      "flag": "d1",
+      "is": "isolate_force"
+     },
+     "text": "You had Aida locked in before the group had spoken."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "stay_watch"
+     },
+     "text": "You kept Aida with the group, under watch."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "group_decide"
+     },
+     "text": "You asked the group to decide before anything was done to her."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "key_marat"
+     },
+     "text": "The only key stayed with Marat."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "hear_door"
+     },
+     "text": "Aida was heard at the door before the group went on."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "let_leave"
+     },
+     "text": "Timur left with an equal share."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "forbid_leave"
+     },
+     "text": "Nobody was allowed to leave."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "all_vote"
+     },
+     "text": "Aida voted with the rest."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "exclude_aida"
+     },
+     "text": "Aida was kept out of the vote about her."
+    }
+   ],
+   "consequences": [
+    {
+     "text": "The group has one clear decider and a quiet night."
+    },
+    {
+     "text": "Nobody except Marat can overrule an emergency decision."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "let_leave"
+     },
+     "text": "Timur is out there with two days of bread. Nobody knows where."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "all_vote"
+     },
+     "text": "The vote that Aida joined no longer decides anything that matters."
+    }
+   ],
+   "unresolved": "If Marat is wrong, who will be able to tell him?"
+  },
+  "R_E2": {
+   "id": "R_E2",
+   "title": "CONSENT ONLY",
+   "subtitle": "Nobody is forced. Nobody is fully protected either.",
+   "result": "The group agrees that nobody is restricted without consent, and Aida chooses her own distance.",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "caption": "[Wind at the shutter.]",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "aida"
+    ],
+    "lines": [
+     {
+      "text": "Dana says it first, and Leo writes it under the supply log: nothing is done to anyone without their consent."
+     },
+     {
+      "speaker": "aida",
+      "expression": "concerned",
+      "text": "Then I will make my own rule. I sleep at the far end, and the door stays open."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "isolate_force"
+      },
+      "text": "Nobody turns the key on her again."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "stay_watch"
+      },
+      "text": "Nobody sits beside her with a stick."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "group_decide"
+      },
+      "text": "Nobody calls another vote about her."
+     },
+     {
+      "speaker": "marat",
+      "expression": "angry",
+      "text": "And if she is already carrying it? Consent does not stop a bite."
+     },
+     {
+      "text": "By dawn Aida has a fever. It could be the bite, the wound or fear. She stays where she said she would. Nobody makes her. Nobody sleeps."
+     },
+     {
+      "text": "If Aida had refused, would the rule still have protected the others?"
+     }
+    ]
+   },
+   "fragments": [
+    {
+     "when": {
+      "flag": "d1",
+      "is": "isolate_force"
+     },
+     "text": "You had Aida locked in before the group had spoken."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "stay_watch"
+     },
+     "text": "You kept Aida with the group, under watch."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "group_decide"
+     },
+     "text": "You asked the group to decide before anything was done to her."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "key_marat"
+     },
+     "text": "The only key stayed with Marat."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "hear_door"
+     },
+     "text": "Aida was heard at the door before the group went on."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "let_leave"
+     },
+     "text": "Timur left with an equal share."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "forbid_leave"
+     },
+     "text": "Nobody was allowed to leave."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "all_vote"
+     },
+     "text": "Aida voted with the rest."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "exclude_aida"
+     },
+     "text": "Aida was kept out of the vote about her."
+    }
+   ],
+   "consequences": [
+    {
+     "text": "Nobody is restricted without agreeing to it."
+    },
+    {
+     "text": "Aida sleeps at the far end of the depot, by her own choice."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "key_marat"
+     },
+     "text": "Marat still carries the key, and no longer has a rule that lets him use it."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "forbid_leave"
+     },
+     "text": "Timur is free to go now. He has not decided whether to."
+    }
+   ],
+   "unresolved": "If Aida had refused, would the rule still have protected the others?"
+  },
+  "R_E3": {
+   "id": "R_E3",
+   "title": "THE OPEN TABLE",
+   "subtitle": "Every decision can be questioned. Every decision takes longer.",
+   "result": "The group decides together, and every decision can be challenged the next day.",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "caption": "[Chairs scrape on concrete.]",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "aida"
+    ],
+    "lines": [
+     {
+      "text": "The rule is simple: the group decides, and any decision can be challenged the next day. Leo writes both halves on the wall."
+     },
+     {
+      "speaker": "dana",
+      "expression": "confident",
+      "text": "So that nobody has to be right alone."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "isolate_force"
+      },
+      "text": "The first decision to be challenged is the lock on the storeroom."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "stay_watch"
+      },
+      "text": "The first decision to be challenged is the watch."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "group_decide"
+      },
+      "text": "The first decision to be challenged is yesterday's vote."
+     },
+     {
+      "speaker": "marat",
+      "expression": "concerned",
+      "text": "And if there is no time to wait for tomorrow?"
+     },
+     {
+      "text": "By dawn Aida has a fever. It could be the bite, the wound or fear. The group meets again and argues for an hour. It decides only to keep watching, and to meet again."
+     },
+     {
+      "text": "Can a group that is always arguing keep anyone safe?"
+     }
+    ]
+   },
+   "fragments": [
+    {
+     "when": {
+      "flag": "d1",
+      "is": "isolate_force"
+     },
+     "text": "You had Aida locked in before the group had spoken."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "stay_watch"
+     },
+     "text": "You kept Aida with the group, under watch."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "group_decide"
+     },
+     "text": "You asked the group to decide before anything was done to her."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "key_marat"
+     },
+     "text": "The only key stayed with Marat."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "hear_door"
+     },
+     "text": "Aida was heard at the door before the group went on."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "let_leave"
+     },
+     "text": "Timur left with an equal share."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "forbid_leave"
+     },
+     "text": "Nobody was allowed to leave."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "all_vote"
+     },
+     "text": "Aida voted with the rest."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "exclude_aida"
+     },
+     "text": "Aida was kept out of the vote about her."
+    }
+   ],
+   "consequences": [
+    {
+     "text": "Every decision now ends with a time for objections."
+    },
+    {
+     "text": "The first objection is already on the wall, in Dana's handwriting."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "exclude_aida"
+     },
+     "text": "Aida is allowed to speak against the vote that left her out."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "hear_door"
+     },
+     "text": "What Aida said at the door is read aloud at every meeting."
+    }
+   ],
+   "unresolved": "Can a group that is always arguing keep anyone safe?"
+  }
+ },
+ "flagLabels": [
+  {
+   "flag": "d1",
+   "values": {
+    "isolate_force": "You locked Aida in",
+    "stay_watch": "You kept her under watch",
+    "group_decide": "You asked the group to decide"
+   }
+  },
+  {
+   "flag": "d2",
+   "values": {
+    "key_marat": "The key stayed with Marat",
+    "hear_door": "Aida was heard at the door",
+    "let_leave": "Timur was let go",
+    "forbid_leave": "Nobody could leave",
+    "all_vote": "Everyone voted, Aida too",
+    "exclude_aida": "Aida was left out of the vote"
+   }
+  }
+ ],
+ "analysis": {
+  "hobbes": {
+   "argument": "In Leviathan (chapters 13, 14, 17 and 21), Hobbes describes a state of nature with no common power. There, fear of violent death makes everyone a possible threat to everyone else. To escape it, people agree to authorise a sovereign who can keep the peace. Even so, he holds that nobody can be obliged to give up the right to defend their own life.",
+   "application": {
+    "byEnding": {
+     "R_E1": "Letting one person decide in an emergency follows the Hobbesian logic that order needs a single decider whose word ends the argument. The same logic asks who holds the key, and whether that person can protect everyone at all times.",
+     "R_E2": "A rule of consent only keeps the one thing Hobbes treats as untouchable, each person's right to protect their own life. But it gives no common power to settle a dispute when two people's safety conflicts. From this angle the shelter has principles and no decider.",
+     "R_E3": "Deciding together and allowing challenge builds a small body of authority. This line of thought asks what happens in the hours between a decision and its challenge, and who acts when the group cannot agree."
+    },
+    "byFlag": {
+     "d1=isolate_force": "Locking Aida in applies the idea that security comes first and that fear of the bite justifies a decider acting at once. It also treats her as a threat before anyone knows she is one.",
+     "d1=stay_watch": "Keeping her under watch tries to hold both order and her place in the group. The framework asks who decides when the watchers disagree about what they see.",
+     "d1=group_decide": "Calling everyone together treats the shelter as a body that must authorise its own decisions. The account asks how long a group of equals can keep that up once fear rises.",
+     "d2=key_marat": "Giving one person the only key makes a small sovereign. The theory explains why people accept this, and offers no test for when the key-holder has gone too far.",
+     "d2=hear_door": "Opening the door so she can speak keeps the decision with the group while letting her state her case. The framework notes that it also lowers the safety margin.",
+     "d2=let_leave": "Letting Timur leave with an equal share respects a person's right to protect his own life by his own means. It also weakens the group that protects everyone else.",
+     "d2=forbid_leave": "Forbidding anyone to leave asks everyone to stay under the same protection. The cost is that some are kept there by force.",
+     "d2=all_vote": "Letting everyone vote, Aida included, treats all six as parties to the same agreement. It also gives the person most at risk a say in her own constraint.",
+     "d2=exclude_aida": "Leaving Aida out of the vote treats her as the matter to be settled and not as a party to the agreement. Hobbes's own limit, that nobody can be made to give up the defence of their life, sits uneasily with that."
+    }
+   },
+   "limitation": {
+    "R_E1": "Hobbes gives no test for a decider who abuses emergency power. Here the decider is a neighbour, not a state, and nobody can hold the key-holder to account.",
+    "R_E2": "The theory needs a common power to work, and a rule of consent leaves exactly that out. Whether a shelter can run on it is what the story leaves untested.",
+    "R_E3": "A body that must listen before it acts is slower than a single sovereign, and Hobbes thought slowness could be dangerous. The story does not show whether he was right."
+   },
+   "reference": "hobbes"
+  },
+  "locke": {
+   "argument": "In the Second Treatise of Government (chapters 2, 9, 14 and 19), Locke holds that people have natural rights to life, liberty and property, and that government exists to preserve them. Power used against those ends loses its legitimacy. He allows the executive some discretion for the public good, which he calls prerogative, but treats it as a trust that the people can judge.",
+   "application": {
+    "byEnding": {
+     "R_E1": "One person deciding in an emergency is a prerogative with no judge. Locke allows such discretion for the public good, and he asks that the people can still assess how it was used.",
+     "R_E2": "No restriction without consent is the most Lockean of the three rules: liberty and bodily integrity come first. It also makes the group accept the risk this creates for others, and that cost is real.",
+     "R_E3": "Allowing any decision to be challenged supplies what Locke asks of those who hold power: a way for those affected to judge it. It works only if the challenge can actually be heard."
+    },
+    "byFlag": {
+     "d1=isolate_force": "Isolating Aida without a hearing raises the question of whether necessity was shown. Her liberty was limited before anyone had evidence either way.",
+     "d1=stay_watch": "Letting her stay raises the question of whose rights are at risk, hers or the group's. Locke gives no formula for that balance.",
+     "d1=group_decide": "Calling the group lets those affected judge the case, which Locke values. It does not say what to do if the group is wrong.",
+     "d2=key_marat": "Keeping the only key with Marat shows how discretion becomes unchecked: nobody can examine his reasons.",
+     "d2=hear_door": "Letting her speak is a small step towards the impartial hearing that a restriction needs.",
+     "d2=let_leave": "Letting Timur go treats his liberty as real even when it costs the group something.",
+     "d2=forbid_leave": "Forbidding him to leave limits his liberty for the group's safety. That needs the same justification as locking Aida in.",
+     "d2=all_vote": "Including Aida treats her as a member of the community whose rights are in question.",
+     "d2=exclude_aida": "Excluding her makes her the object of the judgment and not one of the judges. That sits poorly with Locke's insistence that power answer to those it affects."
+    }
+   },
+   "limitation": {
+    "R_E1": "Locke relies on known laws and impartial judges. The shelter has neither, so a trust nobody can review is hard to tell from plain control.",
+    "R_E2": "The group's right to safety and one person's rights conflict, and there is no neutral arbiter to settle it. Consent works when everybody agrees and fails when someone does not.",
+    "R_E3": "Locke's idea of trust assumes people can wait for a judgment. A fever does not."
+   },
+   "reference": "locke"
+  },
+  "rousseau": {
+   "argument": "In The Social Contract (book I chapter 6, book II chapter 3 and book IV chapter 6), Rousseau grounds legitimate authority in a compact in which each person submits to the general will, which aims at the common good. The general will is not the will of all, which is only the sum of private interests. In a crisis he accepts a temporary dictatorship, and insists that it be brief.",
+   "application": {
+    "byEnding": {
+     "R_E1": "A standing rule of one is closer to the dictatorship Rousseau tolerates only for a short time. A rule made at night after one scare is not obviously temporary.",
+     "R_E2": "A rule of consent protects each person's will but has no way to form a general will. Six private wills can still leave the common good unserved.",
+     "R_E3": "Deciding together and revisiting the decision comes closest to a general will in this story. It still asks whether the group is judging the common good or only its own fear."
+    },
+    "byFlag": {
+     "d1=isolate_force": "Locking her in before anyone spoke took the decision out of the group's hands at the start, so no general will could form around it.",
+     "d1=stay_watch": "Keeping her under watch left the question open, which at least lets the group form a view.",
+     "d1=group_decide": "Calling the group is the clearest attempt in the story to ask what the common good requires.",
+     "d2=key_marat": "Giving the key to Marat gives him a share of the sovereign's role that the group never voted on.",
+     "d2=hear_door": "Hearing Aida gives the group the information a general will would need.",
+     "d2=let_leave": "Letting Timur leave treats the compact as optional. The theory asks what binds people who can walk away.",
+     "d2=forbid_leave": "Forbidding him to leave enforces the compact, at the price of a person's freedom to refuse it.",
+     "d2=all_vote": "Including Aida answers the question of whether she is part of the people: here, yes.",
+     "d2=exclude_aida": "Excluding Aida answers the same question the other way, and a vote without the person concerned may express only the others' fear."
+    }
+   },
+   "limitation": {
+    "R_E1": "Rousseau does not say how to stop an emergency power from becoming permanent when nobody else holds any.",
+    "R_E2": "The theory does not say how to protect a minority of one when the group's will and the person's will diverge.",
+    "R_E3": "A vote can express fear and not the common good, and Rousseau offers no reliable way to tell the two apart."
+   },
+   "reference": "rousseau"
+  }
+ },
+ "lenses": {
+  "title": "Two further lenses",
+  "text": "Karl Popper (The Open Society and Its Enemies) suggests that an emergency regime stays open only while citizens can still criticise those in power, which makes the next-day challenge in your last rule more than a courtesy. Manuel Castells (Communication Power) argues that power rests on control of communication. In this shelter Marat holds the keys and the radio, and the group hears the outside world only through him."
+ },
+ "context": {
+  "title": "A real-world echo: Kazakhstan, 2020",
+  "text": "In March 2020 Kazakhstan declared a nationwide state of emergency and placed Nur-Sultan and Almaty under quarantine. People were asked to accept limits on movement for the safety of others. The decision in this shelter is much smaller, but the questions are the same: who decides, how far, and can it be challenged?",
+  "source": "Amangeldinova et al., 2020"
+ },
+ "reflection": {
+  "conflicts": {
+   "R_E1": "Hobbes puts security first and asks for a decider. Locke puts each person's rights first and asks that power can be judged. Rousseau puts the common good first and asks who the people are. In the shelter these demands pull apart: the safest rule limits Aida the most, the freest rule leaves the others most exposed, and the most inclusive rule is the slowest. None of them is offered here as the right one.",
+   "R_E2": "Hobbes puts security first and asks for a decider. Locke puts each person's rights first and asks that power can be judged. Rousseau puts the common good first and asks who the people are. In the shelter these demands pull apart: the safest rule limits Aida the most, the freest rule leaves the others most exposed, and the most inclusive rule is the slowest. None of them is offered here as the right one.",
+   "R_E3": "Hobbes puts security first and asks for a decider. Locke puts each person's rights first and asks that power can be judged. Rousseau puts the common good first and asks who the people are. In the shelter these demands pull apart: the safest rule limits Aida the most, the freest rule leaves the others most exposed, and the most inclusive rule is the slowest. None of them is offered here as the right one."
+  },
+  "questions": [
+   "Who in this shelter had the right to decide, and why?",
+   "What evidence would have changed your choice?",
+   "Would your answer change if Aida were a stranger?"
+  ]
+ }
+}

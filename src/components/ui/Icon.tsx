@@ -2,10 +2,14 @@ import type { ReactNode } from 'react';
 
 export type IconName =
   | 'back' | 'next' | 'close' | 'settings' | 'volume' | 'mute' | 'document' | 'log' | 'message' | 'card' | 'config'
-  | 'food' | 'medicine' | 'ammo' | 'fuel' | 'check' | 'lock' | 'zoom-in' | 'zoom-out' | 'fit' | 'clock' | 'branch' | 'archive' | 'restart' | 'map' | 'mind' | 'fragment' | 'menu';
+  | 'food' | 'medicine' | 'ammo' | 'fuel' | 'check' | 'lock' | 'zoom-in' | 'zoom-out' | 'fit' | 'clock' | 'branch' | 'archive' | 'restart' | 'map' | 'mind' | 'fragment' | 'menu' | 'arrow-up' | 'arrow-down' | 'steady' | 'people';
 
 const PATHS: Record<IconName, ReactNode> = {
   back: <path d="M15 5l-7 7 7 7M8 12h12" />,
+  'arrow-up': <path d="M12 19V5M6 11l6-6 6 6" />,
+  'arrow-down': <path d="M12 5v14M6 13l6 6 6-6" />,
+  steady: <path d="M5 12h14" />,
+  people: (<><circle cx="9" cy="8" r="3" /><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M16 6a3 3 0 010 5.5M18 14c2 .7 3 2.6 3 6" /></>),
   next: <path d="M9 5l7 7-7 7M16 12H4" />,
   close: <path d="M6 6l12 12M18 6L6 18" />,
   menu: <path d="M4 7h16M4 12h16M4 17h10" />,

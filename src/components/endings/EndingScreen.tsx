@@ -8,6 +8,7 @@ import type { DecisionRecord, SceneContent, Story } from '../../engine/types';
 import { ScenePlayer } from '../cinematic/ScenePlayer';
 import { StorySummary } from './StorySummary';
 import { EndingsProgress } from './EndingsProgress';
+import { SystemPanel } from './SystemPanel';
 import { useGame } from '../../hooks/useGameState';
 import { Icon } from '../ui/Icon';
 
@@ -54,6 +55,8 @@ export function EndingScreen({
             <StorySummary story={story} history={history} />
           </section>
         </div>
+
+        <SystemPanel story={story} history={history} />
 
         <EndingsProgress story={story} found={found} current={ending.id} />
 

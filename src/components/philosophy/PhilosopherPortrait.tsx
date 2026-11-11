@@ -28,50 +28,47 @@ export function PhilosopherPortrait({ id, className = '' }: { id: PhilosopherId;
         </mask>
       </defs>
       <g mask={`url(#${g}-m)`}>
-        {id === 'kant' && (
+        {id === 'hobbes' && (
           <g>
-            <path d="M10 240 C14 190 52 176 100 174 C148 176 186 190 190 240Z" fill={`url(#${g}-dark)`} />
-            <path d="M82 176 L100 214 L118 176 L108 170 L92 170Z" fill="#dbe5ef" opacity="0.9" />
-            <rect x="86" y="148" width="28" height="30" rx="8" fill={`url(#${g})`} />
-            <ellipse cx="100" cy="104" rx="34" ry="44" fill={`url(#${g})`} />
-            <path d="M62 100 C56 44 144 44 138 100 C132 70 112 60 100 60 C88 60 68 70 62 100Z" fill="#e6edf5" opacity="0.92" />
-            <g fill="#e6edf5" opacity="0.88">
-              <ellipse cx="58" cy="116" rx="11" ry="9" />
-              <ellipse cx="55" cy="134" rx="10" ry="8" />
-              <ellipse cx="142" cy="116" rx="11" ry="9" />
-              <ellipse cx="145" cy="134" rx="10" ry="8" />
-            </g>
-            <path d="M80 98 q8 -5 16 0 M104 98 q8 -5 16 0" stroke="#0f1822" strokeWidth="2.6" fill="none" strokeLinecap="round" />
-            <path d="M82 108 q7 4 14 0 M104 108 q7 4 14 0" stroke="#0f1822" strokeWidth="1.6" fill="none" opacity="0.7" />
-            <path d="M100 108 q-4 14 2 18 M88 136 q12 6 24 0" stroke="#0f1822" strokeWidth="2" fill="none" opacity="0.7" strokeLinecap="round" />
+            <path d="M6 240 C10 194 48 178 100 176 C152 178 190 194 194 240Z" fill={`url(#${g}-dark)`} />
+            <path d="M70 182 C84 198 116 198 130 182 L124 168 L76 168Z" fill="#dbe5ef" opacity="0.85" />
+            <rect x="85" y="148" width="30" height="30" rx="8" fill={`url(#${g})`} />
+            <ellipse cx="100" cy="100" rx="34" ry="46" fill={`url(#${g})`} />
+            <path d="M68 96 C60 104 62 124 70 132 C66 116 68 106 68 96Z M132 96 C140 104 138 124 130 132 C134 116 132 106 132 96Z" fill="#e6edf5" opacity="0.88" />
+            <path d="M80 90 q8 -5 16 0 M104 90 q8 -5 16 0" stroke="#0f1822" strokeWidth="3" fill="none" strokeLinecap="round" />
+            <path d="M82 100 q7 3 14 0 M104 100 q7 3 14 0" stroke="#0f1822" strokeWidth="1.5" fill="none" opacity="0.65" />
+            <path d="M100 98 q-4 14 2 18" stroke="#0f1822" strokeWidth="2" fill="none" opacity="0.65" strokeLinecap="round" />
+            <path d="M82 124 C90 118 110 118 118 124 C112 128 88 128 82 124Z" fill="#e6edf5" opacity="0.92" />
+            <path d="M94 134 C98 142 102 142 106 134 C104 146 96 146 94 134Z" fill="#e6edf5" opacity="0.85" />
           </g>
         )}
-        {id === 'mill' && (
+        {id === 'locke' && (
           <g>
             <path d="M8 240 C12 192 50 178 100 176 C150 178 188 192 192 240Z" fill={`url(#${g}-dark)`} />
-            <path d="M78 178 L100 222 L122 178 L112 168 L88 168Z" fill="#cfdbe8" opacity="0.88" />
-            <path d="M94 192 l6 40 l6 -40z" fill="#101a25" />
-            <rect x="85" y="146" width="30" height="32" rx="8" fill={`url(#${g})`} />
-            <ellipse cx="100" cy="102" rx="33" ry="46" fill={`url(#${g})`} />
-            <path d="M68 86 C70 54 128 50 132 86 C122 66 82 64 68 86Z" fill="#9fb0c2" opacity="0.85" />
-            <path d="M80 98 q8 -4 16 0 M104 98 q8 -4 16 0" stroke="#0f1822" strokeWidth="2.6" fill="none" strokeLinecap="round" />
-            <path d="M80 108 q7 3 14 0 M104 108 q7 3 14 0" stroke="#0f1822" strokeWidth="1.4" fill="none" opacity="0.6" />
-            <path d="M100 106 q-4 16 3 20 M90 138 q10 4 20 0" stroke="#0f1822" strokeWidth="2" fill="none" opacity="0.65" strokeLinecap="round" />
+            <path d="M92 174 L100 206 L108 174Z" fill="#dbe5ef" opacity="0.9" />
+            <rect x="86" y="148" width="28" height="30" rx="8" fill={`url(#${g})`} />
+            <g fill="#d3deea" opacity="0.9">
+              <path d="M58 100 C54 58 146 58 142 100 L146 168 C136 176 128 164 126 150 L74 150 C72 164 64 176 54 168Z" />
+              {[58, 66, 134, 142].map((x, i) => <circle key={x} cx={x} cy={150 + (i % 2) * 12} r="9" />)}
+            </g>
+            <ellipse cx="100" cy="104" rx="29" ry="42" fill={`url(#${g})`} />
+            <path d="M72 84 C74 62 126 62 128 84 C118 72 84 72 72 84Z" fill="#d3deea" opacity="0.9" />
+            <path d="M82 98 q7 -4 14 0 M104 98 q7 -4 14 0" stroke="#0f1822" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+            <path d="M82 107 q6 3 12 0 M106 107 q6 3 12 0" stroke="#0f1822" strokeWidth="1.4" fill="none" opacity="0.6" />
+            <path d="M100 106 q-3 14 3 18 M90 132 q10 4 20 0" stroke="#0f1822" strokeWidth="2" fill="none" opacity="0.65" strokeLinecap="round" />
           </g>
         )}
-        {id === 'aristotle' && (
+        {id === 'rousseau' && (
           <g>
             <path d="M6 240 C10 196 46 180 100 178 C154 180 190 196 194 240Z" fill={`url(#${g}-dark)`} />
-            <path d="M30 200 C70 180 120 196 170 232 L190 240 L40 240Z" fill="#8ea1b5" opacity="0.45" />
-            <rect x="84" y="146" width="32" height="34" rx="9" fill={`url(#${g})`} />
-            <ellipse cx="100" cy="100" rx="34" ry="46" fill={`url(#${g})`} />
-            <path d="M68 86 C70 52 130 52 132 86 C122 70 78 70 68 86Z" fill="#b9c8d8" opacity="0.7" />
-            <g fill="#dfe8f1" opacity="0.92">
-              <path d="M66 112 C64 150 82 168 100 170 C118 168 136 150 134 112 C128 134 116 140 100 140 C84 140 72 134 66 112Z" />
-              {[76, 90, 104, 118].map((x, i) => <circle key={x} cx={x} cy={150 + (i % 2) * 6} r="8" />)}
-            </g>
-            <path d="M80 94 q8 -4 16 0 M104 94 q8 -4 16 0" stroke="#0f1822" strokeWidth="3" fill="none" strokeLinecap="round" />
-            <path d="M82 104 q7 3 14 0 M104 104 q7 3 14 0" stroke="#0f1822" strokeWidth="1.4" fill="none" opacity="0.6" />
+            <path d="M76 180 L100 208 L124 180 L112 170 L88 170Z" fill="#cfdbe8" opacity="0.85" />
+            <rect x="85" y="146" width="30" height="34" rx="9" fill={`url(#${g})`} />
+            <ellipse cx="100" cy="102" rx="33" ry="45" fill={`url(#${g})`} />
+            <path d="M66 94 C62 54 138 54 134 94 C128 72 112 66 100 66 C88 66 72 72 66 94Z" fill="#dfe8f1" opacity="0.92" />
+            <path d="M132 90 C148 104 148 138 138 160 C142 136 140 112 130 98Z" fill="#dfe8f1" opacity="0.8" />
+            <path d="M80 96 q8 -4 16 0 M104 96 q8 -4 16 0" stroke="#0f1822" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+            <path d="M82 106 q7 3 14 0 M104 106 q7 3 14 0" stroke="#0f1822" strokeWidth="1.5" fill="none" opacity="0.6" />
+            <path d="M100 104 q-4 14 2 18 M90 134 q10 5 20 0" stroke="#0f1822" strokeWidth="2" fill="none" opacity="0.65" strokeLinecap="round" />
           </g>
         )}
       </g>

@@ -16,7 +16,7 @@ export function About({ go }: { go: (r: Route) => void }): ReactNode {
         <section>
           <h2 className="section-title">{t('The idea')}</h2>
           <p className="lede">{philosophyMeta.centralQuestion}</p>
-          <p>{t('ECHO places you in realistic fictional situations where values collide: honesty and loyalty, privacy and transparency, duty and consequence. There are no morality points and no hidden score. After each story, three philosophical lenses describe what your choices might mean, without telling you what is right.')}</p>
+          <p>{t('ECHO puts you inside a fictional crisis where values collide: security and freedom, authority and consent. There are no morality points and no hidden score. After each story, three social contract thinkers describe what your choices might mean, without telling you what is right.')}</p>
         </section>
         <section>
           <h2 className="section-title">{t('How to play')}</h2>

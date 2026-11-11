@@ -18,6 +18,7 @@ import { EndingScreen } from '../components/endings/EndingScreen';
 import { Icon } from '../components/ui/Icon';
 import { SoundControl } from '../components/ui/SoundControl';
 import { ResourceBar } from '../components/ui/ResourceBar';
+import { IndicatorBar } from '../components/ui/IndicatorBar';
 
 export function GameScreen({ story, go }: { story: Story; go: (r: Route) => void }): ReactNode {
   const t = useT();
@@ -25,7 +26,9 @@ export function GameScreen({ story, go }: { story: Story; go: (r: Route) => void
   const { progress, state, timeline } = useStoryProgress(story);
   useEffect(() => {
     voice.setCast(Object.values(story.characters));
+    voice.setRecorded(story.voice !== false);
   }, [story]);
+  const [noticeSeen, setNoticeSeen] = useState(false);
 
   /** Inspected in this run: story-changing items come from the history, the rest from the archive. */
   const inspectedIn = useCallback(
@@ -90,6 +93,26 @@ export function GameScreen({ story, go }: { story: Story; go: (r: Route) => void
     if (state.valid && !progress.cursor && beat) goTo(beat.key, 0);
   }, [state.valid, progress.cursor, beat, goTo]);
 
+  /** The content notice comes once, before the first scene of a story that has one. */
+  if (story.notice && !noticeSeen && state.valid && progress.history.length === 0 && (!progress.cursor || (progress.cursor.key === timeline[0]?.key && progress.cursor.line === 0))) {
+    return (
+      <div className="stage">
+        <SceneBackground id={story.tone} className="cam blur" />
+        <div className="scene-vignette strong" aria-hidden="true" />
+        <div className="overlay-center">
+          <section className="notice-card" role="dialog" aria-modal="true" aria-labelledby="notice-title" data-testid="content-notice">
+            <p className="meta-label blue" id="notice-title">{t('Before you begin')}</p>
+            <p className="notice-text">{story.notice}</p>
+            <div className="notice-actions">
+              <button type="button" className="cta" onClick={() => { audio.unlock(); setNoticeSeen(true); }} data-testid="notice-continue">{t('I understand, begin')} <Icon name="next" size={18} /></button>
+              <button type="button" className="chip-btn" onClick={() => go({ name: 'menu' })}>{t('Back to menu')}</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    );
+  }
+
   if (!state.valid || !beat) {
     return (
       <div className="page"><div className="page-scroll"><main className="page-main">
@@ -102,7 +125,11 @@ export function GameScreen({ story, go }: { story: Story; go: (r: Route) => void
   const node = story.nodes[beat.nodeId];
   /** What the world looks like at this beat, not at the next decision. */
   const flags = beat.kind === 'ending' ? state.flags : beat.kind === 'decision' ? (state.snapshots[`${beat.nodeId}:before`] ?? state.flags) : (state.snapshots[beat.nodeId] ?? state.flags);
-  const stageIndex = timeline.filter((b) => b.kind === 'decision').findIndex((b) => b.key === beat.nodeId || (beat.kind === 'reaction' && b.nodeId === beat.nodeId));
+  const decisionBeats = timeline.filter((b) => b.kind === 'decision');
+  const stageIndex = decisionBeats.findIndex((b) => b.key === beat.nodeId || (beat.kind === 'reaction' && b.nodeId === beat.nodeId));
+  /** The state before the most recent answered decision, to show which way each indicator moved. */
+  const lastAnswered = [...state.path].reverse().find((id) => state.selected[id] && (beat.kind === 'ending' || state.path.indexOf(id) < state.path.indexOf(beat.nodeId) || id === beat.nodeId));
+  const before = lastAnswered ? (state.snapshots[`${lastAnswered}:before`] ?? null) : null;
   // Stories told in chapters show the chapter instead of three decision ticks.
   const chapterNo = story.chapters
     ? Math.max(1, ...state.path.map((id) => { const n = story.nodes[id]; return n && n.type !== 'router' ? (n.chapter ?? 0) : 0; }))
@@ -123,7 +150,7 @@ export function GameScreen({ story, go }: { story: Story; go: (r: Route) => void
         ) : (
           <span className="hud-stages" aria-label={t('Decision progress')}>
             {[0, 1, 2].map((i) => (
-              <i key={i} className={state.selected[`d${i + 1}`] ? 'done' : stageIndex === i && beat.kind === 'decision' ? 'now' : ''} />
+              <i key={i} className={decisionBeats[i] && state.selected[decisionBeats[i].nodeId] ? 'done' : stageIndex === i && beat.kind === 'decision' ? 'now' : ''} />
             ))}
           </span>
         )}
@@ -257,6 +284,7 @@ export function GameScreen({ story, go }: { story: Story; go: (r: Route) => void
     <div className="stage" onPointerDown={() => audio.unlock()}>
       <SceneTransition id={beat.kind === 'reaction' && interactionDone !== beat.key && getChoice(story, beat.nodeId, state.selected[beat.nodeId])?.interaction && line === 0 ? `${beat.key}:i` : beat.key}>{body}</SceneTransition>
       {hud}
+      {story.indicators && <div className="hud-indicators"><IndicatorBar story={story} flags={flags} before={before} /></div>}
       {(storageWarning || error) && <div className="banner warn floating" role="alert">{error ?? storageWarning}</div>}
     </div>
   );

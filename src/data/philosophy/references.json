@@ -1,0 +1,20 @@
+{
+ "hobbes": {
+  "author": "Thomas Hobbes",
+  "work": "Leviathan",
+  "location": "chapters 13, 14, 17 and 21",
+  "note": "The state of nature, the natural rights and laws, the authorisation of a sovereign, and the liberty of subjects."
+ },
+ "locke": {
+  "author": "John Locke",
+  "work": "Second Treatise of Government",
+  "location": "chapters 2, 9, 14 and 19",
+  "note": "The state of nature, the ends of government, prerogative, and the dissolution of government."
+ },
+ "rousseau": {
+  "author": "Jean-Jacques Rousseau",
+  "work": "The Social Contract",
+  "location": "book I chapter 6, book II chapter 3 and book IV chapter 6",
+  "note": "The compact, the general will against the will of all, and the dictatorship in a crisis."
+ }
+}

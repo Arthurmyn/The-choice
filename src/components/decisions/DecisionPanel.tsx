@@ -110,7 +110,7 @@ export function DecisionPanel({
             <button type="button" className="cta" disabled={!selected || busy} onClick={submit} data-testid="confirm-button">
               {selected ? t('Confirm this decision') : t('Pick one of the options')}
             </button>
-            <p className="muted small">{selected ? t('It is saved at once and cannot be changed in this playthrough.') : t('Click an option, or press 1–{n}.', { n: options.length })}</p>
+            <p className="muted small">{selected ? t('It is saved at once and cannot be changed in this playthrough.') : t('Click an option, or press 1-{n}.', { n: options.length })}</p>
           </div>
 
           <details className="decision-more">

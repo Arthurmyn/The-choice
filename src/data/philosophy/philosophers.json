@@ -1,0 +1,48 @@
+{
+ "centralQuestion": "To what extent can collective security justify restricting individual freedom and moral rights during a social crisis?",
+ "note": "The text under 'From the source' is a paraphrase of the philosopher's argument. The application to your choices is this game's interpretation. It is not a verdict, no philosopher is claimed to endorse a particular option, and nothing here scores or ranks your choices.",
+ "philosophers": {
+  "hobbes": {
+   "id": "hobbes",
+   "name": "Thomas Hobbes",
+   "years": "1588-1679",
+   "section": "SECURITY AND THE COMMON POWER",
+   "question": "Does the decision give the group the security that only a common power can provide, and what limit does it leave on that power?",
+   "concepts": [
+    "State of nature",
+    "Fear of violent death",
+    "Sovereign",
+    "Authorisation",
+    "Right to self-preservation"
+   ]
+  },
+  "locke": {
+   "id": "locke",
+   "name": "John Locke",
+   "years": "1632-1704",
+   "section": "RIGHTS AND LEGITIMATE POWER",
+   "question": "Does the decision protect life, liberty and property, and can those affected judge how power was used?",
+   "concepts": [
+    "Natural rights",
+    "Consent",
+    "Trust",
+    "Prerogative",
+    "Right to resist abuse"
+   ]
+  },
+  "rousseau": {
+   "id": "rousseau",
+   "name": "Jean-Jacques Rousseau",
+   "years": "1712-1778",
+   "section": "THE GENERAL WILL",
+   "question": "Does the decision serve the common good as the people themselves would will it, or only the sum of private fears?",
+   "concepts": [
+    "Social contract",
+    "General will",
+    "Will of all",
+    "Temporary dictatorship",
+    "Equality before the law"
+   ]
+  }
+ }
+}

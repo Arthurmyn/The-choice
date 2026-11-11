@@ -77,6 +77,7 @@ export function MainMenu({ go }: { go: (r: Route) => void }): ReactNode {
           className="menu-title"
         >
           <h1 aria-label="ECHO">ECHO</h1>
+          <p className="menu-sub">{t('The Ethics of Survival')}</p>
           <p className="tagline">{t('Your choices leave a trace.')}</p>
         </motion.header>
         <nav aria-label={t('Main menu')}>
