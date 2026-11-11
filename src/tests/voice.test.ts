@@ -26,9 +26,13 @@ describe('character voices', () => {
   });
 
   it('gives the protagonist the best voice of their gender, and everyone distinct voices', () => {
-    const cast = Object.values(stories[0].characters);
+    const cast = [
+      { id: 'zed', voice: { gender: 'm' as const, pitch: 1, rate: 1 } },
+      { id: 'you', role: 'Courier (you)', voice: { gender: 'm' as const, pitch: 1, rate: 1 } },
+      { id: 'ada', voice: { gender: 'f' as const, pitch: 1, rate: 1 } },
+    ];
     const m = assignVoices(voices, cast);
-    expect(m.get('alex')?.name).toBe('Oliver (Enhanced)');
+    expect(m.get('you')?.name).toBe('Oliver (Enhanced)');
     const names = [...m.values()].map((v) => v.name);
     expect(m.size).toBe(cast.length + 1);
     expect(new Set(names).size).toBe(names.length);
@@ -40,7 +44,7 @@ describe('character voices', () => {
   });
 
   it('is deterministic and survives having no voices', () => {
-    const cast = Object.values(stories[1].characters);
+    const cast = Object.values(stories[0].characters);
     expect([...assignVoices(voices, cast)].map(([k, v]) => k + v.name)).toEqual([...assignVoices([...voices].reverse(), cast)].map(([k, v]) => k + v.name));
     expect(assignVoices([], cast).size).toBe(0);
   });
@@ -54,7 +58,8 @@ describe('recorded voice-over', () => {
   it.each(LANGS)('%s: every spoken line has a recorded clip', (lang) => {
     const manifest = JSON.parse(readFileSync(`public/voice/${lang}/manifest.json`, 'utf8')) as Record<string, string>;
     const missing: string[] = [];
-    for (const s of getStories(lang)) {
+    // ECHO chapters have no recorded clips and are read by the browser's speech synthesis (voice: false).
+    for (const s of getStories(lang).filter((x) => x.voice !== false)) {
       const lines = allLines(s);
       for (const l of lines) {
         const key = `${l.speaker ?? 'narrator'}|${l.text}`;
@@ -63,5 +68,14 @@ describe('recorded voice-over', () => {
       }
     }
     expect(missing).toEqual([]);
+  });
+});
+
+describe('stories without recorded clips', () => {
+  it('declare voice: false, and every character still has a voice profile for the fallback', () => {
+    for (const s of stories) {
+      expect(s.voice).toBe(false);
+      for (const c of Object.values(s.characters)) expect(c.voice).toBeTruthy();
+    }
   });
 });

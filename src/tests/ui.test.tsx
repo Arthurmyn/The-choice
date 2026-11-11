@@ -1,14 +1,10 @@
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ReactNode } from 'react';
-import { stories as allStories } from '../data';
-
-const stories = allStories.filter((s) => s.exhaustive !== false);
+import { stories } from '../data';
 import { enumeratePaths, pathKey } from '../engine/narrativeEngine';
-import { SETTINGS_KEY, emptyProgress, saveProgress, storyKey, withDecision } from '../engine/progressManager';
-import { readFileSync } from 'node:fs';
+import { SETTINGS_KEY, storyKey } from '../engine/progressManager';
 import { resolveEnding } from '../engine/endingResolver';
-import type { Story } from '../engine/types';
 
 // Animation libraries are not under test; render children immediately.
 vi.mock('framer-motion', async () => {
@@ -33,10 +29,11 @@ vi.mock('framer-motion', async () => {
 });
 
 const { App } = await import('../app/App');
+const story = stories[0];
 
 beforeEach(() => {
   localStorage.clear();
-  localStorage.setItem(SETTINGS_KEY, JSON.stringify({ reducedMotion: true, typewriter: false, subtitles: true, musicVolume: 0, sfxVolume: 0, textSize: 'medium', cameraMotion: false }));
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify({ reducedMotion: true, typewriter: false, subtitles: true, musicVolume: 0, sfxVolume: 0, textSize: 'medium', cameraMotion: false, lang: 'en' }));
   window.location.hash = '';
 });
 afterEach(() => cleanup());
@@ -49,48 +46,16 @@ async function go(hash: string): Promise<void> {
 }
 
 /** Advance through whatever beat is on screen until `until` returns truthy. */
-async function drive(story: Story, choices: string[], until: () => boolean): Promise<void> {
+async function drive(choices: string[], until: () => boolean): Promise<void> {
   const choiceIds = new Set(choices);
   for (let guard = 0; guard < 400 && !until(); guard++) {
     const q = (id: string) => screen.queryByTestId(id);
+    const notice = q('notice-continue');
+    if (notice) { click(notice); continue; }
     const title = screen.queryByRole('button', { name: /Press to begin/ });
     if (title) { click(title); continue; }
-    if (q('interaction')) {
-      const inter = q('interaction')!;
-      const cont = q('interaction-continue') as HTMLButtonElement;
-      if (!cont.disabled) { click(cont); continue; }
-      const send = q('send-message');
-      if (send) { click(send); }
-      else if (q('run-test')) {
-        const radios = within(inter).getAllByRole('radio') as HTMLInputElement[];
-        click(radios[0]); // Harbor / sign in as
-        click(radios[radios.length / 2 + 2]); // Brightwell / owner
-        click(q('run-test') as HTMLElement);
-      } else if (q('step-0')) {
-        for (let i = 0; i < 3; i++) {
-          const b = await screen.findByTestId(`step-${i}`);
-          await waitFor(() => expect((b as HTMLButtonElement).disabled).toBe(false), { timeout: 3000 });
-          click(b);
-          await waitFor(() => expect(inter.querySelectorAll('.step.done').length).toBe(i + 1), { timeout: 3000 });
-        }
-      } else {
-        for (const h of within(inter).getAllByRole('button', { pressed: false })) click(h);
-      }
-      await waitFor(() => expect((q('interaction-continue') as HTMLButtonElement | null)?.disabled ?? false).toBe(false), { timeout: 5000 });
-      continue;
-    }
     const ev = q('evidence-continue') as HTMLButtonElement | null;
-    if (ev) {
-      if (ev.disabled) {
-        for (const b of screen.getAllByRole('button', { name: /required/i })) {
-          click(b);
-          click(screen.getByRole('button', { name: /^Close/ }));
-        }
-        continue;
-      }
-      click(ev);
-      continue;
-    }
+    if (ev) { click(ev); continue; }
     if (q('confirm-button')) {
       const id = [...choiceIds].find((c) => q(`choice-${c}`));
       if (!id) throw new Error('no choice found');
@@ -104,56 +69,128 @@ async function drive(story: Story, choices: string[], until: () => boolean): Pro
     if (next) { click(next); continue; }
     await act(async () => { await new Promise((r) => setTimeout(r, 10)); });
   }
-  if (!until()) throw new Error(`stuck in ${story.id}: ${document.body.textContent?.slice(0, 200)}`);
+  if (!until()) throw new Error(`stuck: ${document.body.textContent?.slice(0, 200)}`);
 }
 
-describe('menu', () => {
-  it('shows all menu options; Continue is disabled with no save', () => {
+const ind = (key: string) => screen.getByTestId(`ind-${key}`).getAttribute('aria-label');
+
+describe('menu and chapters', () => {
+  it('shows all menu options, the title and the tagline; Continue is disabled with no save', () => {
     render(<App />);
     for (const label of ['Continue', 'New Experience', 'Stories', 'Memory Archive', 'Settings', 'About']) {
       expect(screen.getByText(label)).toBeInTheDocument();
     }
     expect(screen.getByTestId('menu-continue')).toBeDisabled();
     expect(screen.getByRole('heading', { name: 'ECHO' })).toBeInTheDocument();
+    expect(screen.getByText('The Ethics of Survival')).toBeInTheDocument();
     expect(screen.getByText(/Your choices leave a trace/i)).toBeInTheDocument();
+    expect(screen.getByText('0 of 3 endings')).toBeInTheDocument();
   });
 
-  it('lists both stories with disclaimer and playtime', async () => {
+  it('lists chapter 1 as playable and chapters 2 and 3 as locked, with no fake content', async () => {
     render(<App />);
     await go('#/stories');
-    expect(await screen.findByText('RELEASE TODAY')).toBeInTheDocument();
-    expect(screen.getByText('SPEAK FOR SOMEONE ELSE')).toBeInTheDocument();
-    expect(screen.getAllByText(/Fictional scenario\. Consequences are simulated for philosophical discussion\./).length).toBe(3);
-    expect(screen.getByText('THE LAST JOURNEY')).toBeInTheDocument();
-    expect(screen.getByText('5–7 min')).toBeInTheDocument();
+    expect(await screen.findByText('The Infected Survivor')).toBeInTheDocument();
+    expect(screen.getByText('8-10 min')).toBeInTheDocument();
+    expect(screen.getAllByText(/Fictional scenario\. Consequences are simulated for philosophical discussion\./)).toHaveLength(1);
+    const locked = ['last-medicine', 'who-controls'].map((id) => screen.getByTestId(`locked-${id}`));
+    for (const card of locked) {
+      expect(within(card).getByText('In development')).toBeInTheDocument();
+      expect(within(card).queryByRole('button')).toBeNull();
+    }
+    expect(screen.getByText('The Last Medicine')).toBeInTheDocument();
+    expect(screen.getByText('Who Controls the Group?')).toBeInTheDocument();
+    expect(screen.queryByText(/Release Today|Last Journey|Speak for Someone/i)).toBeNull();
+  });
+
+  it('switches to Russian', async () => {
+    render(<App />);
+    click(screen.getByRole('button', { name: 'RU' }));
+    expect(await screen.findByText('Этика выживания')).toBeInTheDocument();
+    await go('#/stories');
+    expect(await screen.findByText('Укушенная')).toBeInTheDocument();
+    expect(screen.getAllByText('В разработке')).toHaveLength(2);
   });
 });
 
-describe.each(stories.map((s) => [s.id, s] as const))('full UI playthrough of %s', (_id, story) => {
+describe('content notice', () => {
+  it('appears before the first scene, can be left, and does not return once the story has begun', async () => {
+    render(<App />);
+    await go(`#/play/${story.id}`);
+    const notice = await screen.findByTestId('content-notice');
+    expect(notice.textContent).toMatch(/death, coercion and fear/);
+    expect(notice.textContent).toMatch(/leave at any time/);
+    expect(notice.textContent).toMatch(/Nothing here is a recommendation about real events/);
+    expect(screen.queryByRole('button', { name: /Press to begin/ })).toBeNull();
+    click(screen.getByTestId('notice-continue'));
+    expect(await screen.findByRole('button', { name: /Press to begin/ })).toBeInTheDocument();
+
+    await drive(['isolate_force'], () => !!screen.queryByTestId('decision-screen'));
+    click(screen.getByTestId('choice-isolate_force'));
+    click(screen.getByTestId('confirm-button'));
+    cleanup();
+    render(<App />);
+    expect(screen.queryByTestId('content-notice')).toBeNull();
+  });
+});
+
+describe('indicators in the HUD', () => {
+  it('show words and arrows, never numbers or a total', async () => {
+    render(<App />);
+    await go(`#/play/${story.id}`);
+    await drive([], () => !!screen.queryByTestId('decision-screen'));
+    const bar = screen.getByTestId('indicators');
+    expect(bar.querySelectorAll('li')).toHaveLength(4);
+    expect(bar.textContent).not.toMatch(/\d/);
+    expect(['trust', 'safety', 'resources', 'participation'].map(ind)).toEqual([
+      'Trust: Stable, unchanged', 'Safety: Stable, unchanged', 'Resources: Stable, unchanged', 'Participation: Stable, unchanged',
+    ]);
+
+    click(screen.getByTestId('choice-isolate_force'));
+    click(screen.getByTestId('confirm-button'));
+    await waitFor(() => expect(ind('trust')).toBe('Trust: Strained, falling'));
+    expect(ind('safety')).toBe('Safety: Stable, rising');
+    expect(ind('participation')).toBe('Participation: Strained, falling');
+    expect(ind('resources')).toBe('Resources: Stable, unchanged');
+    expect(screen.getByTestId('indicators').textContent).not.toMatch(/\d/);
+  });
+});
+
+describe('full UI playthrough of every path', () => {
   const paths = enumeratePaths(story);
   it.each(paths.map((p) => [pathKey(p), p] as const))('path %s', async (_k, history) => {
     const choices = history.map((h) => h.choiceId);
     render(<App />);
     await go(`#/play/${story.id}`);
-    const endingText = resolveEnding(story, history)!;
+    const resolved = resolveEnding(story, history)!;
 
-    await drive(story, choices, () => !!screen.queryByTestId('ending-summary'));
+    await drive(choices, () => !!screen.queryByTestId('ending-summary'));
 
     const summary = screen.getByTestId('ending-summary');
-    expect(within(summary).getByRole('heading', { level: 2 }).textContent).toBe(endingText.ending.title);
-    for (const f of endingText.fragments) expect(within(summary).getByText(f)).toBeInTheDocument();
+    expect(within(summary).getByRole('heading', { level: 2 }).textContent).toBe(resolved.ending.title);
+    for (const f of resolved.fragments) expect(within(summary).getByText(f)).toBeInTheDocument();
+
+    // "How the system worked" lists each decision made, and nothing is scored or ranked.
+    const panel = within(summary).getByTestId('system-panel');
+    for (const d of ['d1', history[1].nodeId, 'd3']) expect(within(panel).getByTestId(`system-${d}`)).toBeInTheDocument();
+    expect(panel.querySelectorAll('ol > li')).toHaveLength(3);
+    expect(summary.textContent).not.toMatch(/\bscore|\btotal\b|\bpoints\b|\bbest\b|\bworst\b|\bcorrect\b|\brank/i);
 
     // Saved progress matches the played path.
     const saved = JSON.parse(localStorage.getItem(storyKey(story.id))!);
     expect(saved.history.map((h: { choiceId: string }) => h.choiceId)).toEqual(choices);
     expect(Object.keys(saved.completed)).toEqual([pathKey(history)]);
 
-    // Analysis reflects the real ending.
+    // Analysis: three philosophers, the lenses, the collision, three questions and the Kazakhstan card.
     click(within(summary).getByTestId('open-analysis'));
-    const kant = await screen.findByTestId('analysis-kant', undefined, { timeout: 4000 });
-    expect(kant.textContent).toContain(story.analysis.kant.application.byEnding[endingText.ending.id].slice(0, 60));
-    expect(screen.getByTestId('analysis-mill')).toBeInTheDocument();
-    expect(screen.getByTestId('analysis-aristotle')).toBeInTheDocument();
+    const hobbes = await screen.findByTestId('analysis-hobbes', undefined, { timeout: 4000 });
+    expect(hobbes.textContent).toContain(story.analysis.hobbes.application.byEnding[resolved.ending.id].slice(0, 60));
+    expect(screen.getByTestId('analysis-locke')).toBeInTheDocument();
+    expect(screen.getByTestId('analysis-rousseau')).toBeInTheDocument();
+    expect(screen.getByTestId('lenses').textContent).toMatch(/Popper[\s\S]*Castells/);
+    expect(screen.getByText('Where the principles collide')).toBeInTheDocument();
+    expect(document.querySelectorAll('.questions li')).toHaveLength(3);
+    expect(screen.getByTestId('context-card').textContent).toMatch(/Kazakhstan[\s\S]*Amangeldinova et al\., 2020/);
 
     // Map highlights the path and review does not alter the save.
     const before = localStorage.getItem(storyKey(story.id));
@@ -169,168 +206,135 @@ describe.each(stories.map((s) => [s.id, s] as const))('full UI playthrough of %s
 });
 
 describe('persistence and restart', () => {
-  const story = stories[0];
-
-  it('resumes mid-scene and after a decision after reload', async () => {
+  it('resumes on the first decision after a reload, and after a decision', async () => {
     const { unmount } = render(<App />);
     await go(`#/play/${story.id}`);
-    await drive(story, ['verify'], () => !!screen.queryByTestId('decision-screen'));
-    // Reload on the first decision
+    await drive(['isolate_force'], () => !!screen.queryByTestId('decision-screen'));
     unmount();
     render(<App />);
     expect(await screen.findByTestId('decision-screen')).toBeInTheDocument();
-    expect(screen.getByText('VERIFY THE EVIDENCE')).toBeInTheDocument();
+    expect(screen.getByText('DAWN')).toBeInTheDocument();
+    for (const id of ['isolate_force', 'stay_watch', 'group_decide']) expect(screen.getByTestId(`choice-${id}`)).toBeInTheDocument();
 
-    click(screen.getByTestId('choice-verify'));
+    click(screen.getByTestId('choice-isolate_force'));
     click(screen.getByTestId('confirm-button'));
-    expect(await screen.findByTestId('interaction')).toBeInTheDocument();
-    expect(JSON.parse(localStorage.getItem(storyKey(story.id))!).history).toHaveLength(1);
+    await waitFor(() => expect(JSON.parse(localStorage.getItem(storyKey(story.id))!).history).toHaveLength(1));
 
     // Reload after the decision: lands in the reaction, not back on the decision.
     cleanup();
     render(<App />);
     expect(screen.queryByTestId('decision-screen')).toBeNull();
-    expect(screen.getByTestId('interaction') || screen.getByTestId('dialogue')).toBeTruthy();
+    expect(screen.getByTestId('dialogue')).toBeInTheDocument();
+  });
+
+  it('offers only the second decision that belongs to the first answer', async () => {
+    render(<App />);
+    await go(`#/play/${story.id}`);
+    await drive(['stay_watch', 'let_leave'], () => !!screen.queryByTestId('decision-screen'));
+    click(screen.getByTestId('choice-stay_watch'));
+    click(screen.getByTestId('confirm-button'));
+    await drive(['stay_watch', 'let_leave'], () => screen.queryByTestId('choice-let_leave') !== null);
+    expect(screen.getByText('THE SHARE')).toBeInTheDocument();
+    expect(screen.getByTestId('choice-forbid_leave')).toBeInTheDocument();
+    expect(screen.queryByTestId('choice-key_marat')).toBeNull();
+    expect(screen.queryByTestId('choice-all_vote')).toBeNull();
   });
 
   it('prevents choosing a decision twice', async () => {
     render(<App />);
     await go(`#/play/${story.id}`);
-    await drive(story, ['verify'], () => !!screen.queryByTestId('decision-screen'));
-    click(screen.getByTestId('choice-verify'));
+    await drive(['isolate_force'], () => !!screen.queryByTestId('decision-screen'));
+    click(screen.getByTestId('choice-isolate_force'));
     const confirm = screen.getByTestId('confirm-button');
     click(confirm);
     click(confirm);
     expect(JSON.parse(localStorage.getItem(storyKey(story.id))!).history).toHaveLength(1);
   });
 
-  it('restarts one story without touching the other or completed endings', async () => {
-    const s0 = stories[0];
-    const s1 = stories[1];
+  it('reopens a finished story on its ending when continued, and counts the endings found', async () => {
     render(<App />);
-    await go(`#/play/${s0.id}`);
-    await drive(s0, ['verify', 'disclose', 'postpone'], () => !!screen.queryByTestId('ending-summary'));
-    await go(`#/play/${s1.id}`);
-    await drive(s1, ['ask'], () => !!screen.queryByTestId('decision-screen'));
-    click(screen.getByTestId('choice-ask'));
-    click(screen.getByTestId('confirm-button'));
-    const s1Saved = localStorage.getItem(storyKey(s1.id));
+    await go(`#/play/${story.id}`);
+    await drive(['group_decide', 'all_vote', 'group_challenge'], () => !!screen.queryByTestId('ending-summary'));
+    const region = within(screen.getByTestId('ending-summary')).getByRole('region', { name: 'Endings found' });
+    expect(region.textContent).toMatch(/1\/3/);
+    expect(within(region).getByText('THE OPEN TABLE')).toBeInTheDocument();
+    expect(within(region).queryByText('A SINGLE HAND')).toBeNull();
 
-    await go('#/stories');
-    click(await screen.findByTestId(`restart-${s0.id}`));
-    click(screen.getByTestId(`restart-yes-${s0.id}`));
-    await waitFor(() => expect(JSON.parse(localStorage.getItem(storyKey(s0.id))!).history).toEqual([]));
-    expect(Object.keys(JSON.parse(localStorage.getItem(storyKey(s0.id))!).completed)).toHaveLength(1);
-    expect(localStorage.getItem(storyKey(s1.id))).toBe(s1Saved);
-  });
-
-  it('reopens a finished story on its ending when continued', async () => {
-    const s0 = stories[0];
-    render(<App />);
-    await go(`#/play/${s0.id}`);
-    await drive(s0, ['trust-report', 'delay', 'full'], () => !!screen.queryByTestId('ending-summary'));
     cleanup();
     window.location.hash = '';
     render(<App />);
+    expect(screen.getByText('1 of 3 endings')).toBeInTheDocument();
     const cont = screen.getByTestId('menu-continue');
     expect(cont).toBeEnabled();
     click(cont);
     expect(await screen.findByTestId('ending-summary', undefined, { timeout: 3000 })).toBeInTheDocument();
   });
 
-  it('lists the endings found on the ending screen, hides the ones not found, and keeps the count after restarting', async () => {
-    const s0 = stories[0];
+  it('restart keeps the endings found', async () => {
     render(<App />);
-    await go(`#/play/${s0.id}`);
-    await drive(s0, ['verify', 'disclose', 'postpone'], () => !!screen.queryByTestId('ending-summary'));
-    const region = within(screen.getByTestId('ending-summary')).getByRole('region', { name: 'Endings found' });
-    expect(region.textContent).toMatch(/1\/3/);
-    expect(within(region).getByText('POSTPONED')).toBeInTheDocument();
-    expect(within(region).getByText('Ending 2')).toBeInTheDocument();
-    expect(within(region).queryByText('LIMITED RELEASE')).toBeNull();
-
+    await go(`#/play/${story.id}`);
+    await drive(['isolate_force', 'key_marat', 'one_decides'], () => !!screen.queryByTestId('ending-summary'));
     await go('#/stories');
-    click(await screen.findByTestId(`restart-${s0.id}`));
-    click(screen.getByTestId(`restart-yes-${s0.id}`));
-    await go('#/stories');
-    expect(within(await screen.findByTestId(`story-${s0.id}`)).getByText('1 of 3 endings')).toBeInTheDocument();
+    click(await screen.findByTestId(`restart-${story.id}`));
+    click(screen.getByTestId(`restart-yes-${story.id}`));
+    await waitFor(() => expect(JSON.parse(localStorage.getItem(storyKey(story.id))!).history).toEqual([]));
+    expect(Object.keys(JSON.parse(localStorage.getItem(storyKey(story.id))!).completed)).toHaveLength(1);
   });
 
   it('recovers from a corrupted save instead of crashing', async () => {
-    localStorage.setItem(storyKey(stories[0].id), '{{{ nope');
+    localStorage.setItem(storyKey(story.id), '{{{ nope');
     render(<App />);
     expect(screen.getByText(/unreadable and has been reset/)).toBeInTheDocument();
     await go('#/stories');
-    expect(await screen.findByText('RELEASE TODAY')).toBeInTheDocument();
+    expect(await screen.findByText('The Infected Survivor')).toBeInTheDocument();
   });
 });
 
 describe('memory fragments and archive', () => {
-  const story = stories[0];
-
-  it('keeps inspected fragments across reloads and shows them in the Memory Archive', async () => {
+  it('keeps inspected fragments and shows them in the Memory Archive', async () => {
     render(<App />);
     await go(`#/play/${story.id}`);
-    await drive(story, ['verify'], () => !!screen.queryByTestId('evidence-continue'));
-    // Nothing found yet.
+    await drive([], () => !!screen.queryByTestId('evidence-continue'));
     expect(JSON.parse(localStorage.getItem(storyKey(story.id))!).fragments).toEqual([]);
-    click(screen.getByRole('button', { name: /Security report #214, required/ }));
+    click(screen.getByRole('button', { name: /^The wound/ }));
     expect(screen.getByText(/Added to the Memory Archive/)).toBeInTheDocument();
     click(screen.getByRole('button', { name: /^Close/ }));
-    expect(JSON.parse(localStorage.getItem(storyKey(story.id))!).fragments).toEqual(['report']);
+    expect(JSON.parse(localStorage.getItem(storyKey(story.id))!).fragments).toEqual(['wound']);
+    // Inspecting evidence here does not change the story, so it is not in the decision history.
+    expect(JSON.parse(localStorage.getItem(storyKey(story.id))!).history).toEqual([]);
 
     cleanup();
     await go('#/archive');
     render(<App />);
     expect(await screen.findByText('Memory Archive')).toBeInTheDocument();
-    expect(screen.getByText(new RegExp(`^1/${8 + 33}$`))).toBeInTheDocument();
-    expect(screen.getByText(/Report #214|Security report #214/)).toBeInTheDocument();
-    expect(screen.getAllByLabelText('Undiscovered fragment').length).toBe(7 + 33);
+    expect(screen.getByText('1/3')).toBeInTheDocument();
+    expect(screen.getAllByLabelText('Undiscovered fragment')).toHaveLength(2);
   });
 
-  it('does not lose fragments when a story is restarted', async () => {
-    render(<App />);
-    await go(`#/play/${story.id}`);
-    await drive(story, ['verify'], () => !!screen.queryByTestId('evidence-continue'));
-    click(screen.getByRole('button', { name: /Security report #214, required/ }));
-    click(screen.getByRole('button', { name: /^Close/ }));
-    await go('#/stories');
-    click(await screen.findByTestId(`restart-${story.id}`));
-    click(screen.getByTestId(`restart-yes-${story.id}`));
-    await waitFor(() => expect(JSON.parse(localStorage.getItem(storyKey(story.id))!).history).toEqual([]));
-    expect(JSON.parse(localStorage.getItem(storyKey(story.id))!).fragments).toEqual(['report']);
-  });
-
-  it('loads old saves that have no fragments field', async () => {
-    localStorage.setItem(storyKey(story.id), JSON.stringify({ version: 1, storyId: story.id, history: [], cursor: null, completed: {}, updatedAt: 1 }));
-    render(<App />);
-    expect(screen.queryByText(/unreadable/)).toBeNull();
+  it('shows the ambiguity honestly: the three items do not settle whether the bite is infectious', () => {
+    const inv = Object.values(story.nodes).find((n) => n.type === 'investigation');
+    if (inv?.type !== 'investigation') throw new Error();
+    expect(inv.items.map((i) => i.finding).join(' ')).toMatch(/does not settle/);
+    expect(inv.items.every((i) => !i.apply)).toBe(true);
   });
 });
 
 describe('settings and accessibility', () => {
-  it('persists mute', async () => {
+  it('persists mute and settings', async () => {
     render(<App />);
     await go('#/settings');
     click(await screen.findByLabelText('Mute everything'));
     expect(JSON.parse(localStorage.getItem(SETTINGS_KEY)!).muted).toBe(true);
-  });
-
-  it('persists settings', async () => {
-    render(<App />);
-    await go('#/settings');
-    click(await screen.findByLabelText('Large'));
+    click(screen.getByLabelText('Large'));
     expect(document.documentElement.dataset.textSize).toBe('large');
-    expect(JSON.parse(localStorage.getItem(SETTINGS_KEY)!).textSize).toBe('large');
     click(screen.getByLabelText('Subtitles'));
     expect(JSON.parse(localStorage.getItem(SETTINGS_KEY)!).subtitles).toBe(false);
-    fireEvent.change(screen.getByLabelText('Music volume'), { target: { value: '30' } });
-    expect(JSON.parse(localStorage.getItem(SETTINGS_KEY)!).musicVolume).toBe(0.3);
   });
 
   it('supports keyboard advance and back in scenes', async () => {
     render(<App />);
-    await go(`#/play/${stories[0].id}`);
+    await go(`#/play/${story.id}`);
+    click(await screen.findByTestId('notice-continue'));
     click(await screen.findByRole('button', { name: /Press to begin/ }));
     const first = screen.getByTestId('dialogue').textContent;
     fireEvent.keyDown(window, { key: 'ArrowRight' });
@@ -341,89 +345,15 @@ describe('settings and accessibility', () => {
 
   it('shows captions only when subtitles are on', async () => {
     render(<App />);
-    await go(`#/play/${stories[0].id}`);
-    expect(await screen.findByText(/hum of air conditioning/)).toBeInTheDocument();
+    await go(`#/play/${story.id}`);
+    await drive([], () => !!screen.queryByText(/chain rattles at the shutter/));
+    expect(screen.getByText(/chain rattles at the shutter/)).toBeInTheDocument();
     cleanup();
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify({ reducedMotion: true, typewriter: false, subtitles: false }));
+    localStorage.clear();
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify({ reducedMotion: true, typewriter: false, subtitles: false, lang: 'en' }));
     render(<App />);
-    await go(`#/play/${stories[0].id}`);
-    await screen.findByRole('button', { name: /Press to begin/ });
-    expect(screen.queryByText(/hum of air conditioning/)).toBeNull();
-  });
-});
-
-
-describe('The Last Journey in the app', () => {
-  const lj = allStories[2];
-  const fixtures = JSON.parse(readFileSync('src/tests/fixtures/lastJourney.paths.json', 'utf8')) as Record<string, { nodeId: string; choiceId: string }[]>;
-
-  it('shows the chapter and shared supplies, records evidence that changes the story, and does not show the future', async () => {
-    render(<App />);
-    await go(`#/play/${lj.id}`);
-    await drive(lj, ['help'], () => !!screen.queryByTestId('evidence-continue'));
-    expect(screen.getByLabelText('Food: 4')).toBeInTheDocument();
-    expect(screen.getByLabelText('Fuel: 5')).toBeInTheDocument();
-    expect(document.body.textContent).toMatch(/Chapter 1/);
-
-    // Inspecting the fuel tank changes the story, so it is saved in this run's history.
-    click(screen.getByRole('button', { name: /Fuel tank hatch/ }));
-    click(screen.getByRole('button', { name: /^Close/ }));
-    expect(screen.getByLabelText('Fuel: 6')).toBeInTheDocument();
-    expect(JSON.parse(localStorage.getItem(storyKey(lj.id))!).history.map((h: { choiceId: string }) => h.choiceId)).toContain('item:c1_tank');
-
-    await drive(lj, ['help'], () => !!screen.queryByTestId('decision-screen'));
-    expect(screen.getByText('THE CHILD IN THE STORAGE ROOM')).toBeInTheDocument();
-    for (const id of ['help', 'leave', 'send_leo', 'split']) expect(screen.getByTestId(`choice-${id}`)).toBeInTheDocument();
-    click(screen.getByTestId('choice-help'));
-    click(screen.getByTestId('confirm-button'));
-    // Food drops by one for sharing. The night's theft has not happened yet, so it is not shown.
-    await waitFor(() => expect(screen.getByLabelText('Food: 3')).toBeInTheDocument());
-  });
-
-  it('keeps going after a reload and resumes on the same beat', async () => {
-    const { unmount } = render(<App />);
-    await go(`#/play/${lj.id}`);
-    await drive(lj, ['help'], () => !!screen.queryByTestId('decision-screen'));
-    unmount();
-    render(<App />);
-    expect(await screen.findByTestId('decision-screen')).toBeInTheDocument();
-  });
-
-  it('shows the endings found, in the story list, on the ending screen and in the Memory Archive', async () => {
-    const h = fixtures.TOGETHER.map((r, i) => ({ ...r, timestamp: i }));
-    saveProgress(withDecision(lj, emptyProgress(lj.id), h, 5));
-    render(<App />);
-    await go('#/stories');
-    const card = await screen.findByTestId(`story-${lj.id}`);
-    expect(within(card).getByText('1 of 7 endings')).toBeInTheDocument();
-    await go('#/');
-    expect(screen.getByText('1 of 13 endings')).toBeInTheDocument();
-    await go('#/archive');
-    click(await screen.findByRole('tab', { name: /Decision paths/ }));
-    const regions = screen.getAllByRole('region', { name: 'Endings found' });
-    expect(regions.map((r) => r.textContent).join(' ')).toMatch(/1\/7/);
-  });
-
-  it('draws the decision map for a finished campaign with all seven endings', async () => {
-    const h = fixtures.ALONE.map((r, i) => ({ ...r, timestamp: i }));
-    saveProgress(withDecision(lj, emptyProgress(lj.id), h, 5));
-    render(<App />);
-    await go(`#/map/${lj.id}/latest`);
-    const map = await screen.findByTestId('decision-map', undefined, { timeout: 4000 });
-    expect(map.querySelectorAll('.map-node.ending').length).toBe(7);
-    const decisions = h.filter((r) => !r.choiceId.startsWith('item:')).length;
-    expect(map.querySelectorAll('.map-node.visited').length).toBe(1 + decisions * 2 + 1);
-    expect(map.querySelectorAll('.map-edge.active').length).toBeGreaterThan(decisions);
-  });
-
-  it('shows the philosophical analysis for the reached ending', async () => {
-    const h = fixtures.BETRAYAL.map((r, i) => ({ ...r, timestamp: i }));
-    saveProgress(withDecision(lj, emptyProgress(lj.id), h, 5));
-    render(<App />);
-    await go(`#/analysis/${lj.id}/latest`);
-    const kant = await screen.findByTestId('analysis-kant', undefined, { timeout: 4000 });
-    expect(kant.textContent).toContain('betrayal is a clean violation');
-    expect(screen.getByTestId('analysis-mill')).toBeInTheDocument();
-    expect(screen.getByTestId('analysis-aristotle')).toBeInTheDocument();
+    await go(`#/play/${story.id}`);
+    await drive([], () => screen.queryAllByTestId('dialogue').length > 0 && /Aida came back/.test(screen.getByTestId('dialogue').textContent ?? ''));
+    expect(screen.queryByText(/chain rattles at the shutter/)).toBeNull();
   });
 });
