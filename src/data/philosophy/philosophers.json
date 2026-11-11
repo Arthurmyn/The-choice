@@ -43,6 +43,34 @@
     "Temporary dictatorship",
     "Equality before the law"
    ]
+  },
+  "popper": {
+   "id": "popper",
+   "name": "Karl Popper",
+   "years": "1902-1994",
+   "section": "THE OPEN SOCIETY AND CRITICISM",
+   "question": "Can citizens still criticise those in power, and remove them without violence?",
+   "concepts": [
+    "Open society",
+    "Criticism",
+    "Falsifiability of policy",
+    "Peaceful removal of rulers",
+    "Piecemeal reform"
+   ]
+  },
+  "castells": {
+   "id": "castells",
+   "name": "Manuel Castells",
+   "years": "born 1942",
+   "section": "COMMUNICATION POWER",
+   "question": "Who controls the channels through which people learn what is happening, and can they be checked?",
+   "concepts": [
+    "Network society",
+    "Communication power",
+    "Control of channels",
+    "Counter-power",
+    "Information and trust"
+   ]
   }
  }
 }

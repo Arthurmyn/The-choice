@@ -71,6 +71,37 @@ export function PhilosopherPortrait({ id, className = '' }: { id: PhilosopherId;
             <path d="M100 104 q-4 14 2 18 M90 134 q10 5 20 0" stroke="#0f1822" strokeWidth="2" fill="none" opacity="0.65" strokeLinecap="round" />
           </g>
         )}
+        {id === 'popper' && (
+          <g>
+            <path d="M6 240 C10 196 46 180 100 178 C154 180 190 196 194 240Z" fill={`url(#${g}-dark)`} />
+            <path d="M78 180 L100 212 L122 180 L112 170 L88 170Z" fill="#cfdbe8" opacity="0.85" />
+            <path d="M92 190 l8 34 l8 -34z" fill="#101a25" />
+            <rect x="85" y="146" width="30" height="34" rx="9" fill={`url(#${g})`} />
+            <ellipse cx="100" cy="102" rx="33" ry="46" fill={`url(#${g})`} />
+            <path d="M68 90 C70 60 130 58 132 90 C124 74 106 70 100 70 C90 70 74 76 68 90Z" fill="#c4d0dd" opacity="0.88" />
+            <g stroke="#0f1822" strokeWidth="2.2" fill="none" opacity="0.85">
+              <rect x="76" y="92" width="20" height="13" rx="5" />
+              <rect x="104" y="92" width="20" height="13" rx="5" />
+              <path d="M96 98 h8" />
+            </g>
+            <path d="M100 106 q-4 14 2 18 M90 136 q10 5 20 0" stroke="#0f1822" strokeWidth="2" fill="none" opacity="0.65" strokeLinecap="round" />
+          </g>
+        )}
+        {id === 'castells' && (
+          <g>
+            <path d="M8 240 C12 194 48 180 100 178 C152 180 188 194 192 240Z" fill={`url(#${g}-dark)`} />
+            <path d="M80 180 L100 200 L120 180 L110 170 L90 170Z" fill="#dbe5ef" opacity="0.85" />
+            <rect x="85" y="146" width="30" height="34" rx="9" fill={`url(#${g})`} />
+            <ellipse cx="100" cy="102" rx="33" ry="46" fill={`url(#${g})`} />
+            <path d="M70 84 C72 62 128 62 130 84 C120 72 82 72 70 84Z" fill="#cfd9e5" opacity="0.88" />
+            <g fill="#e6edf5" opacity="0.9">
+              <path d="M78 122 C84 134 116 134 122 122 C118 142 82 142 78 122Z" />
+            </g>
+            <path d="M80 96 q8 -4 16 0 M104 96 q8 -4 16 0" stroke="#0f1822" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+            <path d="M82 106 q7 3 14 0 M104 106 q7 3 14 0" stroke="#0f1822" strokeWidth="1.5" fill="none" opacity="0.6" />
+            <path d="M100 104 q-4 14 2 18" stroke="#0f1822" strokeWidth="2" fill="none" opacity="0.65" strokeLinecap="round" />
+          </g>
+        )}
       </g>
     </svg>
   );

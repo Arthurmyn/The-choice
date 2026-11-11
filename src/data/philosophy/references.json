@@ -16,5 +16,17 @@
   "work": "The Social Contract",
   "location": "book I chapter 6, book II chapter 3 and book IV chapter 6",
   "note": "The compact, the general will against the will of all, and the dictatorship in a crisis."
+ },
+ "popper": {
+  "author": "Karl Popper",
+  "work": "The Open Society and Its Enemies",
+  "location": "the argument that a free society must let citizens remove rulers without violence",
+  "note": "Source of the test of a free society: criticism and peaceful change of government."
+ },
+ "castells": {
+  "author": "Manuel Castells",
+  "work": "Communication Power",
+  "location": "the argument that power rests on control of communication",
+  "note": "Source of the idea that power is exercised through control of the channels of communication."
  }
 }
