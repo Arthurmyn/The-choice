@@ -84,23 +84,17 @@ describe('menu and chapters', () => {
     expect(screen.getByRole('heading', { name: 'ECHO' })).toBeInTheDocument();
     expect(screen.getByText('The Ethics of Survival')).toBeInTheDocument();
     expect(screen.getByText(/Your choices leave a trace/i)).toBeInTheDocument();
-    expect(screen.getByText('0 of 3 endings')).toBeInTheDocument();
+    expect(screen.getByText('0 of 9 endings')).toBeInTheDocument();
   });
 
-  it('lists chapter 1 as playable and chapters 2 and 3 as locked, with no fake content', async () => {
+  it('lists the three chapters, all playable, with disclaimer and playtime', async () => {
     render(<App />);
     await go('#/stories');
-    expect(await screen.findByText('The Infected Survivor')).toBeInTheDocument();
-    expect(screen.getByText('8-10 min')).toBeInTheDocument();
-    expect(screen.getAllByText(/Fictional scenario\. Consequences are simulated for philosophical discussion\./)).toHaveLength(1);
-    const locked = ['last-medicine', 'who-controls'].map((id) => screen.getByTestId(`locked-${id}`));
-    for (const card of locked) {
-      expect(within(card).getByText('In development')).toBeInTheDocument();
-      expect(within(card).queryByRole('button')).toBeNull();
-    }
-    expect(screen.getByText('The Last Medicine')).toBeInTheDocument();
-    expect(screen.getByText('Who Controls the Group?')).toBeInTheDocument();
-    expect(screen.queryByText(/Release Today|Last Journey|Speak for Someone/i)).toBeNull();
+    for (const title of ['The Infected Survivor', 'The Last Medicine', 'Who Controls the Group?']) expect(await screen.findByText(title)).toBeInTheDocument();
+    expect(screen.getAllByText('8-10 min')).toHaveLength(3);
+    expect(screen.getAllByText(/Fictional scenario\. Consequences are simulated for philosophical discussion\./)).toHaveLength(3);
+    for (const st of stories) expect(screen.getByTestId(`play-${st.id}`)).toBeEnabled();
+    expect(screen.queryByText(/In development|Release Today|Last Journey|Speak for Someone/i)).toBeNull();
   });
 
   it('switches to Russian', async () => {
@@ -109,7 +103,8 @@ describe('menu and chapters', () => {
     expect(await screen.findByText('Этика выживания')).toBeInTheDocument();
     await go('#/stories');
     expect(await screen.findByText('Укушенная')).toBeInTheDocument();
-    expect(screen.getAllByText('В разработке')).toHaveLength(2);
+    expect(screen.getByText('Последнее лекарство')).toBeInTheDocument();
+    expect(screen.getByText('Кто управляет группой?')).toBeInTheDocument();
   });
 });
 
@@ -156,7 +151,7 @@ describe('indicators in the HUD', () => {
   });
 });
 
-describe('full UI playthrough of every path', () => {
+describe.each(stories.map((st) => [st.id, st] as const))('full UI playthrough of every path of %s', (_id, story) => {
   const paths = enumeratePaths(story);
   it.each(paths.map((p) => [pathKey(p), p] as const))('path %s', async (_k, history) => {
     const choices = history.map((h) => h.choiceId);
@@ -183,14 +178,15 @@ describe('full UI playthrough of every path', () => {
 
     // Analysis: three philosophers, the lenses, the collision, three questions and the Kazakhstan card.
     click(within(summary).getByTestId('open-analysis'));
-    const hobbes = await screen.findByTestId('analysis-hobbes', undefined, { timeout: 4000 });
-    expect(hobbes.textContent).toContain(story.analysis.hobbes.application.byEnding[resolved.ending.id].slice(0, 60));
-    expect(screen.getByTestId('analysis-locke')).toBeInTheDocument();
-    expect(screen.getByTestId('analysis-rousseau')).toBeInTheDocument();
-    expect(screen.getByTestId('lenses').textContent).toMatch(/Popper[\s\S]*Castells/);
+    const first = await screen.findByTestId('analysis-hobbes', undefined, { timeout: 4000 });
+    expect(first.textContent).toContain(story.analysis.hobbes.application.byEnding[resolved.ending.id].slice(0, 60));
+    for (const ph of Object.keys(story.analysis)) expect(screen.getByTestId(`analysis-${ph}`)).toBeInTheDocument();
     expect(screen.getByText('Where the principles collide')).toBeInTheDocument();
     expect(document.querySelectorAll('.questions li')).toHaveLength(3);
-    expect(screen.getByTestId('context-card').textContent).toMatch(/Kazakhstan[\s\S]*Amangeldinova et al\., 2020/);
+    if (story.id === 'infected-survivor') {
+      expect(screen.getByTestId('lenses').textContent).toMatch(/Popper[\s\S]*Castells/);
+      expect(screen.getByTestId('context-card').textContent).toMatch(/Kazakhstan[\s\S]*Amangeldinova et al\., 2020/);
+    }
 
     // Map highlights the path and review does not alter the save.
     const before = localStorage.getItem(storyKey(story.id));
@@ -263,7 +259,7 @@ describe('persistence and restart', () => {
     cleanup();
     window.location.hash = '';
     render(<App />);
-    expect(screen.getByText('1 of 3 endings')).toBeInTheDocument();
+    expect(screen.getByText('1 of 9 endings')).toBeInTheDocument();
     const cont = screen.getByTestId('menu-continue');
     expect(cont).toBeEnabled();
     click(cont);
@@ -307,8 +303,8 @@ describe('memory fragments and archive', () => {
     await go('#/archive');
     render(<App />);
     expect(await screen.findByText('Memory Archive')).toBeInTheDocument();
-    expect(screen.getByText('1/3')).toBeInTheDocument();
-    expect(screen.getAllByLabelText('Undiscovered fragment')).toHaveLength(2);
+    expect(screen.getByText('1/9')).toBeInTheDocument();
+    expect(screen.getAllByLabelText('Undiscovered fragment')).toHaveLength(8);
   });
 
   it('shows the ambiguity honestly: the three items do not settle whether the bite is infectious', () => {

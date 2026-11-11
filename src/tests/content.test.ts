@@ -81,13 +81,63 @@ describe('philosophy layer', () => {
   });
 });
 
+describe('chapters 2 and 3', () => {
+  const [, medicine, control] = getStories('en');
+  const refs = getReferences('en');
+
+  it('The Last Medicine: Hobbes, Locke and Rousseau, with Kant and Mill as a short secondary note', () => {
+    expect(Object.keys(medicine.analysis)).toEqual(['hobbes', 'locke', 'rousseau']);
+    expect(medicine.lenses!.text).toMatch(/Kant/);
+    expect(medicine.lenses!.text).toMatch(/Mill/);
+    expect(medicine.lenses!.text.length).toBeLessThan(700);
+    expect(Object.keys(medicine.characters)).toContain('nadia');
+    expect(medicine.nodes.d1.type === 'decision' ? medicine.nodes.d1.choices.map((c) => c.id) : []).toEqual(['give_leo', 'give_nadia', 'put_group']);
+    expect(medicine.nodes.d3.type === 'decision' ? medicine.nodes.d3.choices.map((c) => c.id) : []).toEqual(['need_first', 'lottery', 'weigh_usefulness']);
+  });
+
+  it('The Last Medicine contests need against usefulness, never gender, ethnicity or disability', () => {
+    // Character records hold voice profiles (a gender field for speech synthesis), so only the story text is scanned.
+    const text = JSON.stringify({ ...medicine, characters: undefined }).toLowerCase();
+    for (const w of ['gender', 'ethnic', 'race', 'disabled', 'disability', 'woman', 'women', 'man ', 'religion']) expect(text, w).not.toContain(w);
+  });
+
+  it('Who Controls the Group?: all five thinkers, each with a source', () => {
+    expect(Object.keys(control.analysis)).toEqual(['hobbes', 'locke', 'rousseau', 'popper', 'castells']);
+    for (const a of Object.values(control.analysis)) {
+      expect(refs[a.reference as 'hobbes']).toBeTruthy();
+      expect(Object.keys(a.application.byFlag)).toHaveLength(9);
+      expect(Object.keys(a.limitation)).toHaveLength(3);
+    }
+    expect(control.nodes.d1.type === 'decision' ? control.nodes.d1.choices.map((c) => c.id) : []).toEqual(['keep_leader', 'call_vote', 'create_council']);
+    expect(control.nodes.d3.type === 'decision' ? control.nodes.d3.choices.map((c) => c.id) : []).toEqual(['silence', 'voice', 'may_leave']);
+  });
+
+  it('Who Controls the Group? never shows whether Marat lied', () => {
+    const inv = Object.values(control.nodes).find((n) => n.type === 'investigation');
+    if (inv?.type !== 'investigation') throw new Error();
+    for (const i of inv.items) expect(i.apply).toBeUndefined();
+    expect(inv.items.map((i) => i.finding).join(' ')).toMatch(/cannot say|Nothing here shows a lie|Neither proves/);
+  });
+
+  it('every chapter keeps the philosophy layer in paraphrase, without verdicts', () => {
+    for (const lang of LANGS) {
+      for (const st of getStories(lang)) {
+        const all = JSON.stringify(st.analysis) + JSON.stringify(st.reflection);
+        expect(all).not.toMatch(/\bwould (choose|pick|vote|select|have chosen|endorse|approve)\b/i);
+        expect(JSON.stringify(st.analysis)).not.toMatch(/\\"/);
+      }
+    }
+  });
+});
+
 describe('no moral score anywhere in the story', () => {
   it('has no total, rank or verdict field and ending titles do not judge', () => {
-    const story = getStories('en')[0];
-    expect(Object.keys(story)).not.toContain('score');
-    for (const e of Object.values(story.endings)) expect(e.title).not.toMatch(/good|bad|best|worst|win|lose|fail/i);
-    expect(story.indicators).toHaveLength(4);
-    expect(story.resources).toBeUndefined();
+    for (const story of getStories('en')) {
+      expect(Object.keys(story)).not.toContain('score');
+      for (const e of Object.values(story.endings)) expect(e.title).not.toMatch(/good|bad|best|worst|win|lose|fail/i);
+      expect(story.indicators).toHaveLength(4);
+      expect(story.resources).toBeUndefined();
+    }
   });
 });
 

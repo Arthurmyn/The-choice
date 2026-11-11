@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { getPhilosophy, getReferences, getStories, getUpcoming, LANGS } from '../data';
+import { getPhilosophy, getReferences, getStories, LANGS } from '../data';
 import { enumeratePaths, allLines, deriveState } from '../engine/narrativeEngine';
 import { resolveEnding } from '../engine/endingResolver';
 import { validateStory } from '../engine/storyValidator';
@@ -78,7 +78,6 @@ describe('languages', () => {
       expect(/[А-Яа-яЁё]/.test(s.notice ?? '')).toBe(true);
       for (const a of Object.values(s.analysis)) expect(/[А-Яа-яЁё]/.test(a.argument)).toBe(true);
     }
-    for (const c of getUpcoming('ru')) expect(/[А-Яа-яЁё]/.test(c.title + c.synopsis)).toBe(true);
     for (const p of Object.values(getPhilosophy('ru').philosophers)) expect(/[А-Яа-яЁё]/.test(p.name + p.question)).toBe(true);
   });
 

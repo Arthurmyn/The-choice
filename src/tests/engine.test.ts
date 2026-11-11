@@ -26,40 +26,58 @@ import type { DecisionRecord, Story } from '../engine/types';
 
 const story = getStories('en')[0];
 const KEYS = ['#trust', '#safety', '#resources', '#participation'];
-const ENDING_OF: Record<string, string> = { one_decides: 'R_E1', consent_only: 'R_E2', group_challenge: 'R_E3' };
-const D2_OF: Record<string, string> = { isolate_force: 'd2_isolate', stay_watch: 'd2_watch', group_decide: 'd2_group' };
-const PHILOSOPHERS = ['hobbes', 'locke', 'rousseau'];
+
+/** Each chapter: which second decision follows each first answer, which ending each last answer reaches, and who analyses it. */
+const CHAPTERS = [
+  { index: 0, id: 'infected-survivor', d2: { isolate_force: 'd2_isolate', stay_watch: 'd2_watch', group_decide: 'd2_group' }, ending: { one_decides: 'R_E1', consent_only: 'R_E2', group_challenge: 'R_E3' }, philosophers: ['hobbes', 'locke', 'rousseau'] },
+  { index: 1, id: 'last-medicine', d2: { give_leo: 'd2_leo', give_nadia: 'd2_nadia', put_group: 'd2_group' }, ending: { need_first: 'R2_E1', lottery: 'R2_E2', weigh_usefulness: 'R2_E3' }, philosophers: ['hobbes', 'locke', 'rousseau'] },
+  { index: 2, id: 'who-controls', d2: { keep_leader: 'd2_leader', call_vote: 'd2_vote', create_council: 'd2_council' }, ending: { silence: 'R3_E1', voice: 'R3_E2', may_leave: 'R3_E3' }, philosophers: ['hobbes', 'locke', 'rousseau', 'popper', 'castells'] },
+] as const;
 
 const rec = (ids: [string, string][]): DecisionRecord[] => ids.map(([nodeId, choiceId], i) => ({ nodeId, choiceId, timestamp: i }));
 
-describe('The Infected Survivor: structure', () => {
+describe.each(CHAPTERS)('$id: structure', (c) => {
+  const s = getStories('en')[c.index];
+
   it('validates in both languages', () => {
-    for (const lang of ['en', 'ru'] as const) expect(validateStory(getStories(lang)[0])).toEqual([]);
+    for (const lang of ['en', 'ru'] as const) expect(validateStory(getStories(lang)[c.index])).toEqual([]);
   });
 
   it('has 3 options at D1, 2 at each D2 and 3 at D3, so 18 paths', () => {
-    const d = (id: string) => (story.nodes[id].type === 'decision' ? (story.nodes[id] as { choices: unknown[] }).choices.length : -1);
+    const d = (id: string) => (s.nodes[id].type === 'decision' ? (s.nodes[id] as { choices: unknown[] }).choices.length : -1);
     expect(d('d1')).toBe(3);
-    expect(['d2_isolate', 'd2_watch', 'd2_group'].map(d)).toEqual([2, 2, 2]);
+    expect(Object.values(c.d2).map(d)).toEqual([2, 2, 2]);
     expect(d('d3')).toBe(3);
-    expect(enumeratePaths(story)).toHaveLength(18);
+    expect(enumeratePaths(s)).toHaveLength(18);
   });
 
-  it('keeps every old story out of the registry', () => {
-    expect(getStories('en').map((s) => s.id)).toEqual(['infected-survivor']);
+  it('has three endings, no recorded clips, a content notice and the Memory Archive items', () => {
+    expect(Object.keys(s.endings).sort()).toEqual(Object.values(c.ending).sort());
+    expect(s.voice).toBe(false);
+    expect(s.notice).toBeTruthy();
+    const inv = Object.values(s.nodes).find((n) => n.type === 'investigation');
+    expect(inv && inv.type === 'investigation' ? inv.items.length : 0).toBe(3);
+  });
+});
+
+describe('registry', () => {
+  it('holds the three chapters in order and no earlier story', () => {
+    expect(getStories('en').map((s) => s.id)).toEqual(['infected-survivor', 'last-medicine', 'who-controls']);
+    expect(getStories('ru').map((s) => s.id)).toEqual(['infected-survivor', 'last-medicine', 'who-controls']);
   });
 
-  it('declares three decisions, three endings, five characters and the Memory Archive items', () => {
-    expect(Object.keys(story.endings).sort()).toEqual(['R_E1', 'R_E2', 'R_E3']);
+  it('The Infected Survivor has its five characters and the three Memory Archive items', () => {
     expect(Object.keys(story.characters).sort()).toEqual(['aida', 'dana', 'leo', 'marat', 'timur']);
     const inv = Object.values(story.nodes).find((n) => n.type === 'investigation');
     expect(inv && inv.type === 'investigation' ? inv.items.map((i) => i.id) : []).toEqual(['wound', 'log', 'account']);
   });
 });
 
-describe.each(['en', 'ru'] as const)('all 18 paths (%s)', (lang) => {
-  const s = getStories(lang)[0];
+describe.each(CHAPTERS.flatMap((c) => (['en', 'ru'] as const).map((lang) => ({ ...c, lang }))))('$id, all 18 paths ($lang)', (c) => {
+  const s = getStories(c.lang)[c.index];
   const paths = enumeratePaths(s);
+  const D2_OF = c.d2 as Record<string, string>;
+  const ENDING_OF = c.ending as Record<string, string>;
 
   it.each(paths.map((p) => [pathKey(p), p] as const))('path %s', (_key, history) => {
     const state = deriveState(s, history);
@@ -92,7 +110,8 @@ describe.each(['en', 'ru'] as const)('all 18 paths (%s)', (lang) => {
     expect(beats[beats.length - 1]).toBe('ending');
 
     // Analysis exists for the exact ending and for every choice flag.
-    for (const ph of PHILOSOPHERS) {
+    expect(Object.keys(s.analysis)).toEqual([...c.philosophers]);
+    for (const ph of c.philosophers) {
       const a = s.analysis[ph];
       expect(a.application.byEnding[state.endingId!]).toBeTruthy();
       expect(a.limitation[state.endingId!]).toBeTruthy();
@@ -140,8 +159,10 @@ describe('indicators', () => {
     expect(at([['d1', 'stay_watch'], ['d2_watch', 'let_leave']])).toMatchObject({ '#resources': '3', '#trust': '6', '#participation': '6', '#safety': '3' });
   });
 
-  it('no option improves all four indicators', () => {
-    for (const n of Object.values(story.nodes)) {
+  it.each(CHAPTERS)('no option of $id improves all four indicators', (ch) => {
+    const s = getStories('en')[ch.index];
+    expect(s.initial).toMatchObject({ '#trust': '6', '#safety': '5', '#resources': '5', '#participation': '5' });
+    for (const n of Object.values(s.nodes)) {
       if (n.type !== 'decision') continue;
       for (const c of n.choices) {
         const sums = KEYS.map((k) => (c.apply ?? []).reduce((t, a) => t + (a.effects?.[k] ?? 0), 0));
@@ -181,7 +202,7 @@ describe('conditional endings', () => {
 
   it('keeps every ending unresolved: no ending says who was right', () => {
     for (const lang of ['en', 'ru'] as const) {
-      for (const e of Object.values(getStories(lang)[0].endings)) {
+      for (const e of getStories(lang).flatMap((x) => Object.values(x.endings))) {
         const last = e.scene.lines.filter((l) => !l.when).at(-1)!;
         expect(last.text.trim().endsWith('?'), e.id).toBe(true);
         expect(e.unresolved.trim().endsWith('?'), e.id).toBe(true);
@@ -190,7 +211,7 @@ describe('conditional endings', () => {
   });
 
   it('writes each ending as 80 to 110 words', () => {
-    for (const e of Object.values(story.endings)) {
+    for (const e of getStories('en').flatMap((x) => Object.values(x.endings))) {
       const base = e.scene.lines.filter((l) => !l.when).map((l) => l.text).join(' ');
       const withVariant = [...e.scene.lines.filter((l) => !l.when).map((l) => l.text), e.scene.lines.find((l) => l.when)!.text].join(' ');
       const n = (t: string) => t.split(/\s+/).filter(Boolean).length;
