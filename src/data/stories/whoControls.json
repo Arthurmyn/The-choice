@@ -1,0 +1,1580 @@
+{
+ "id": "who-controls",
+ "title": "Who Controls the Group?",
+ "category": "Social contract",
+ "themes": [
+  "Power",
+  "Criticism",
+  "Information"
+ ],
+ "minutes": "8-10 min",
+ "synopsis": "Day twenty, three days from a place that may be safe. Marat decides everything and holds the map and the radio. Some say he abuses his power. Nobody can show it either way.",
+ "disclaimer": "Fictional scenario. Consequences are simulated for philosophical discussion.",
+ "notice": "This story deals with fear, distrust and the loss of a group. You can leave at any time, and your progress is saved. Nothing here is a recommendation about real events.",
+ "voice": false,
+ "tone": "highway",
+ "start": "intro",
+ "initial": {
+  "#trust": "6",
+  "#safety": "5",
+  "#resources": "5",
+  "#participation": "5"
+ },
+ "indicators": [
+  {
+   "key": "#trust",
+   "label": "Trust"
+  },
+  {
+   "key": "#safety",
+   "label": "Safety"
+  },
+  {
+   "key": "#resources",
+   "label": "Resources"
+  },
+  {
+   "key": "#participation",
+   "label": "Participation"
+  }
+ ],
+ "characters": {
+  "marat": {
+   "id": "marat",
+   "name": "Marat",
+   "role": "Holds the keys and the radio",
+   "visual": {
+    "skin": "#c89d7c",
+    "hair": {
+     "style": "cropped",
+     "color": "#1f1b19"
+    },
+    "outfit": "#34312c",
+    "accent": "#8C9BB0",
+    "accessory": "lanyard"
+   },
+   "voice": {
+    "gender": "m",
+    "pitch": 0.88,
+    "rate": 0.95
+   }
+  },
+  "dana": {
+   "id": "dana",
+   "name": "Dana",
+   "role": "Former teacher",
+   "visual": {
+    "skin": "#e0b494",
+    "hair": {
+     "style": "bun",
+     "color": "#5a4636"
+    },
+    "outfit": "#2f4660",
+    "accent": "#65B9FF",
+    "accessory": "glasses"
+   },
+   "voice": {
+    "gender": "f",
+    "pitch": 0.97,
+    "rate": 0.98
+   }
+  },
+  "timur": {
+   "id": "timur",
+   "name": "Timur",
+   "role": "The youngest in the shelter",
+   "visual": {
+    "skin": "#d9ad8b",
+    "hair": {
+     "style": "short",
+     "color": "#14100e"
+    },
+    "outfit": "#2c3a30",
+    "accent": "#8C9BB0",
+    "accessory": "none"
+   },
+   "voice": {
+    "gender": "m",
+    "pitch": 1.12,
+    "rate": 1.05
+   }
+  },
+  "leo": {
+   "id": "leo",
+   "name": "Leo",
+   "role": "Keeps the supply log",
+   "visual": {
+    "skin": "#a97654",
+    "hair": {
+     "style": "cropped",
+     "color": "#9aa0a8"
+    },
+    "outfit": "#3a3f46",
+    "accent": "#8C9BB0",
+    "accessory": "glasses"
+   },
+   "voice": {
+    "gender": "m",
+    "pitch": 0.8,
+    "rate": 0.9
+   }
+  },
+  "nadia": {
+   "id": "nadia",
+   "name": "Nadia",
+   "role": "Trained nurse",
+   "visual": {
+    "skin": "#d6a98a",
+    "hair": {
+     "style": "curly",
+     "color": "#2a1c14"
+    },
+    "outfit": "#3b5560",
+    "accent": "#65B9FF",
+    "accessory": "none"
+   },
+   "voice": {
+    "gender": "f",
+    "pitch": 1.0,
+    "rate": 1.0
+   }
+  }
+ },
+ "nodes": {
+  "intro": {
+   "type": "scene",
+   "id": "intro",
+   "next": "evidence",
+   "scene": {
+    "background": "highway",
+    "ambient": "room",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "nadia"
+    ],
+    "card": {
+     "kicker": "DAY 20",
+     "title": "THE RIDGE",
+     "text": "Three days from a place that may be safe."
+    },
+    "lines": [
+     {
+      "text": "Day twenty. A ridge above the road. The map says the safe zone is three days ahead. The radio says nothing. Everyone knows this because Marat says so."
+     },
+     {
+      "speaker": "marat",
+      "expression": "confident",
+      "text": "I read the map every morning. The route has not failed us."
+     },
+     {
+      "speaker": "timur",
+      "expression": "angry",
+      "text": "He reads it to us. I have never seen it."
+     },
+     {
+      "speaker": "dana",
+      "expression": "concerned",
+      "text": "He has also kept us alive. Both things are true."
+     },
+     {
+      "speaker": "leo",
+      "expression": "neutral",
+      "text": "I have seen him switch the radio off at four minutes past six, every day. I do not know why."
+     },
+     {
+      "speaker": "nadia",
+      "expression": "concerned",
+      "text": "Nobody has proof of anything. That is the whole problem."
+     }
+    ]
+   }
+  },
+  "evidence": {
+   "type": "investigation",
+   "id": "evidence",
+   "next": "d1",
+   "scene": {
+    "background": "camp",
+    "ambient": "room",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "nadia"
+    ],
+    "lines": [
+     {
+      "text": "Three things you can look at. None of them shows a lie, and none clears him."
+     }
+    ]
+   },
+   "items": [
+    {
+     "id": "map",
+     "label": "The map",
+     "kind": "card",
+     "title": "What the map shows",
+     "body": [
+      "Folded small, soft at the creases. The route is inked in pen.",
+      "A second route is crossed out with two firm lines."
+     ],
+     "finding": "The route looks plausible. The crossed-out one could be a danger or a safer way. Nothing here shows a lie."
+    },
+    {
+     "id": "radio",
+     "label": "Leo's radio log",
+     "kind": "log",
+     "mono": true,
+     "title": "Radio, days 14 to 19",
+     "body": [
+      "06:00 on. 06:04 off. Static.",
+      "Day 16: static, then a voice, two words, unclear.",
+      "Day 18: off at 06:04. Battery light amber."
+     ],
+     "finding": "It could be saving the battery, or hiding something. The log cannot say which."
+    },
+    {
+     "id": "night",
+     "label": "Dana's note",
+     "kind": "message",
+     "title": "What Dana wrote",
+     "body": [
+      "\"Marat sat up four nights guarding us.\"",
+      "\"He also stopped sharing the radio the day after Timur disagreed with him.\""
+     ],
+     "finding": "Both things are true. Neither proves what he intends."
+    }
+   ]
+  },
+  "d1": {
+   "type": "decision",
+   "id": "d1",
+   "stage": "D1",
+   "title": "THE ROAD",
+   "background": "camp",
+   "situation": "The group needs to agree how the next three days are run. Marat wants to keep deciding. Timur wants a vote. Dana wants a council.",
+   "info": [
+    "Nobody can show that Marat has lied.",
+    "Nobody can show that he has not."
+   ],
+   "pressures": [
+    "A leader who has kept the group alive",
+    "A group that cannot check what it is told"
+   ],
+   "choices": [
+    {
+     "id": "keep_leader",
+     "label": "Keep one leader: Marat continues.",
+     "description": "Quick, clear, and unchecked.",
+     "mapLabel": "Keep one leader",
+     "sets": {
+      "d1": "keep_leader"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#safety": 2,
+        "#participation": -2,
+        "#trust": -1
+       }
+      }
+     ],
+     "next": "d2_leader",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "timur",
+       "dana"
+      ],
+      "lines": [
+       {
+        "speaker": "marat",
+        "expression": "confident",
+        "text": "Then nothing changes. Good. Nothing needs to."
+       },
+       {
+        "speaker": "timur",
+        "expression": "angry",
+        "text": "Nothing needs to change for you."
+       },
+       {
+        "speaker": "dana",
+        "expression": "sad",
+        "text": "Let us at least ask for one thing."
+       }
+      ]
+     },
+     "result": "Marat stays the only decider."
+    },
+    {
+     "id": "call_vote",
+     "label": "Call a vote on the route and on who leads.",
+     "description": "Everyone has a voice. It takes time.",
+     "mapLabel": "Call a vote",
+     "sets": {
+      "d1": "call_vote"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#participation": 2,
+        "#trust": 1,
+        "#safety": -1,
+        "#resources": -1
+       }
+      }
+     ],
+     "next": "d2_vote",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "timur",
+       "nadia"
+      ],
+      "lines": [
+       {
+        "speaker": "timur",
+        "expression": "confident",
+        "text": "A vote. That is all I asked."
+       },
+       {
+        "speaker": "marat",
+        "expression": "concerned",
+        "text": "Time is food. Do not forget what we spend on it."
+       },
+       {
+        "speaker": "nadia",
+        "expression": "neutral",
+        "text": "Then let us make it quick, and make it honest."
+       }
+      ]
+     },
+     "result": "The group sits down to vote."
+    },
+    {
+     "id": "create_council",
+     "label": "Create a council of three to decide together.",
+     "description": "Power is shared, and a little slower.",
+     "mapLabel": "Create a council",
+     "sets": {
+      "d1": "create_council"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#participation": 1,
+        "#trust": 1,
+        "#resources": -1
+       }
+      }
+     ],
+     "next": "d2_council",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "dana",
+       "marat",
+       "leo"
+      ],
+      "lines": [
+       {
+        "speaker": "dana",
+        "expression": "confident",
+        "text": "Three people. Marat can be one of them."
+       },
+       {
+        "speaker": "marat",
+        "expression": "neutral",
+        "text": "If I must share, I will. But three is not three maps."
+       }
+      ]
+     },
+     "result": "The group agrees to a council of three."
+    }
+   ]
+  },
+  "d2_leader": {
+   "type": "decision",
+   "id": "d2_leader",
+   "stage": "D2",
+   "title": "THE MAP",
+   "background": "camp",
+   "situation": "Dana asks Marat to put the map and the radio where everyone can see them. He has not said yes.",
+   "info": [
+    "The map is in his jacket. The radio is on his belt.",
+    "Leo has the log, and nobody else can read it."
+   ],
+   "pressures": [
+    "Safety of one clear plan",
+    "What the group can check for itself"
+   ],
+   "choices": [
+    {
+     "id": "share_map",
+     "label": "Ask Marat to put the map and the radio on the table.",
+     "description": "Everyone can see them. Marat keeps deciding.",
+     "mapLabel": "Open the map and radio",
+     "sets": {
+      "d2": "share_map"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#trust": 1,
+        "#participation": 1,
+        "#safety": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "dana",
+       "timur"
+      ],
+      "lines": [
+       {
+        "speaker": "marat",
+        "expression": "concerned",
+        "text": "You want to see it? Look."
+       },
+       {
+        "text": "The map goes round. The radio stays on the table, switched on, hissing."
+       },
+       {
+        "speaker": "timur",
+        "expression": "surprised",
+        "text": "It says what he said it says."
+       }
+      ]
+     },
+     "result": "The map and the radio are open to everyone."
+    },
+    {
+     "id": "leave_map",
+     "label": "Leave the map and the radio with Marat.",
+     "description": "Nothing changes. The plan stays in one pair of hands.",
+     "mapLabel": "Leave them with Marat",
+     "sets": {
+      "d2": "leave_map"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#safety": 1,
+        "#participation": -1,
+        "#trust": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "dana"
+      ],
+      "lines": [
+       {
+        "speaker": "marat",
+        "expression": "confident",
+        "text": "Good. A plan is a thing in one head."
+       },
+       {
+        "speaker": "dana",
+        "expression": "sad",
+        "text": "I only wanted to look."
+       }
+      ]
+     },
+     "result": "The map and the radio stay with Marat."
+    }
+   ]
+  },
+  "d2_vote": {
+   "type": "decision",
+   "id": "d2_vote",
+   "stage": "D2",
+   "title": "THE BALLOT",
+   "background": "camp",
+   "situation": "The group is about to vote. Marat is watching the circle. How will the vote be taken?",
+   "info": [
+    "Six people, one decision, and everyone knows everyone.",
+    "The person who leads is in the circle."
+   ],
+   "pressures": [
+    "Honest answers without fear",
+    "A result everyone can see and trust"
+   ],
+   "choices": [
+    {
+     "id": "secret_ballot",
+     "label": "Vote on written slips. Nobody sees who voted how.",
+     "description": "It protects each voice. It takes longer.",
+     "mapLabel": "Secret ballot",
+     "sets": {
+      "d2": "secret_ballot"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#trust": 1,
+        "#participation": 1,
+        "#resources": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "leo",
+       "marat",
+       "timur"
+      ],
+      "lines": [
+       {
+        "speaker": "leo",
+        "expression": "neutral",
+        "text": "Slips in a tin. I count them with my back to the room."
+       },
+       {
+        "speaker": "marat",
+        "expression": "concerned",
+        "text": "And if it is close?"
+       },
+       {
+        "speaker": "leo",
+        "expression": "neutral",
+        "text": "Then it is close."
+       }
+      ]
+     },
+     "result": "The group votes by secret ballot."
+    },
+    {
+     "id": "open_hands",
+     "label": "Vote by raised hands. Everyone sees.",
+     "description": "Quick, and everyone knows where everyone stands.",
+     "mapLabel": "Open hands",
+     "sets": {
+      "d2": "open_hands"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#safety": 1,
+        "#participation": -1,
+        "#trust": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "timur",
+       "nadia"
+      ],
+      "lines": [
+       {
+        "text": "Hands go up one by one. Everyone watches Marat watching them."
+       },
+       {
+        "speaker": "nadia",
+        "expression": "concerned",
+        "text": "It is not the same when you can see who is looking."
+       }
+      ]
+     },
+     "result": "The group votes with raised hands."
+    }
+   ]
+  },
+  "d2_council": {
+   "type": "decision",
+   "id": "d2_council",
+   "stage": "D2",
+   "title": "THE COUNCIL",
+   "background": "camp",
+   "situation": "The group has agreed to a council of three. Who sits on it?",
+   "info": [
+    "Marat has the most experience. Timur has the most doubts.",
+    "Dana wants someone who has never held power."
+   ],
+   "pressures": [
+    "Authority that comes from the group",
+    "A fair chance for everyone to serve"
+   ],
+   "choices": [
+    {
+     "id": "by_lot",
+     "label": "Draw the three names by lot.",
+     "description": "Everyone has the same chance. Nobody picks.",
+     "mapLabel": "By lot",
+     "sets": {
+      "d2": "by_lot"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#participation": 1,
+        "#safety": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "leo",
+       "dana",
+       "marat"
+      ],
+      "lines": [
+       {
+        "text": "Leo draws three strips from the tin. Nobody breathes."
+       },
+       {
+        "speaker": "dana",
+        "expression": "neutral",
+        "text": "Nobody chose them. Nobody can say it was a plot."
+       }
+      ]
+     },
+     "result": "Three names are drawn by lot."
+    },
+    {
+     "id": "elected",
+     "label": "Elect the three by a vote.",
+     "description": "The group chooses who it will follow.",
+     "mapLabel": "Elected",
+     "sets": {
+      "d2": "elected"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#trust": 1,
+        "#resources": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "timur",
+       "nadia"
+      ],
+      "lines": [
+       {
+        "speaker": "nadia",
+        "expression": "confident",
+        "text": "Then we pick the ones we trust."
+       },
+       {
+        "speaker": "marat",
+        "expression": "neutral",
+        "text": "Pick carefully. They will have to make hard calls."
+       }
+      ]
+     },
+     "result": "The group elects three people."
+    }
+   ]
+  },
+  "night": {
+   "type": "scene",
+   "id": "night",
+   "next": "d3",
+   "scene": {
+    "background": "camp",
+    "ambient": "room",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "nadia"
+    ],
+    "card": {
+     "kicker": "DAY 21",
+     "title": "THE FIRE",
+     "text": "One more night before the last stretch."
+    },
+    "lines": [
+     {
+      "text": "Day twenty-one. A small fire in a ditch. The road ahead is a grey line on the hill."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "keep_leader"
+      },
+      "text": "Marat still decides. The group walked behind him all day without a word."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "call_vote"
+      },
+      "text": "The group voted today. It is a different group at the fire, quieter and more tired."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "create_council"
+      },
+      "text": "The council met on the road. Three people walk at the front and argue in low voices."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "share_map"
+      },
+      "text": "The map has been passed from hand to hand tonight. Everybody looks at the crossed-out route."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "leave_map"
+      },
+      "text": "The map is back in Marat's jacket. The radio is back on his belt."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "secret_ballot"
+      },
+      "text": "The slips were burned. Nobody asked what the count was."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "open_hands"
+      },
+      "text": "The raised hands are still in everyone's memory. People sit a little apart."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "by_lot"
+      },
+      "text": "The drawn names are written on the wall. One of them did not want to be on it."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "elected"
+      },
+      "text": "The elected three sit apart from the fire, with a map between them."
+     },
+     {
+      "speaker": "timur",
+      "expression": "concerned",
+      "text": "Someone is going to say we are wrong tomorrow. What happens to them?"
+     },
+     {
+      "speaker": "dana",
+      "expression": "neutral",
+      "text": "A group that cannot be told it is wrong does not know where it is going."
+     },
+     {
+      "speaker": "marat",
+      "expression": "concerned",
+      "text": "And a group that argues on the road does not get there."
+     },
+     {
+      "text": "It is for you to say first what happens to those who disagree."
+     }
+    ]
+   }
+  },
+  "d3": {
+   "type": "decision",
+   "id": "d3",
+   "stage": "D3",
+   "title": "THE DISAGREEING",
+   "background": "camp",
+   "situation": "Tomorrow someone will say the road is wrong. You say first what the group does with people who disagree.",
+   "info": [
+    "Three days from a place that may be safe, or may not exist.",
+    "What you propose becomes the rule tomorrow."
+   ],
+   "pressures": [
+    "Unity against criticism",
+    "Everyone staying together against everyone choosing their own way"
+   ],
+   "choices": [
+    {
+     "id": "silence",
+     "label": "On the road everyone follows the decision. Disagreement waits.",
+     "description": "Speak your mind at the safe zone, not before.",
+     "mapLabel": "Follow, disagree later",
+     "sets": {},
+     "apply": [
+      {
+       "effects": {
+        "#safety": 1,
+        "#participation": -2,
+        "#trust": -1
+       }
+      }
+     ],
+     "ending": "R3_E1",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "timur",
+       "dana"
+      ],
+      "lines": [
+       {
+        "speaker": "marat",
+        "expression": "confident",
+        "text": "Quiet is not obedience. Quiet is how we get there."
+       },
+       {
+        "speaker": "timur",
+        "expression": "angry",
+        "text": "And if the road is wrong?"
+       },
+       {
+        "speaker": "dana",
+        "expression": "sad",
+        "text": "Then we find out together, and too late."
+       }
+      ]
+     },
+     "result": "The group adopts the rule: follow the decision, disagree later."
+    },
+    {
+     "id": "voice",
+     "label": "Anyone may disagree out loud. The group still moves together.",
+     "description": "Open argument, one column.",
+     "mapLabel": "Disagree openly, move together",
+     "sets": {},
+     "apply": [
+      {
+       "effects": {
+        "#participation": 1,
+        "#trust": 1,
+        "#safety": -1
+       }
+      }
+     ],
+     "ending": "R3_E2",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "dana",
+       "timur",
+       "marat"
+      ],
+      "lines": [
+       {
+        "speaker": "dana",
+        "expression": "confident",
+        "text": "Say it out loud. Then we walk."
+       },
+       {
+        "speaker": "timur",
+        "expression": "confident",
+        "text": "Then I will say it. I want to see the route."
+       },
+       {
+        "speaker": "marat",
+        "expression": "concerned",
+        "text": "Shouting is not a plan."
+       }
+      ]
+     },
+     "result": "The group adopts the rule: anyone may disagree out loud."
+    },
+    {
+     "id": "may_leave",
+     "label": "Those who disagree may leave with a fair share of the supplies.",
+     "description": "Nobody is made to follow. Nobody is made to stay.",
+     "mapLabel": "Dissenters may leave",
+     "sets": {},
+     "apply": [
+      {
+       "effects": {
+        "#participation": 1,
+        "#trust": 1,
+        "#resources": -2,
+        "#safety": -1
+       }
+      }
+     ],
+     "ending": "R3_E3",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "leo",
+       "timur",
+       "nadia"
+      ],
+      "lines": [
+       {
+        "speaker": "leo",
+        "expression": "neutral",
+        "text": "A fair share is a third of the bread. I will count it twice."
+       },
+       {
+        "speaker": "timur",
+        "expression": "concerned",
+        "text": "Then I know where I am going. I only need someone to come with me."
+       }
+      ]
+     },
+     "result": "The group adopts the rule: those who disagree may leave with a fair share."
+    }
+   ]
+  }
+ },
+ "endings": {
+  "R3_E1": {
+   "id": "R3_E1",
+   "title": "THE QUIET COLUMN",
+   "subtitle": "Nobody argues on the road. Nobody can say if it is wrong.",
+   "result": "The group agrees that on the road everyone follows the decision, and disagreement waits for the safe zone.",
+   "scene": {
+    "background": "highway",
+    "ambient": "room",
+    "caption": "[Boots on gravel.]",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "nadia"
+    ],
+    "lines": [
+     {
+      "text": "The rule is spoken once: on the road, everyone follows the decision, and disagreement waits for the safe zone. Leo writes it down. Nobody argues."
+     },
+     {
+      "speaker": "marat",
+      "expression": "confident",
+      "text": "Quiet is not obedience. Quiet is how we get there."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "keep_leader"
+      },
+      "text": "The leader who was already deciding now decides without a question."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "call_vote"
+      },
+      "text": "The vote that was taken is now a memory the column does not mention."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "create_council"
+      },
+      "text": "The council walks at the front and speaks with one voice."
+     },
+     {
+      "text": "The column moves in silence for three days. The map comes out each morning and goes back into the jacket."
+     },
+     {
+      "text": "On the third evening the road forks at a rusted sign. Nobody speaks. Nobody knows which way is safe."
+     },
+     {
+      "text": "If nobody is allowed to say the road is wrong, how would the group ever know?"
+     }
+    ]
+   },
+   "fragments": [
+    {
+     "when": {
+      "flag": "d1",
+      "is": "keep_leader"
+     },
+     "text": "You kept one leader."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "call_vote"
+     },
+     "text": "You called a vote."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "create_council"
+     },
+     "text": "You created a council of three."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "share_map"
+     },
+     "text": "The map and the radio were opened to everyone."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "leave_map"
+     },
+     "text": "The map and the radio stayed with Marat."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "secret_ballot"
+     },
+     "text": "The vote was taken in secret."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "open_hands"
+     },
+     "text": "The vote was taken with raised hands."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "by_lot"
+     },
+     "text": "The council was drawn by lot."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "elected"
+     },
+     "text": "The council was elected."
+    }
+   ],
+   "consequences": [
+    {
+     "text": "The column has a clear rule and a steady pace."
+    },
+    {
+     "text": "Nobody has said out loud what they think of the route."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "share_map"
+     },
+     "text": "The map was open to all, and the rule means nobody may use what they saw."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "secret_ballot"
+     },
+     "text": "The votes were secret, and there is no longer any place to speak them."
+    }
+   ],
+   "unresolved": "If nobody is allowed to say the road is wrong, how would the group ever know?"
+  },
+  "R3_E2": {
+   "id": "R3_E2",
+   "title": "THE LOUD COLUMN",
+   "subtitle": "Everyone speaks. The road takes longer.",
+   "result": "The group agrees that anyone may disagree out loud, and that the column still moves together.",
+   "scene": {
+    "background": "highway",
+    "ambient": "room",
+    "caption": "[Voices carry on the wind.]",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "nadia"
+    ],
+    "lines": [
+     {
+      "text": "The rule is spoken once: anyone may disagree out loud, and the column still moves together. Dana writes it on the wall of a ruined shed."
+     },
+     {
+      "speaker": "timur",
+      "expression": "angry",
+      "text": "Then I say it now: I want to see the map."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "keep_leader"
+      },
+      "text": "The leader who used to decide alone now answers every question."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "call_vote"
+      },
+      "text": "The vote that was taken is reopened at every turn."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "create_council"
+      },
+      "text": "The council is argued with at every turn."
+     },
+     {
+      "text": "For three days the column argues about every turn. It is slow and tiring. The map goes round the circle and nobody trusts what it shows."
+     },
+     {
+      "speaker": "marat",
+      "expression": "concerned",
+      "text": "Shouting is not a plan."
+     },
+     {
+      "text": "On the third evening the road forks at a rusted sign. Everyone has an opinion. Nobody is sure."
+     },
+     {
+      "text": "Can a group that argues about every turn still reach anywhere?"
+     }
+    ]
+   },
+   "fragments": [
+    {
+     "when": {
+      "flag": "d1",
+      "is": "keep_leader"
+     },
+     "text": "You kept one leader."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "call_vote"
+     },
+     "text": "You called a vote."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "create_council"
+     },
+     "text": "You created a council of three."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "share_map"
+     },
+     "text": "The map and the radio were opened to everyone."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "leave_map"
+     },
+     "text": "The map and the radio stayed with Marat."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "secret_ballot"
+     },
+     "text": "The vote was taken in secret."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "open_hands"
+     },
+     "text": "The vote was taken with raised hands."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "by_lot"
+     },
+     "text": "The council was drawn by lot."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "elected"
+     },
+     "text": "The council was elected."
+    }
+   ],
+   "consequences": [
+    {
+     "text": "Every decision on the road is questioned out loud, and explained."
+    },
+    {
+     "text": "The column is slower and less afraid of its own doubts."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "leave_map"
+     },
+     "text": "The map is still in Marat's jacket, and now everyone says so."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "open_hands"
+     },
+     "text": "The first open votes made it easier to say what you thought in front of everyone."
+    }
+   ],
+   "unresolved": "Can a group that argues about every turn still reach anywhere?"
+  },
+  "R3_E3": {
+   "id": "R3_E3",
+   "title": "TWO ROADS",
+   "subtitle": "Nobody is made to follow. The group gets smaller.",
+   "result": "The group agrees that those who disagree may leave with a fair share of the supplies.",
+   "scene": {
+    "background": "haven-gate",
+    "ambient": "room",
+    "caption": "[Static, then a voice.]",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "nadia"
+    ],
+    "lines": [
+     {
+      "text": "The rule is spoken once: those who disagree may leave, with a fair share of the supplies. Leo counts the bread twice."
+     },
+     {
+      "speaker": "timur",
+      "expression": "confident",
+      "text": "Then I am going with whoever wants the other route."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "keep_leader"
+      },
+      "text": "The leader keeps the map, and now everyone knows they could leave him."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "call_vote"
+      },
+      "text": "The vote that was taken no longer binds those who lost it."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "create_council"
+      },
+      "text": "The council can no longer count on being followed."
+     },
+     {
+      "text": "The radio is switched on once more before they part. Static, and then, briefly, a voice."
+     },
+     {
+      "text": "At dawn the group splits. Some go on with Marat. Some take the crossed-out route and their share of the bread."
+     },
+     {
+      "speaker": "dana",
+      "expression": "sad",
+      "text": "I hope the map was right. I hope I was."
+     },
+     {
+      "text": "If the group splits, who is left to check either road?"
+     }
+    ]
+   },
+   "fragments": [
+    {
+     "when": {
+      "flag": "d1",
+      "is": "keep_leader"
+     },
+     "text": "You kept one leader."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "call_vote"
+     },
+     "text": "You called a vote."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "create_council"
+     },
+     "text": "You created a council of three."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "share_map"
+     },
+     "text": "The map and the radio were opened to everyone."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "leave_map"
+     },
+     "text": "The map and the radio stayed with Marat."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "secret_ballot"
+     },
+     "text": "The vote was taken in secret."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "open_hands"
+     },
+     "text": "The vote was taken with raised hands."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "by_lot"
+     },
+     "text": "The council was drawn by lot."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "elected"
+     },
+     "text": "The council was elected."
+    }
+   ],
+   "consequences": [
+    {
+     "text": "Nobody is forced to follow, and nobody is forced to stay."
+    },
+    {
+     "text": "Each half has less bread, fewer hands and nobody to ask."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "elected"
+     },
+     "text": "The elected council is now one half of the group, not all of it."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "by_lot"
+     },
+     "text": "One of the three drawn by lot went with the other road."
+    }
+   ],
+   "unresolved": "If the group splits, who is left to check either road?"
+  }
+ },
+ "flagLabels": [
+  {
+   "flag": "d1",
+   "values": {
+    "keep_leader": "One leader kept",
+    "call_vote": "A vote was called",
+    "create_council": "A council was created"
+   }
+  },
+  {
+   "flag": "d2",
+   "values": {
+    "share_map": "Map and radio opened",
+    "leave_map": "Map and radio left with Marat",
+    "secret_ballot": "Secret ballot",
+    "open_hands": "Open hands",
+    "by_lot": "Council by lot",
+    "elected": "Council elected"
+   }
+  }
+ ],
+ "analysis": {
+  "hobbes": {
+   "argument": "In Leviathan (chapters 13, 14, 17 and 21), Hobbes describes a state of nature with no common power. There, fear of violent death makes everyone a possible threat to everyone else. To escape it, people agree to authorise a sovereign who can keep the peace. Even so, he holds that nobody can be obliged to give up the right to defend their own life.",
+   "application": {
+    "byEnding": {
+     "R3_E1": "Silence on the road is order bought with obedience, which is the bargain Hobbes describes: peace in return for a single will. The account gives no test for when it has gone too far.",
+     "R3_E2": "Open disagreement in a moving column strains the single will that Hobbes thinks a group needs. The account asks how long a column can argue and still march.",
+     "R3_E3": "Letting dissenters leave puts the two halves in something like the state of nature: no common power between them. The account asks who protects either from the other."
+    },
+    "byFlag": {
+     "d1=keep_leader": "Keeping one leader is the default for this theory: a single decider and a single will. It asks only whether he can really protect everyone, and says little about checking him.",
+     "d1=call_vote": "Calling a vote treats the column as a body that authorises its own leader. The account asks what happens when the vote and the danger disagree.",
+     "d1=create_council": "A council spreads the sovereign's power across three people. The account asks who decides when they split two to one, and how quickly.",
+     "d2=share_map": "Putting the map and the radio on the table gives up the decider's private advantage. The theory neither requires it nor forbids it.",
+     "d2=leave_map": "Leaving the map and the radio with Marat keeps the decider's means of decision in one hand, which is how a sovereign is usually imagined.",
+     "d2=secret_ballot": "A secret ballot protects each person's fear from being read by the others, and lets the column judge without pressure.",
+     "d2=open_hands": "Votes by raised hands make everyone's choice visible to the decider, which strengthens his hand.",
+     "d2=by_lot": "Drawing the council by lot avoids anyone claiming authority for themselves. The account does not say whether authority can be assigned by chance.",
+     "d2=elected": "Electing the council is closer to authorisation: people choose those they agree to obey."
+    }
+   },
+   "limitation": {
+    "R3_E1": "Hobbes allows the sovereign great power in return for security. He gives no test for a decider who hides the information the others depend on.",
+    "R3_E2": "The theory prefers a single will, and a column that argues in public is not one. Whether it is weaker or only slower, the story leaves open.",
+    "R3_E3": "Hobbes assumes that people cannot safely live apart without a common power. The story does not show whether either half is safer."
+   },
+   "reference": "hobbes"
+  },
+  "locke": {
+   "argument": "In the Second Treatise of Government (chapters 2, 9, 14 and 19), Locke holds that people have natural rights to life, liberty and property, and that government exists to preserve them. Power used against those ends loses its legitimacy. He allows the executive some discretion for the public good, which he calls prerogative, but treats it as a trust that the people can judge.",
+   "application": {
+    "byEnding": {
+     "R3_E1": "Making dissent wait suspends the people's ability to judge those in power. Locke accepts discretion for the public good, but as a trust that can be judged, and a silenced column cannot judge it.",
+     "R3_E2": "Open disagreement keeps the column able to judge how power is used, which is the check Locke asks for. It does not guarantee that anyone acts on the judgment.",
+     "R3_E3": "Leaving with a fair share respects each person's liberty and property, and treats the group as a partnership people may leave. This fits Locke's idea of consent, though the group may be weakened."
+    },
+    "byFlag": {
+     "d1=keep_leader": "One leader without review is power with no way for those affected to judge it. Locke permits discretion only as a trust the people can evaluate.",
+     "d1=call_vote": "A vote is a way for those affected to give or withhold consent to those who lead them.",
+     "d1=create_council": "A council divides power, so no single judgment is the last word. It still needs a way to be replaced.",
+     "d2=share_map": "Showing the map and the radio lets people check the leader's claims themselves, which is what a trust that can be judged requires.",
+     "d2=leave_map": "Keeping the map and the radio hidden means nobody can check the leader's claims, so the trust is blind.",
+     "d2=secret_ballot": "A secret ballot lets each person consent or refuse without being punished for it.",
+     "d2=open_hands": "Open votes expose each person to the leader's reaction, which weakens consent.",
+     "d2=by_lot": "A lottery gives nobody the group's consent. Locke's theory asks how those drawn come to have authority.",
+     "d2=elected": "Election gives the council the group's consent, the source Locke names for legitimate power."
+    }
+   },
+   "limitation": {
+    "R3_E1": "Locke assumes courts and laws that outlast the crisis. The column has neither, so a silenced majority has no recourse.",
+    "R3_E2": "Locke relies on people being able to wait and judge. A road with three days left does not always allow it.",
+    "R3_E3": "Locke accepts that people may leave. He does not say what the one who leaves owes to those who stay."
+   },
+   "reference": "locke"
+  },
+  "rousseau": {
+   "argument": "In The Social Contract (book I chapter 6, book II chapter 3 and book IV chapter 6), Rousseau grounds legitimate authority in a compact in which each person submits to the general will, which aims at the common good. The general will is not the will of all, which is only the sum of private interests. In a crisis he accepts a temporary dictatorship, and insists that it be brief.",
+   "application": {
+    "byEnding": {
+     "R3_E1": "A column that follows in silence has a single will, though not obviously a general one. Rousseau accepts brief emergency power, and insists that it be short.",
+     "R3_E2": "Open disagreement is how a general will forms out of private opinions. It can also drown in noise.",
+     "R3_E3": "Letting people leave makes the compact voluntary. Rousseau wants citizens bound to the common good, so the exit raises the question of what still binds them."
+    },
+    "byFlag": {
+     "d1=keep_leader": "One leader is acceptable to Rousseau only as a short emergency, and only if the people can end it.",
+     "d1=call_vote": "A vote is how a people forms a will. The theory asks that it concern the common good, not only fear.",
+     "d1=create_council": "A council stands for the people. Rousseau distrusts representatives who replace the people's own judgment.",
+     "d2=share_map": "Opening the map and the radio gives everyone the facts a general will needs.",
+     "d2=leave_map": "Keeping the facts with one person lets that person shape what the group wills.",
+     "d2=secret_ballot": "A secret ballot protects each person's real view from pressure, which a general will needs.",
+     "d2=open_hands": "Open votes can turn into a show of loyalty rather than a statement about the common good.",
+     "d2=by_lot": "Drawing by lot keeps representatives from becoming a class. Rousseau considers it where equality matters most.",
+     "d2=elected": "Election gives the council the people's authority, with the risk that people hand over their will along with the vote."
+    }
+   },
+   "limitation": {
+    "R3_E1": "Rousseau does not say how to end an emergency when the one who holds the power is the one who says it continues.",
+    "R3_E2": "A group that argues may reach a general will or a stalemate. The theory does not say which the column is.",
+    "R3_E3": "The compact assumes people stay bound. A column that may split is a compact that may dissolve."
+   },
+   "reference": "rousseau"
+  },
+  "popper": {
+   "argument": "In The Open Society and Its Enemies, Popper argues that the key test of a free society is whether citizens can criticise their rulers and remove them without violence. Institutions that allow this keep a society open, and those that silence criticism close it.",
+   "application": {
+    "byEnding": {
+     "R3_E1": "Silence on the road closes the column: nobody can criticise the route, so nobody can correct it.",
+     "R3_E2": "Open argument keeps the column open. It is the quality Popper values most, even when it is uncomfortable.",
+     "R3_E3": "Letting dissenters leave is one way of changing a decision without force. It keeps the group open, at the price of its size."
+    },
+    "byFlag": {
+     "d1=keep_leader": "One leader with no appointed critic is the structure Popper warns about.",
+     "d1=call_vote": "A vote gives people a peaceful way to remove the leader, which is what the test asks for.",
+     "d1=create_council": "A council makes a second voice that can disagree with the first.",
+     "d2=share_map": "The map and the radio make the leader's claims open to checking, which is a condition of criticism.",
+     "d2=leave_map": "Without the map and the radio, nobody can check what the leader says, so criticism has nothing to hold.",
+     "d2=secret_ballot": "A secret ballot lets people criticise without risk.",
+     "d2=open_hands": "A public vote can make dissent visible and costly.",
+     "d2=by_lot": "A council drawn by lot has no authority to defend, which makes it easier to criticise.",
+     "d2=elected": "An elected council can be replaced at the next vote, which is the peaceful removal Popper asks for."
+    }
+   },
+   "limitation": {
+    "R3_E1": "Popper's test concerns institutions, not intentions. The story does not show whether Marat meant harm.",
+    "R3_E2": "Criticism needs someone willing to act on it. The story does not say whether anyone will.",
+    "R3_E3": "Popper values exit and criticism both. He gives no rule for when a group is too small to split."
+   },
+   "reference": "popper"
+  },
+  "castells": {
+   "argument": "In Communication Power, Castells argues that power in a network society rests on control of the channels through which people communicate. Whoever sets what is shared, and what is kept back, shapes what others can think and decide.",
+   "application": {
+    "byEnding": {
+     "R3_E1": "Quiet on the road also means a single channel: the leader talks and the others listen. That concentrates communication power.",
+     "R3_E2": "Open argument spreads communication across the column, which makes any single voice less able to set the story.",
+     "R3_E3": "Splitting gives each half its own channel. Neither can easily check what the other says."
+    },
+    "byFlag": {
+     "d1=keep_leader": "One leader keeps the map and the radio, which is exactly where Castells locates power in this story.",
+     "d1=call_vote": "A vote does not change who holds the radio, only who is asked.",
+     "d1=create_council": "A council can share the channels among three people, which spreads power without removing it.",
+     "d2=share_map": "Putting the map and the radio on the table opens the channels to all, which moves power from one holder to the group.",
+     "d2=leave_map": "Leaving them with Marat keeps the channels closed, and Castells places the leader's power in exactly that control.",
+     "d2=secret_ballot": "A secret ballot is a channel nobody controls, which is rare.",
+     "d2=open_hands": "Open votes make everyone's opinion known to those who control the channels.",
+     "d2=by_lot": "A lottery gives control of the channels to chance, spreading it without anyone's consent.",
+     "d2=elected": "Election gives the council control of the channels with the group's approval."
+    }
+   },
+   "limitation": {
+    "R3_E1": "Castells describes the structure of power. He does not say whether a given leader abuses it.",
+    "R3_E2": "More voices do not mean more truth. The story does not say which channel the column should trust.",
+    "R3_E3": "Two groups, two channels, no check. The account does not say how trust is rebuilt."
+   },
+   "reference": "castells"
+  }
+ },
+ "reflection": {
+  "conflicts": {
+   "R3_E1": "Hobbes values a decider who can keep the peace. Locke values a power that those affected can judge. Rousseau values a will that belongs to the whole group. Popper values the ability to remove those in power without violence, and Castells points out that power sits with whoever controls the channels. In this story they pull apart: the clearest leader is the hardest to check, the most open column is the slowest, and the group that may split may lose both safety and trust. None of them is offered here as the right one.",
+   "R3_E2": "Hobbes values a decider who can keep the peace. Locke values a power that those affected can judge. Rousseau values a will that belongs to the whole group. Popper values the ability to remove those in power without violence, and Castells points out that power sits with whoever controls the channels. In this story they pull apart: the clearest leader is the hardest to check, the most open column is the slowest, and the group that may split may lose both safety and trust. None of them is offered here as the right one.",
+   "R3_E3": "Hobbes values a decider who can keep the peace. Locke values a power that those affected can judge. Rousseau values a will that belongs to the whole group. Popper values the ability to remove those in power without violence, and Castells points out that power sits with whoever controls the channels. In this story they pull apart: the clearest leader is the hardest to check, the most open column is the slowest, and the group that may split may lose both safety and trust. None of them is offered here as the right one."
+  },
+  "questions": [
+   "Does a leader who may be abusing power have to be proved guilty before the group acts?",
+   "What could make disagreement safe on a road where everyone depends on one decision?",
+   "If the group splits, who is responsible for each half?"
+  ]
+ }
+}

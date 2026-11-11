@@ -232,7 +232,6 @@ export const RU: Record<string, string> = {
   'Before you begin': 'Прежде чем начать',
   'I understand, begin': 'Понятно, начать',
   'Back to menu': 'В меню',
-  'In development': 'В разработке',
   'How the system worked': 'Как работала система',
   'Each option moves the indicators by a fixed amount, listed here. No option improves all four, and nothing is added up.': 'Каждый вариант сдвигает показатели на заданную величину, она указана здесь. Ни один вариант не улучшает все четыре, и ничего не суммируется.',
   'Where the group ended': 'Где оказалась группа',

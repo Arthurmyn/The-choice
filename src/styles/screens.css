@@ -286,10 +286,6 @@ input[type='range'] { flex: 1; min-height: 44px; accent-color: var(--accent); }
 .notice-text { font-size: 1.05rem; line-height: 1.6; text-wrap: pretty; }
 .notice-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; align-items: center; }
 
-.chapter.locked .bg-layer .bg-svg { filter: saturate(0.4) brightness(0.7); }
-.chapter.locked .chapter-title { color: #aab6c4; }
-.chapter.locked .chapter-no { opacity: 0.5; }
-.chapter.locked .chapter-status { color: var(--muted); gap: 0.45rem; }
 
 .system-panel { display: flex; flex-direction: column; gap: 0.6rem; padding: 1rem 1.1rem; border: 1px solid var(--hair); border-radius: var(--radius); background: rgba(232, 237, 243, 0.03); }
 .system-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }

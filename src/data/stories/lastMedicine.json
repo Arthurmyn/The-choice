@@ -1,0 +1,1483 @@
+{
+ "id": "last-medicine",
+ "title": "The Last Medicine",
+ "category": "Social contract",
+ "themes": [
+  "Equality",
+  "Need",
+  "Common good"
+ ],
+ "minutes": "8-10 min",
+ "synopsis": "Day twelve. One course of antibiotic, two feverish people: Leo, the oldest, and Nadia, the only nurse. You are not in charge, but the group is looking at you.",
+ "disclaimer": "Fictional scenario. Consequences are simulated for philosophical discussion.",
+ "notice": "This story deals with illness, death and fear. You can leave at any time, and your progress is saved. Nothing here is a recommendation about real events.",
+ "voice": false,
+ "tone": "hospital",
+ "start": "intro",
+ "initial": {
+  "#trust": "6",
+  "#safety": "5",
+  "#resources": "5",
+  "#participation": "5"
+ },
+ "indicators": [
+  {
+   "key": "#trust",
+   "label": "Trust"
+  },
+  {
+   "key": "#safety",
+   "label": "Safety"
+  },
+  {
+   "key": "#resources",
+   "label": "Resources"
+  },
+  {
+   "key": "#participation",
+   "label": "Participation"
+  }
+ ],
+ "characters": {
+  "marat": {
+   "id": "marat",
+   "name": "Marat",
+   "role": "Holds the keys and the radio",
+   "visual": {
+    "skin": "#c89d7c",
+    "hair": {
+     "style": "cropped",
+     "color": "#1f1b19"
+    },
+    "outfit": "#34312c",
+    "accent": "#8C9BB0",
+    "accessory": "lanyard"
+   },
+   "voice": {
+    "gender": "m",
+    "pitch": 0.88,
+    "rate": 0.95
+   }
+  },
+  "dana": {
+   "id": "dana",
+   "name": "Dana",
+   "role": "Former teacher",
+   "visual": {
+    "skin": "#e0b494",
+    "hair": {
+     "style": "bun",
+     "color": "#5a4636"
+    },
+    "outfit": "#2f4660",
+    "accent": "#65B9FF",
+    "accessory": "glasses"
+   },
+   "voice": {
+    "gender": "f",
+    "pitch": 0.97,
+    "rate": 0.98
+   }
+  },
+  "timur": {
+   "id": "timur",
+   "name": "Timur",
+   "role": "The youngest in the shelter",
+   "visual": {
+    "skin": "#d9ad8b",
+    "hair": {
+     "style": "short",
+     "color": "#14100e"
+    },
+    "outfit": "#2c3a30",
+    "accent": "#8C9BB0",
+    "accessory": "none"
+   },
+   "voice": {
+    "gender": "m",
+    "pitch": 1.12,
+    "rate": 1.05
+   }
+  },
+  "leo": {
+   "id": "leo",
+   "name": "Leo",
+   "role": "Keeps the supply log",
+   "visual": {
+    "skin": "#a97654",
+    "hair": {
+     "style": "cropped",
+     "color": "#9aa0a8"
+    },
+    "outfit": "#3a3f46",
+    "accent": "#8C9BB0",
+    "accessory": "glasses"
+   },
+   "voice": {
+    "gender": "m",
+    "pitch": 0.8,
+    "rate": 0.9
+   }
+  },
+  "nadia": {
+   "id": "nadia",
+   "name": "Nadia",
+   "role": "Trained nurse",
+   "visual": {
+    "skin": "#d6a98a",
+    "hair": {
+     "style": "curly",
+     "color": "#2a1c14"
+    },
+    "outfit": "#3b5560",
+    "accent": "#65B9FF",
+    "accessory": "none"
+   },
+   "voice": {
+    "gender": "f",
+    "pitch": 1.0,
+    "rate": 1.0
+   }
+  }
+ },
+ "nodes": {
+  "intro": {
+   "type": "scene",
+   "id": "intro",
+   "next": "evidence",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "nadia"
+    ],
+    "card": {
+     "kicker": "DAY 12",
+     "title": "ONE VIAL",
+     "text": "Two fevers. One course of medicine."
+    },
+    "lines": [
+     {
+      "text": "Day twelve. The first-aid box holds one vial of antibiotic. One course. That is all there is."
+     },
+     {
+      "speaker": "nadia",
+      "expression": "concerned",
+      "text": "Leo and I caught the same infection from the same water. It is treatable. This treats it."
+     },
+     {
+      "speaker": "leo",
+      "expression": "sad",
+      "text": "Give it to somebody who can use it."
+     },
+     {
+      "speaker": "marat",
+      "expression": "concerned",
+      "text": "Decide. Fever does not wait."
+     },
+     {
+      "text": "You are not in charge. But everyone is looking at you."
+     }
+    ]
+   }
+  },
+  "evidence": {
+   "type": "investigation",
+   "id": "evidence",
+   "next": "d1",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "nadia"
+    ],
+    "lines": [
+     {
+      "text": "Three things on the table. None of them tells you who would survive without it."
+     }
+    ]
+   },
+   "items": [
+    {
+     "id": "vial",
+     "label": "The vial",
+     "kind": "card",
+     "title": "One course",
+     "body": [
+      "A single sealed vial. The label is half rubbed off.",
+      "One course treats one person. Nobody knows if half a course would work."
+     ],
+     "finding": "One dose, one person. Splitting it is a gamble nobody can price."
+    },
+    {
+     "id": "chart",
+     "label": "The fever chart",
+     "kind": "log",
+     "mono": true,
+     "title": "Leo and Nadia, days 10 to 12",
+     "body": [
+      "Leo: 38.2, 38.9, 39.4.",
+      "Nadia: 37.9, 38.8, 39.3.",
+      "Both rising at a similar pace."
+     ],
+     "finding": "Both are getting worse at a similar pace. Nobody can say who would hold longer without it."
+    },
+    {
+     "id": "note",
+     "label": "Nadia's note",
+     "kind": "message",
+     "title": "What Nadia wrote",
+     "body": [
+      "\"If I recover I can dress wounds and catch fevers early. I cannot promise it.\"",
+      "\"Do not decide on what I might do. Decide on what is fair.\""
+     ],
+     "finding": "Her skills could help others later. That is a prediction, not a fact."
+    }
+   ]
+  },
+  "d1": {
+   "type": "decision",
+   "id": "d1",
+   "stage": "D1",
+   "title": "THE VIAL",
+   "background": "shelter",
+   "situation": "One dose. Leo and Nadia both have the fever. The group waits for you to say who gets it.",
+   "info": [
+    "Leo has been ill longest. Nadia is the only trained nurse.",
+    "The vial cannot be split."
+   ],
+   "pressures": [
+    "Equal claim to life",
+    "The group's need for a nurse"
+   ],
+   "choices": [
+    {
+     "id": "give_leo",
+     "label": "Give it to Leo, who needs it first.",
+     "description": "He has been sick longest. Nadia waits.",
+     "mapLabel": "Leo first",
+     "sets": {
+      "d1": "give_leo"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#trust": 1,
+        "#safety": -1,
+        "#resources": -2
+       }
+      }
+     ],
+     "next": "d2_leo",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "leo",
+       "nadia",
+       "marat"
+      ],
+      "lines": [
+       {
+        "text": "You say it plainly: Leo has been sick longest. He gets the dose."
+       },
+       {
+        "speaker": "nadia",
+        "expression": "sad",
+        "text": "I understand. I would have said the same."
+       },
+       {
+        "speaker": "leo",
+        "expression": "sad",
+        "text": "I did not ask for this."
+       }
+      ]
+     },
+     "result": "Leo gets the dose. Nadia waits."
+    },
+    {
+     "id": "give_nadia",
+     "label": "Give it to Nadia, who can help the others.",
+     "description": "She is the only trained nurse. Leo waits.",
+     "mapLabel": "Nadia first",
+     "sets": {
+      "d1": "give_nadia"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#safety": 1,
+        "#trust": -2,
+        "#resources": -2
+       }
+      }
+     ],
+     "next": "d2_nadia",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "leo",
+       "nadia",
+       "dana"
+      ],
+      "lines": [
+       {
+        "text": "You say it plainly: Nadia can treat the rest of you later. She gets the dose."
+       },
+       {
+        "speaker": "leo",
+        "expression": "neutral",
+        "text": "Fair. I would have chosen the same."
+       },
+       {
+        "speaker": "dana",
+        "expression": "concerned",
+        "text": "He should not have to say that."
+       }
+      ]
+     },
+     "result": "Nadia gets the dose. Leo waits."
+    },
+    {
+     "id": "put_group",
+     "label": "Put it to the group.",
+     "description": "Nothing is given until the group has spoken.",
+     "mapLabel": "Ask the group",
+     "sets": {
+      "d1": "put_group"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#participation": 2,
+        "#trust": 1,
+        "#safety": -1,
+        "#resources": -1
+       }
+      }
+     ],
+     "next": "d2_group",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "dana",
+       "timur"
+      ],
+      "lines": [
+       {
+        "text": "You ask for everyone, now. The two fevers rise while the group talks."
+       },
+       {
+        "speaker": "dana",
+        "expression": "confident",
+        "text": "Good. Whatever we choose, we will have chosen it together."
+       },
+       {
+        "speaker": "marat",
+        "expression": "concerned",
+        "text": "Talk fast."
+       }
+      ]
+     },
+     "result": "The group sits down to decide."
+    }
+   ]
+  },
+  "d2_leo": {
+   "type": "decision",
+   "id": "d2_leo",
+   "stage": "D2",
+   "title": "THE OBJECTION",
+   "background": "shelter",
+   "situation": "Timur objects: \"Nadia is the only one who can treat us.\" Nobody had asked him.",
+   "info": [
+    "The dose is already given.",
+    "Nadia is lying very still."
+   ],
+   "pressures": [
+    "A decision made, and a person who disagrees",
+    "What the group owes the one left waiting"
+   ],
+   "choices": [
+    {
+     "id": "leo_stand",
+     "label": "Stand by the decision. It is made.",
+     "description": "No review. Timur has said his piece.",
+     "mapLabel": "Stand by it",
+     "sets": {
+      "d2": "leo_stand"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#safety": 1,
+        "#participation": -1,
+        "#trust": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "timur",
+       "marat"
+      ],
+      "lines": [
+       {
+        "speaker": "timur",
+        "expression": "angry",
+        "text": "So that is it?"
+       },
+       {
+        "speaker": "marat",
+        "expression": "confident",
+        "text": "That is it. We have no time for a second vial."
+       }
+      ]
+     },
+     "result": "The decision stands. The objection is noted and set aside."
+    },
+    {
+     "id": "leo_reopen",
+     "label": "Let the group review the decision.",
+     "description": "The dose cannot be taken back, but the group can say what it thinks.",
+     "mapLabel": "Review it",
+     "sets": {
+      "d2": "leo_reopen"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#participation": 1,
+        "#trust": 1,
+        "#safety": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "dana",
+       "timur",
+       "leo"
+      ],
+      "lines": [
+       {
+        "speaker": "dana",
+        "expression": "neutral",
+        "text": "It is too late to undo. It is not too late to say what we think of it."
+       },
+       {
+        "speaker": "timur",
+        "expression": "concerned",
+        "text": "Then I want it written down that I asked."
+       }
+      ]
+     },
+     "result": "The group reviews the decision, and the dose stays where it is."
+    }
+   ]
+  },
+  "d2_nadia": {
+   "type": "decision",
+   "id": "d2_nadia",
+   "stage": "D2",
+   "title": "THE OBJECTION",
+   "background": "shelter",
+   "situation": "Dana objects: \"Leo has been sick the longest.\" She had not been asked either.",
+   "info": [
+    "The dose is already given.",
+    "Leo is breathing slowly, with his eyes shut."
+   ],
+   "pressures": [
+    "A decision made, and a person who disagrees",
+    "What the group owes the one left waiting"
+   ],
+   "choices": [
+    {
+     "id": "nadia_stand",
+     "label": "Stand by the decision. It is made.",
+     "description": "No review. Dana has said her piece.",
+     "mapLabel": "Stand by it",
+     "sets": {
+      "d2": "nadia_stand"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#safety": 1,
+        "#participation": -1,
+        "#trust": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "dana",
+       "marat"
+      ],
+      "lines": [
+       {
+        "speaker": "dana",
+        "expression": "angry",
+        "text": "So length of illness counts for nothing?"
+       },
+       {
+        "speaker": "marat",
+        "expression": "confident",
+        "text": "It counts. It was weighed. The decision stands."
+       }
+      ]
+     },
+     "result": "The decision stands. The objection is noted and set aside."
+    },
+    {
+     "id": "nadia_reopen",
+     "label": "Let the group review the decision.",
+     "description": "The dose cannot be taken back, but the group can say what it thinks.",
+     "mapLabel": "Review it",
+     "sets": {
+      "d2": "nadia_reopen"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#participation": 1,
+        "#trust": 1,
+        "#safety": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "dana",
+       "timur",
+       "leo"
+      ],
+      "lines": [
+       {
+        "speaker": "dana",
+        "expression": "neutral",
+        "text": "It is too late to undo. It is not too late to say what we think of it."
+       },
+       {
+        "speaker": "leo",
+        "expression": "sad",
+        "text": "Say it to my face. I can hear you."
+       }
+      ]
+     },
+     "result": "The group reviews the decision, and the dose stays where it is."
+    }
+   ]
+  },
+  "d2_group": {
+   "type": "decision",
+   "id": "d2_group",
+   "stage": "D2",
+   "title": "THE VOTE",
+   "background": "shelter",
+   "situation": "The group debates, then asks who may vote. Leo and Nadia can both hear.",
+   "info": [
+    "Three healthy hands, two feverish ones.",
+    "The vote is about their own treatment."
+   ],
+   "pressures": [
+    "Those who are ill are the ones most affected",
+    "Those who are well are the ones who can think clearly"
+   ],
+   "choices": [
+    {
+     "id": "sick_vote",
+     "label": "Everyone votes, including Leo and Nadia.",
+     "description": "Five hands. The two who need the dose vote too.",
+     "mapLabel": "Everyone votes",
+     "sets": {
+      "d2": "sick_vote"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#participation": 1,
+        "#trust": 1,
+        "#safety": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "leo",
+       "nadia",
+       "dana"
+      ],
+      "lines": [
+       {
+        "speaker": "nadia",
+        "expression": "concerned",
+        "text": "I am voting for Leo. I would rather you did not make me defend that."
+       },
+       {
+        "speaker": "leo",
+        "expression": "sad",
+        "text": "And I am voting for her. We will see what that means."
+       }
+      ]
+     },
+     "result": "All five vote, the two feverish ones included."
+    },
+    {
+     "id": "healthy_vote",
+     "label": "Only the three healthy ones vote.",
+     "description": "Three hands. Leo and Nadia listen.",
+     "mapLabel": "Healthy vote",
+     "sets": {
+      "d2": "healthy_vote"
+     },
+     "apply": [
+      {
+       "effects": {
+        "#safety": 1,
+        "#trust": -1
+       }
+      }
+     ],
+     "next": "night",
+     "reaction": {
+      "background": "shelter",
+      "ambient": "room",
+      "cast": [
+       "dana",
+       "marat",
+       "timur"
+      ],
+      "lines": [
+       {
+        "speaker": "dana",
+        "expression": "concerned",
+        "text": "It is their lives we are deciding."
+       },
+       {
+        "speaker": "marat",
+        "expression": "confident",
+        "text": "And they cannot think straight right now. That is why we vote."
+       }
+      ]
+     },
+     "result": "Three vote. Leo and Nadia listen from their pallets."
+    }
+   ]
+  },
+  "night": {
+   "type": "scene",
+   "id": "night",
+   "next": "d3",
+   "scene": {
+    "background": "camp",
+    "ambient": "room",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "nadia"
+    ],
+    "card": {
+     "kicker": "NIGHT",
+     "title": "THE WAITING",
+     "text": "Nobody knows who will hold."
+    },
+    "lines": [
+     {
+      "text": "Night. Two pallets, two lamps turned low. Whoever did not get the vial is still awake."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "give_leo"
+      },
+      "text": "Leo's breathing is slow and steady. Nadia watches the ceiling."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "give_nadia"
+      },
+      "text": "Nadia's breathing is slow and steady. Leo watches the ceiling."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "put_group"
+      },
+      "text": "The vial was given to the one the count favoured. The other pallet is silent."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "leo_stand"
+      },
+      "text": "Timur wrote his objection on the wall, in small letters."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "nadia_stand"
+      },
+      "text": "Dana wrote her objection on the wall, in small letters."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "leo_reopen"
+      },
+      "text": "The review is on the wall, in Leo's careful hand. Nobody wants to read it twice."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "nadia_reopen"
+      },
+      "text": "The review is on the wall, in Leo's careful hand. Nobody wants to read it twice."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "sick_vote"
+      },
+      "text": "The count is on the wall. The two who were counted do not look at it."
+     },
+     {
+      "when": {
+       "flag": "d2",
+       "is": "healthy_vote"
+      },
+      "text": "The count is on the wall. The two it was about have not seen it."
+     },
+     {
+      "speaker": "leo",
+      "expression": "neutral",
+      "text": "Whatever happens, write down how we decided. For the next time."
+     },
+     {
+      "speaker": "nadia",
+      "expression": "concerned",
+      "text": "There will be a next time. Another vial, another fever. Decide the rule now, while it is not you."
+     },
+     {
+      "speaker": "marat",
+      "expression": "concerned",
+      "text": "One rule. Quick to use."
+     },
+     {
+      "text": "It is for you to say first what the rule will be."
+     }
+    ]
+   }
+  },
+  "d3": {
+   "type": "decision",
+   "id": "d3",
+   "stage": "D3",
+   "title": "THE RULE",
+   "background": "camp",
+   "situation": "The next scarce thing will come, a vial, a blanket, a place on a truck. You say first what rule the group keeps for it.",
+   "info": [
+    "Five people, twelve days in, supplies that will not stretch.",
+    "What you propose becomes the rule tomorrow."
+   ],
+   "pressures": [
+    "Need against usefulness",
+    "A fair chance against a fair outcome"
+   ],
+   "choices": [
+    {
+     "id": "need_first",
+     "label": "Need first: the sickest is served first.",
+     "description": "Whoever is closest to the worst goes first, whoever they are.",
+     "mapLabel": "Need first",
+     "sets": {},
+     "apply": [
+      {
+       "effects": {
+        "#trust": 1,
+        "#participation": 1,
+        "#safety": -1
+       }
+      }
+     ],
+     "ending": "R2_E1",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "leo",
+       "nadia",
+       "dana"
+      ],
+      "lines": [
+       {
+        "speaker": "dana",
+        "expression": "confident",
+        "text": "Then it is the sickest first. Not the useful, not the liked."
+       },
+       {
+        "speaker": "nadia",
+        "expression": "neutral",
+        "text": "Written down, I could live with that. Even if it is not me."
+       }
+      ]
+     },
+     "result": "The group adopts the rule: need first."
+    },
+    {
+     "id": "lottery",
+     "label": "A draw: everyone eligible has the same chance.",
+     "description": "Names in a tin. Nobody judges anyone.",
+     "mapLabel": "A draw",
+     "sets": {},
+     "apply": [
+      {
+       "effects": {
+        "#participation": 1,
+        "#trust": 1,
+        "#resources": -1
+       }
+      }
+     ],
+     "ending": "R2_E2",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "timur",
+       "leo"
+      ],
+      "lines": [
+       {
+        "speaker": "timur",
+        "expression": "surprised",
+        "text": "A draw? Like children?"
+       },
+       {
+        "speaker": "leo",
+        "expression": "neutral",
+        "text": "Like people who do not trust each other to weigh a life. It is honest."
+       }
+      ]
+     },
+     "result": "The group adopts the rule: a draw."
+    },
+    {
+     "id": "weigh_usefulness",
+     "label": "Weigh usefulness: serve first whoever helps the group most.",
+     "description": "The group keeps itself going. Someone has to judge who matters most to it.",
+     "mapLabel": "Weigh usefulness",
+     "sets": {},
+     "apply": [
+      {
+       "effects": {
+        "#safety": 1,
+        "#resources": 1,
+        "#trust": -2
+       }
+      }
+     ],
+     "ending": "R2_E3",
+     "reaction": {
+      "background": "camp",
+      "ambient": "room",
+      "cast": [
+       "marat",
+       "dana",
+       "nadia"
+      ],
+      "lines": [
+       {
+        "speaker": "marat",
+        "expression": "confident",
+        "text": "Finally. A rule that keeps us alive."
+       },
+       {
+        "speaker": "dana",
+        "expression": "angry",
+        "text": "Who keeps the list of who is useful? And who checks it?"
+       }
+      ]
+     },
+     "result": "The group adopts the rule: weigh usefulness."
+    }
+   ]
+  }
+ },
+ "endings": {
+  "R2_E1": {
+   "id": "R2_E1",
+   "title": "NEED FIRST",
+   "subtitle": "The sickest goes first. Nobody weighs who is worth more.",
+   "result": "The group agrees that the sickest is served first, whoever they are.",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "caption": "[A pencil on paper.]",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "nadia"
+    ],
+    "lines": [
+     {
+      "text": "Leo writes the rule under the supply log: need first. Whoever is closest to the worst goes first, whoever they are."
+     },
+     {
+      "speaker": "dana",
+      "expression": "confident",
+      "text": "It is a rule even the useful can live with."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "give_leo"
+      },
+      "text": "Leo took the dose because the rule was already his reason."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "give_nadia"
+      },
+      "text": "Nadia took the dose, and the rule now counts against her own reasons."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "put_group"
+      },
+      "text": "The group that voted found it had already chosen need."
+     },
+     {
+      "text": "By dawn the fevers have not broken. It is not clear whom the dose has helped, or whether it has."
+     },
+     {
+      "text": "Nadia sits up and says nothing for a long time. She is still the only one who can dress a wound."
+     },
+     {
+      "text": "If the sickest cannot be saved, was the dose spent well?"
+     }
+    ]
+   },
+   "fragments": [
+    {
+     "when": {
+      "flag": "d1",
+      "is": "give_leo"
+     },
+     "text": "You gave the dose to Leo, who had been sick longest."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "give_nadia"
+     },
+     "text": "You gave the dose to Nadia, who could help the others."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "put_group"
+     },
+     "text": "You asked the group before anyone was given anything."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "leo_stand"
+     },
+     "text": "Timur's objection was heard and set aside."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "leo_reopen"
+     },
+     "text": "The group reviewed the decision about Leo."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "nadia_stand"
+     },
+     "text": "Dana's objection was heard and set aside."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "nadia_reopen"
+     },
+     "text": "The group reviewed the decision about Nadia."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "sick_vote"
+     },
+     "text": "Leo and Nadia voted on their own treatment."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "healthy_vote"
+     },
+     "text": "Only the healthy voted on who would be treated."
+    }
+   ],
+   "consequences": [
+    {
+     "text": "The group has one rule that does not depend on who anyone is."
+    },
+    {
+     "text": "The next vial will go to whoever is sickest, even if that is the person the group can spare least."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "sick_vote"
+     },
+     "text": "Leo and Nadia agreed to the rule that was used on them."
+    }
+   ],
+   "unresolved": "If the sickest cannot be saved, was the dose spent well?"
+  },
+  "R2_E2": {
+   "id": "R2_E2",
+   "title": "THE DRAW",
+   "subtitle": "Nobody judges. Nobody is protected from bad luck.",
+   "result": "The group agrees that scarce things are drawn by lot, with the same chance for everyone.",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "caption": "[Paper slips in a tin.]",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "nadia"
+    ],
+    "lines": [
+     {
+      "text": "Leo tears five strips of cardboard and writes five names. The rule is a tin and a hand. Everyone has the same chance."
+     },
+     {
+      "speaker": "timur",
+      "expression": "concerned",
+      "text": "And if the tin picks the one we need least?"
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "give_leo"
+      },
+      "text": "The dose already went to Leo. Next time the tin decides, not you."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "give_nadia"
+      },
+      "text": "The dose already went to Nadia. Next time the tin decides, not you."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "put_group"
+      },
+      "text": "The vote already made you all responsible. The tin only moves the weight."
+     },
+     {
+      "text": "Nobody argues with the tin. Nobody feels better about it either."
+     },
+     {
+      "speaker": "nadia",
+      "expression": "neutral",
+      "text": "It is fair. It is not always kind."
+     },
+     {
+      "text": "By dawn the fevers have not broken. It is not clear whom the dose has helped, or whether it has."
+     },
+     {
+      "text": "Is a fair chance enough when the outcomes are not equal?"
+     }
+    ]
+   },
+   "fragments": [
+    {
+     "when": {
+      "flag": "d1",
+      "is": "give_leo"
+     },
+     "text": "You gave the dose to Leo, who had been sick longest."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "give_nadia"
+     },
+     "text": "You gave the dose to Nadia, who could help the others."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "put_group"
+     },
+     "text": "You asked the group before anyone was given anything."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "leo_stand"
+     },
+     "text": "Timur's objection was heard and set aside."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "leo_reopen"
+     },
+     "text": "The group reviewed the decision about Leo."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "nadia_stand"
+     },
+     "text": "Dana's objection was heard and set aside."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "nadia_reopen"
+     },
+     "text": "The group reviewed the decision about Nadia."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "sick_vote"
+     },
+     "text": "Leo and Nadia voted on their own treatment."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "healthy_vote"
+     },
+     "text": "Only the healthy voted on who would be treated."
+    }
+   ],
+   "consequences": [
+    {
+     "text": "No one has to judge another person's worth, and no one can be blamed for the result."
+    },
+    {
+     "text": "The tin does not know who has been waiting longest."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "healthy_vote"
+     },
+     "text": "The healthy three who voted can no longer decide such a thing alone."
+    }
+   ],
+   "unresolved": "Is a fair chance enough when the outcomes are not equal?"
+  },
+  "R2_E3": {
+   "id": "R2_E3",
+   "title": "WHAT THE GROUP NEEDS",
+   "subtitle": "The group keeps itself going. Somebody keeps the list.",
+   "result": "The group agrees that scarce things go first to whoever helps the group most.",
+   "scene": {
+    "background": "shelter",
+    "ambient": "room",
+    "caption": "[A list is pinned to the wall.]",
+    "cast": [
+     "marat",
+     "dana",
+     "leo",
+     "timur",
+     "nadia"
+    ],
+    "lines": [
+     {
+      "text": "Marat pins a list to the wall: who carries water, who treats wounds, who watches the road. The rule is short: those who keep the group going come first."
+     },
+     {
+      "speaker": "dana",
+      "expression": "angry",
+      "text": "And who decides how much a person is worth to us?"
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "give_leo"
+      },
+      "text": "Leo took the dose and has no place on the list."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "give_nadia"
+      },
+      "text": "Nadia took the dose and is at the top of the list."
+     },
+     {
+      "when": {
+       "flag": "d1",
+       "is": "put_group"
+      },
+      "text": "The vote already treated usefulness as a reason, and now it is policy."
+     },
+     {
+      "speaker": "leo",
+      "expression": "sad",
+      "text": "I carried the log for twelve days. I did not know it was a measure."
+     },
+     {
+      "text": "By dawn the fevers have not broken. It is not clear whom the dose has helped, or whether it has."
+     },
+     {
+      "text": "Who decides which lives count for more to the group, and who checks them?"
+     }
+    ]
+   },
+   "fragments": [
+    {
+     "when": {
+      "flag": "d1",
+      "is": "give_leo"
+     },
+     "text": "You gave the dose to Leo, who had been sick longest."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "give_nadia"
+     },
+     "text": "You gave the dose to Nadia, who could help the others."
+    },
+    {
+     "when": {
+      "flag": "d1",
+      "is": "put_group"
+     },
+     "text": "You asked the group before anyone was given anything."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "leo_stand"
+     },
+     "text": "Timur's objection was heard and set aside."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "leo_reopen"
+     },
+     "text": "The group reviewed the decision about Leo."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "nadia_stand"
+     },
+     "text": "Dana's objection was heard and set aside."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "nadia_reopen"
+     },
+     "text": "The group reviewed the decision about Nadia."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "sick_vote"
+     },
+     "text": "Leo and Nadia voted on their own treatment."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "healthy_vote"
+     },
+     "text": "Only the healthy voted on who would be treated."
+    }
+   ],
+   "consequences": [
+    {
+     "text": "The group has a list, and a clear reason for the order on it."
+    },
+    {
+     "text": "Someone who cannot work now has less standing than before."
+    },
+    {
+     "when": {
+      "flag": "d2",
+      "is": "leo_reopen"
+     },
+     "text": "The review of the dose is now part of how the list is judged."
+    }
+   ],
+   "unresolved": "Who decides which lives count for more to the group, and who checks them?"
+  }
+ },
+ "flagLabels": [
+  {
+   "flag": "d1",
+   "values": {
+    "give_leo": "The dose went to Leo",
+    "give_nadia": "The dose went to Nadia",
+    "put_group": "The group was asked"
+   }
+  },
+  {
+   "flag": "d2",
+   "values": {
+    "leo_stand": "Timur's objection was set aside",
+    "leo_reopen": "The decision about Leo was reviewed",
+    "nadia_stand": "Dana's objection was set aside",
+    "nadia_reopen": "The decision about Nadia was reviewed",
+    "sick_vote": "The sick voted too",
+    "healthy_vote": "Only the healthy voted"
+   }
+  }
+ ],
+ "analysis": {
+  "hobbes": {
+   "argument": "In Leviathan (chapters 13, 14, 17 and 21), Hobbes describes a state of nature with no common power. There, fear of violent death makes everyone a possible threat to everyone else. To escape it, people agree to authorise a sovereign who can keep the peace. Even so, he holds that nobody can be obliged to give up the right to defend their own life.",
+   "application": {
+    "byEnding": {
+     "R2_E1": "A rule that serves the sickest first gives every member the same protection against the same fear. It does not say who enforces it when two people ask at once.",
+     "R2_E2": "A draw removes the decider, which avoids the worry that one person's judgment becomes a threat. It also removes the one who answers for the result.",
+     "R2_E3": "Weighing usefulness reads the group as a body that must keep itself going, which fits Hobbes's concern with security. It also makes someone the judge of whose life counts for more, and the theory keeps for each person the right to defend their own."
+    },
+    "byFlag": {
+     "d1=give_leo": "Serving Leo first follows need as the plain claim, since he has been sick longest. It costs the group the person best placed to protect it, and security counts that as a real cost.",
+     "d1=give_nadia": "Serving Nadia first puts the group's security as the main reason. It places a judgment of usefulness where a neutral decider would stand, and the theory gives no test for that judgment.",
+     "d1=put_group": "Putting the question to the group treats the shelter as a body that authorises its own decisions. It also lets two fevers run while it talks.",
+     "d2=leo_stand": "Standing by the decision keeps a clear decider, which the theory prefers. It leaves the objection with nowhere to go.",
+     "d2=leo_reopen": "Reopening the decision admits that the decider can be questioned. The framework asks how often that can happen before nothing is settled.",
+     "d2=nadia_stand": "Standing by the decision keeps a clear decider, which the theory prefers. It leaves Dana's objection with nowhere to go.",
+     "d2=nadia_reopen": "Reopening the decision admits that the decider can be questioned. The framework asks how often that can happen before nothing is settled.",
+     "d2=sick_vote": "Letting the sick vote on their own treatment makes everyone a party to the agreement, including those with the most at stake.",
+     "d2=healthy_vote": "Letting only the healthy vote puts the decision with those who have least at stake. The account asks whether the sick can still be said to have authorised it."
+    }
+   },
+   "limitation": {
+    "R2_E1": "Hobbes tells the sovereign to secure the people's safety, and gives no rule for dividing one dose between two of them. The shelter has to supply it.",
+    "R2_E2": "A draw is neutral between persons and indifferent to outcomes. Hobbes's concern with security does not say whether that indifference is a flaw.",
+    "R2_E3": "Hobbes gives no test for how a sovereign should weigh one life against another's use. The story leaves it as an open question."
+   },
+   "reference": "hobbes"
+  },
+  "locke": {
+   "argument": "In the Second Treatise of Government (chapters 2, 9, 14 and 19), Locke holds that people have natural rights to life, liberty and property, and that government exists to preserve them. Power used against those ends loses its legitimacy. He allows the executive some discretion for the public good, which he calls prerogative, but treats it as a trust that the people can judge.",
+   "application": {
+    "byEnding": {
+     "R2_E1": "Each person has the same natural claim to life, and need first treats those claims as equal, with the order set by who is closer to losing it.",
+     "R2_E2": "A draw gives every person the same chance, which matches equal rights. It ignores how close each one is to death.",
+     "R2_E3": "Ranking lives by use treats some people's claim to life as worth less to the community. Locke's equal natural rights make that hard to defend, though he accepts that the community may act for the preservation of all."
+    },
+    "byFlag": {
+     "d1=give_leo": "Giving the dose to Leo rests on a claim to life that the story shows plainly, and leaves Nadia's equal claim unserved.",
+     "d1=give_nadia": "Giving the dose to Nadia rests on what she can do for others. That is a calculation of use, not an equal right to life.",
+     "d1=put_group": "Asking the group lets those whose rights are at stake hear the case, which Locke values. It risks letting a majority decide a minority's life.",
+     "d2=leo_stand": "Setting the objection aside leaves the person who disagrees without a hearing, which weakens the legitimacy of the choice.",
+     "d2=leo_reopen": "Reviewing the decision gives those affected a way to judge it, which Locke asks of anyone with power. It cannot restore the dose.",
+     "d2=nadia_stand": "Setting the objection aside leaves the person who disagrees without a hearing, which weakens the legitimacy of the choice.",
+     "d2=nadia_reopen": "Reviewing the decision gives those affected a way to judge it, which Locke asks of anyone with power. It cannot restore the dose.",
+     "d2=sick_vote": "Letting the two who need the dose vote treats their rights as theirs to speak for.",
+     "d2=healthy_vote": "Letting only the healthy vote makes the two whose lives are at stake the object of the decision, not parties to it."
+    }
+   },
+   "limitation": {
+    "R2_E1": "Locke relies on known laws and impartial judges. The shelter has a rule, and nobody neutral to apply it when two claims are equally close.",
+    "R2_E2": "Equal rights suggest an equal chance. Locke does not say whether the preservation of all allows chance to decide who is preserved.",
+    "R2_E3": "Locke allows the community to act for the common good. He does not say how it can weigh persons without breaching equality."
+   },
+   "reference": "locke"
+  },
+  "rousseau": {
+   "argument": "In The Social Contract (book I chapter 6, book II chapter 3 and book IV chapter 6), Rousseau grounds legitimate authority in a compact in which each person submits to the general will, which aims at the common good. The general will is not the will of all, which is only the sum of private interests. In a crisis he accepts a temporary dictatorship, and insists that it be brief.",
+   "application": {
+    "byEnding": {
+     "R2_E1": "Need first is a rule anyone could will for themselves without knowing who they would be, which is close to what a general will asks. It does not weigh what the group as a whole needs.",
+     "R2_E2": "A draw treats everyone as an equal party to the compact. It sets aside the question of what serves the common good, and leaves that to luck.",
+     "R2_E3": "Serving what the group needs is the common good in a narrow sense. Rousseau separates it from the sum of private interests, and a list of usefulness can slide into the latter."
+    },
+    "byFlag": {
+     "d1=give_leo": "Giving the dose to Leo sets private need above the group's need for a nurse. The theory asks whether anyone can say which one the people would will.",
+     "d1=give_nadia": "Giving the dose to Nadia puts the common good first. It is open whether Leo would have agreed, had he been asked.",
+     "d1=put_group": "Putting the question to the group is the clearest attempt to ask what the common good requires here.",
+     "d2=leo_stand": "Standing by the decision treats it as the will of the group. It is the decision of the one who made it.",
+     "d2=leo_reopen": "Reviewing the decision lets the group form a view about it, after the fact, which is part of how a general will forms.",
+     "d2=nadia_stand": "Standing by the decision treats it as the will of the group. It is the decision of the one who made it.",
+     "d2=nadia_reopen": "Reviewing the decision lets the group form a view about it, after the fact, which is part of how a general will forms.",
+     "d2=sick_vote": "Including the sick treats them as part of the people, and lets private interest speak in the open.",
+     "d2=healthy_vote": "Excluding the sick is the opposite answer to who the people are. A vote of the healthy may express only the healthy's view."
+    }
+   },
+   "limitation": {
+    "R2_E1": "Rousseau does not say how a group should treat the person it can spare least.",
+    "R2_E2": "A draw may suit a compact among equals. It leaves out the common good, which Rousseau holds apart from chance.",
+    "R2_E3": "Rousseau gives no test of whether a list of usefulness expresses the general will or only the will of those who write it."
+   },
+   "reference": "rousseau"
+  }
+ },
+ "lenses": {
+  "title": "Two further lenses",
+  "text": "Immanuel Kant (Groundwork of the Metaphysics of Morals) is often read as saying that a person should never be treated merely as a means, which puts pressure on any rule that ranks people by use. John Stuart Mill (Utilitarianism) weighs the consequences for everyone affected, which is the logic behind choosing whoever helps the group most. This game does not say which of the two is right."
+ },
+ "reflection": {
+  "conflicts": {
+   "R2_E1": "Hobbes asks who has the power to settle the question, Locke asks what each person is owed, and Rousseau asks what the group would will for itself. In this story they pull apart: the clearest rule is the least flexible, the fairest chance is blind to need, and the most useful list gives the group a reason to rank people. None of them is offered here as the right one.",
+   "R2_E2": "Hobbes asks who has the power to settle the question, Locke asks what each person is owed, and Rousseau asks what the group would will for itself. In this story they pull apart: the clearest rule is the least flexible, the fairest chance is blind to need, and the most useful list gives the group a reason to rank people. None of them is offered here as the right one.",
+   "R2_E3": "Hobbes asks who has the power to settle the question, Locke asks what each person is owed, and Rousseau asks what the group would will for itself. In this story they pull apart: the clearest rule is the least flexible, the fairest chance is blind to need, and the most useful list gives the group a reason to rank people. None of them is offered here as the right one."
+  },
+  "questions": [
+   "Which counts for more here: how close someone is to dying, or what they could do for others?",
+   "Would a draw feel fairer if you were the one who lost it?",
+   "Who should be allowed to vote on a decision about someone's life?"
+  ]
+ }
+}

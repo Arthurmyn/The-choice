@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { useT } from '../../i18n';
-import { getStories, getUpcoming } from '../../data';
-import type { UpcomingChapter } from '../../data';
+import { getStories } from '../../data';
 import { useLang } from '../../i18n';
 import { useGame } from '../../hooks/useGameState';
 import { useStoryProgress } from '../../hooks/useProgress';
@@ -59,28 +58,9 @@ function Chapter({ story, index, go }: { story: Story; index: number; go: (r: Ro
   );
 }
 
-/** A chapter that is announced and not playable yet. Nothing is shown beyond its name and one line. */
-function LockedChapter({ chapter, index }: { chapter: UpcomingChapter; index: number }): ReactNode {
-  const t = useT();
-  return (
-    <article className="chapter locked" data-testid={`locked-${chapter.id}`} aria-labelledby={`ch-${chapter.id}`}>
-      <SceneBackground id="city-night" className="cam" />
-      <div className="chapter-shade" aria-hidden="true" />
-      <span className="chapter-no" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-      <div className="chapter-body">
-        <p className="chapter-status"><Icon name="lock" size={14} />{t('In development')}</p>
-        <h2 id={`ch-${chapter.id}`} className="chapter-title">{chapter.title}</h2>
-        <p className="chapter-synopsis">{chapter.synopsis}</p>
-      </div>
-    </article>
-  );
-}
-
 export function StorySelection({ go }: { go: (r: Route) => void }): ReactNode {
   const t = useT();
-  const lang = useLang();
-  const stories = getStories(lang);
-  const upcoming = getUpcoming(lang);
+  const stories = getStories(useLang());
   return (
     <div className="chapters-page">
       <button type="button" className="back-link floating-back" onClick={() => go({ name: 'menu' })}>
@@ -89,7 +69,6 @@ export function StorySelection({ go }: { go: (r: Route) => void }): ReactNode {
       <h1 className="sr-only">{t('Stories')}</h1>
       <div className="chapters">
         {stories.map((s, i) => <Chapter key={s.id} story={s} index={i} go={go} />)}
-        {upcoming.map((c, i) => <LockedChapter key={c.id} chapter={c} index={stories.length + i} />)}
       </div>
     </div>
   );

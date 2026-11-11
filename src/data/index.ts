@@ -1,5 +1,9 @@
 import infectedSurvivor from './stories/infectedSurvivor.json';
 import infectedSurvivorRu from './stories/infectedSurvivor.ru.json';
+import lastMedicine from './stories/lastMedicine.json';
+import lastMedicineRu from './stories/lastMedicine.ru.json';
+import whoControls from './stories/whoControls.json';
+import whoControlsRu from './stories/whoControls.ru.json';
 import philosophers from './philosophy/philosophers.json';
 import philosophersRu from './philosophy/philosophers.ru.json';
 import references from './philosophy/references.json';
@@ -13,8 +17,8 @@ export const LANGS: Lang[] = ['en', 'ru'];
 const asStory = (raw: object): Story => raw as unknown as Story;
 
 const STORIES: Record<Lang, Story[]> = {
-  en: [asStory(infectedSurvivor)],
-  ru: [asStory(infectedSurvivorRu)],
+  en: [asStory(infectedSurvivor), asStory(lastMedicine), asStory(whoControls)],
+  ru: [asStory(infectedSurvivorRu), asStory(lastMedicineRu), asStory(whoControlsRu)],
 };
 
 /** English stories. Ids, nodes and choices are identical in every language. */
@@ -23,25 +27,7 @@ export const stories: Story[] = STORIES.en;
 export const getStories = (lang: Lang): Story[] => STORIES[lang];
 export const storyById = (id: string, lang: Lang = 'en'): Story | undefined => STORIES[lang].find((s) => s.id === id);
 
-/** Chapters announced in the menu that are not playable yet. */
-export interface UpcomingChapter {
-  id: string;
-  title: string;
-  synopsis: string;
-}
-const UPCOMING: Record<Lang, UpcomingChapter[]> = {
-  en: [
-    { id: 'last-medicine', title: 'The Last Medicine', synopsis: 'One dose, two injured people.' },
-    { id: 'who-controls', title: 'Who Controls the Group?', synopsis: 'A leader holds the map and the radio.' },
-  ],
-  ru: [
-    { id: 'last-medicine', title: 'Последнее лекарство', synopsis: 'Одна доза, двое раненых.' },
-    { id: 'who-controls', title: 'Кто управляет группой?', synopsis: 'У лидера карта и рация.' },
-  ],
-};
-export const getUpcoming = (lang: Lang): UpcomingChapter[] => UPCOMING[lang];
-
-export type PhilosopherId = 'hobbes' | 'locke' | 'rousseau';
+export type PhilosopherId = 'hobbes' | 'locke' | 'rousseau' | 'popper' | 'castells';
 
 export interface PhilosopherInfo {
   id: PhilosopherId;
@@ -69,7 +55,7 @@ export interface PhilosophyMeta {
 const meta = (p: typeof philosophers): PhilosophyMeta => ({
   centralQuestion: p.centralQuestion,
   note: p.note,
-  order: ['hobbes', 'locke', 'rousseau'],
+  order: ['hobbes', 'locke', 'rousseau', 'popper', 'castells'],
   philosophers: p.philosophers as Record<PhilosopherId, PhilosopherInfo>,
 });
 
