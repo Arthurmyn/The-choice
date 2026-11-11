@@ -9,8 +9,8 @@
 
     python scripts/generate-voice.py MODELS_DIR
 
-The archived stories (src/data/stories/_archive) are the ones with recorded clips; the ECHO chapters use the
-browser's speech synthesis (`voice: false` in the story file).
+The clips cover the three ECHO chapters. Russian uses moderate pitch and rate on purpose (extreme settings
+make Silero mumble) and 48 kHz audio.
 
 Output: public/voice/<lang>/<id>.m4a and public/voice/<lang>/manifest.json (key "speaker|text" -> file).
 Re-running renders only missing clips and deletes clips no line uses any more. Needs macOS `afconvert`
@@ -41,7 +41,6 @@ EN = {
     'noah': ('am_eric', 1.05),
     'emily': ('af_bella', 1.0),
     'james': ('bm_daniel', 0.92),
-    'leo': ('am_puck', 1.08),
     'tobias': ('af_nova', 1.12),
     'marcus': ('bm_fable', 0.97),
     'wren': ('bf_isabella', 1.0),
@@ -50,6 +49,13 @@ EN = {
     'voss': ('am_onyx', 0.92),
     'okafor': ('bm_george', 0.92),
     'broadcast': ('af_sky', 0.95),
+    # ECHO chapters
+    'aida': ('af_sarah', 1.0),
+    'marat': ('am_onyx', 0.95),
+    'dana': ('bf_emma', 1.0),
+    'timur': ('am_puck', 1.0),
+    'nadia': ('af_nicole', 0.97),
+    'leo': ('bm_daniel', 0.92),
 }
 # RU: speaker -> (Silero speaker, SSML pitch, SSML rate)
 RU = {
@@ -68,7 +74,6 @@ RU = {
     'noah': ('aidar', 'high', 'medium'),
     'emily': ('xenia', 'high', 'medium'),
     'james': ('aidar', 'x-low', 'slow'),
-    'leo': ('eugene', 'high', 'fast'),
     'tobias': ('xenia', 'x-high', 'fast'),
     'marcus': ('eugene', 'low', 'slow'),
     'wren': ('kseniya', 'medium', 'medium'),
@@ -77,8 +82,18 @@ RU = {
     'voss': ('aidar', 'low', 'medium'),
     'okafor': ('eugene', 'x-low', 'slow'),
     'broadcast': ('kseniya', 'medium', 'fast'),
+    # ECHO chapters: only 'medium' and 'low' pitch, 'medium' and 'slow' rate, so every word stays clear
+    'aida': ('xenia', 'medium', 'medium'),
+    'marat': ('aidar', 'low', 'medium'),
+    'dana': ('baya', 'medium', 'medium'),
+    'timur': ('eugene', 'high', 'medium'),
+    'leo': ('aidar', 'medium', 'slow'),
+    'nadia': ('kseniya', 'medium', 'medium'),
 }
-STORIES = {'en': ['releaseToday', 'speakForSomeoneElse', 'theLastJourney'], 'ru': ['releaseToday.ru', 'speakForSomeoneElse.ru', 'theLastJourney.ru']}
+STORIES = {
+    'en': ['infectedSurvivor', 'lastMedicine', 'whoControls'],
+    'ru': ['infectedSurvivor.ru', 'lastMedicine.ru', 'whoControls.ru'],
+}
 
 
 def lines_of(story):
@@ -99,7 +114,7 @@ def clip_id(lang, speaker, text):
 
 
 def encode(wav, out):
-    subprocess.run(['afconvert', '-f', 'm4af', '-d', 'aac', '-b', '48000', wav, out], check=True)
+    subprocess.run(['afconvert', '-f', 'm4af', '-d', 'aac', '-b', '64000', wav, out], check=True)
 
 
 def main():
@@ -116,8 +131,8 @@ def main():
         else:
             who, pitch, speed = RU[sp]
             ssml = f'<speak><prosody pitch="{pitch}" rate="{speed}">{escape(text)}</prosody></speak>'
-            samples = silero.apply_tts(ssml_text=ssml, speaker=who, sample_rate=24000, put_accent=True, put_yo=True).numpy()
-            rate = 24000
+            samples = silero.apply_tts(ssml_text=ssml, speaker=who, sample_rate=48000, put_accent=True, put_yo=True).numpy()
+            rate = 48000
         sf.write(wav, samples, rate)
 
     for lang in ('en', 'ru'):
@@ -125,7 +140,7 @@ def main():
         os.makedirs(outdir, exist_ok=True)
         todo = {}
         for name in STORIES[lang]:
-            story = json.load(open(os.path.join(ROOT, 'src/data/stories/_archive', name + '.json')))
+            story = json.load(open(os.path.join(ROOT, 'src/data/stories', name + '.json')))
             for l in lines_of(story):
                 todo[(l.get('speaker') or 'narrator', l['text'])] = None
         print(lang, len(todo), 'clips', flush=True)
