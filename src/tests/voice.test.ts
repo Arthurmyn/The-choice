@@ -58,7 +58,6 @@ describe('recorded voice-over', () => {
   it.each(LANGS)('%s: every spoken line has a recorded clip', (lang) => {
     const manifest = JSON.parse(readFileSync(`public/voice/${lang}/manifest.json`, 'utf8')) as Record<string, string>;
     const missing: string[] = [];
-    // ECHO chapters have no recorded clips and are read by the browser's speech synthesis (voice: false).
     for (const s of getStories(lang).filter((x) => x.voice !== false)) {
       const lines = allLines(s);
       for (const l of lines) {
@@ -71,11 +70,20 @@ describe('recorded voice-over', () => {
   });
 });
 
-describe('stories without recorded clips', () => {
-  it('declare voice: false, and every character still has a voice profile for the fallback', () => {
+describe('recorded voice for every chapter', () => {
+  it('no chapter opts out of the recorded clips, and every character has a profile for the fallback', () => {
     for (const s of stories) {
-      expect(s.voice).toBe(false);
+      expect(s.voice).not.toBe(false);
       for (const c of Object.values(s.characters)) expect(c.voice).toBeTruthy();
+    }
+  });
+
+  it('every speaker has a clip in both languages, so no line falls back to the browser voice', () => {
+    for (const lang of ['en', 'ru'] as const) {
+      const manifest = JSON.parse(readFileSync(`public/voice/${lang}/manifest.json`, 'utf8')) as Record<string, string>;
+      const speakers = new Set(Object.keys(manifest).map((k) => k.split('|')[0]));
+      for (const s of getStories(lang)) for (const c of Object.keys(s.characters)) expect(speakers.has(c), `${lang}/${c}`).toBe(true);
+      expect(speakers.has('narrator')).toBe(true);
     }
   });
 });

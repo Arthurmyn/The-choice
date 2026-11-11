@@ -51,9 +51,9 @@ describe.each(CHAPTERS)('$id: structure', (c) => {
     expect(enumeratePaths(s)).toHaveLength(18);
   });
 
-  it('has three endings, no recorded clips, a content notice and the Memory Archive items', () => {
+  it('has three endings, recorded voice-over, a content notice and the Memory Archive items', () => {
     expect(Object.keys(s.endings).sort()).toEqual(Object.values(c.ending).sort());
-    expect(s.voice).toBe(false);
+    expect(s.voice).not.toBe(false);
     expect(s.notice).toBeTruthy();
     const inv = Object.values(s.nodes).find((n) => n.type === 'investigation');
     expect(inv && inv.type === 'investigation' ? inv.items.length : 0).toBe(3);
